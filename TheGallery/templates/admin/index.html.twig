@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Display
+{% endblock %}
+
+{% block body %}
+	{% if 'ROLE_ADMIN' in app.user.roles %}
+		<a href="{{ path('admin_display') }}" class="btn btn-warning">Admin Panel</a>
+	{% endif %}
+
+	<div class="container mt-5">
+		<h1>Welcome to the Admin Dashboard</h1>
+		<p>Hello,
+			{{ app.user.username }}! You have admin privileges.</p>
+	</div>
+	{% for user in users %}
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+                    <th>Email</th>
+                    <th>Number</th>
+                    <th>Username</th>
+					<th>ProfilePicture</th>
+				</tr>
+				
+				<tr>
+					
+                    <td>{{ app.user.id }}</td>
+                    <td>{{ app.user.email }}</td>
+					<td>{{ app.user.number }}</td>
+                    <td>{{ app.user.username }}</td>
+                    <td>{{ app.user.profilePicture }}</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	{% endfor %}
+{% endblock %}

@@ -60,9 +60,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'id_user', orphanRemoval: true)]
     private Collection $posts;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'id_user', orphanRemoval: true)]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
+        $this->updated_at = new \DateTimeImmutable();
+
     }
 
     public function getId(): ?int
@@ -97,6 +107,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return list<string>
      */
+
+    
     public function getRoles(): array
     {
         return ['ROLE_USER'];
@@ -220,6 +232,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($post->getIdUser() === $this) {
                 $post->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getIdUser() === $this) {
+                $comment->setIdUser(null);
             }
         }
 
