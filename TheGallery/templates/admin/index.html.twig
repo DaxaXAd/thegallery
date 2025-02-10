@@ -13,7 +13,7 @@
 		<p>Hello,
 			{{ app.user.username }}! You have admin privileges.</p>
 	</div>
-	{% for user in users %}
+	
 		<table class="table">
 			<tbody>
 				<tr>
@@ -24,22 +24,22 @@
 					<th>ProfilePicture</th>
 					<th>Actions</th>				
 				</tr>
-				
+				{% for user in users %}
 				<tr>
 					
-                    <td>{{ app.user.id }}</td>
-                    <td>{{ app.user.email }}</td>
-					<td>{{ app.user.bio }}</td>
-                    <td>{{ app.user.username }}</td>
-                    <td>{{ app.user.profilePic }}</td>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+					<td>{{ user.bio }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.profilePic }}</td>
 					<td>
 						<div class="delete-post">
 								{{ include('user/_delete_form.html.twig') }}
 						</div>
 					</td>
 				</tr>
-				
+				{% endfor %}
 			</tbody>
 		</table>
-	{% endfor %}
+	
 {% endblock %}
