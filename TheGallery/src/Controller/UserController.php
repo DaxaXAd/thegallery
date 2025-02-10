@@ -11,6 +11,7 @@ namespace App\Controller;
 // use Symfony\Component\HttpFoundation\Response;
 // use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\User;
+use App\Entity\Post;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Repository\PostsRepository;
@@ -21,10 +22,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Controller\SecurityController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route('/user')]
 final class UserController extends AbstractController
 {
+    private $doctrine;
+
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
+
     #[Route('/user/{id}', name: 'app_user_index', methods: ['GET'])]
     public function index(int $id, UserRepository $userRepository, /*PostsRepository $postsRepository, RetweetsRepository $retweetRepository, LikesRepository $likeRepository, CommentRepository $commentRepository*/): Response
     {
@@ -137,5 +146,28 @@ final class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('home_page', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/profile/{id}', name: 'app_profile', methods: ['GET'])]
+    public function profile(int $id, User $user, ManagerRegistry $doctrine): Response
+    {
+        // Fetch the user by id
+        $user = $this->doctrine->getRepository(User::class)->find($id);
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        // Fetch the images related to the user.
+        // Option 1: If your User entity has a OneToMany relation named "images", then:
+        // $images = $user->getImages();
+        //
+        // Option 2: Otherwise, query the Image repository:
+        $posts = $this->doctrine->getRepository(Post::class)->findBy(['id_user' => $user]);
+
+        // Render a Twig template with the user and images
+        return $this->render('user/profile.html.twig', [
+            'user'   => $user,
+            'posts' => $posts,
+        ]);
     }
 }

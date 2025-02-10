@@ -41,7 +41,7 @@ class PromoteUserCommand extends Command
             return Command::FAILURE;
         }
 
-        $user->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+        $user->setRoles(['ROLE_ADMIN','ROLE_USER']);
         $this->entityManager->flush();
 
         $io->success('User has been promoted to ROLE_ADMIN');

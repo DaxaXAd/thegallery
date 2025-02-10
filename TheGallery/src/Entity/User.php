@@ -66,12 +66,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'id_user', orphanRemoval: true)]
     private Collection $comments;
 
+    /**
+     * @var Collection<int, Image>
+     */
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'id_user', orphanRemoval: true)]
+    private Collection $images;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
         $this->updated_at = new \DateTimeImmutable();
+        $this->images = new ArrayCollection();
 
     }
 
@@ -108,10 +115,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @return list<string>
      */
 
-    
+
+    // public function getRoles(): array
+    // {
+    //     return ['ROLE_USER'];
+    // }
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles ?? []; // Ensure it's an array
+        $roles[] = 'ROLE_USER'; // Always include ROLE_USER
+        return array_unique($roles);
     }
 
     /**
@@ -262,6 +275,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getIdUser() === $this) {
                 $comment->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getIdUser() === $this) {
+                $image->setIdUser(null);
             }
         }
 

@@ -25,6 +25,10 @@ class Image
     #[ORM\OneToOne(mappedBy: 'id_img', cascade: ['persist', 'remove'])]
     private ?Post $post = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $id_user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,6 +83,18 @@ class Image
         }
 
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(?User $id_user): static
+    {
+        $this->id_user = $id_user;
 
         return $this;
     }
