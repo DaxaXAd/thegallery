@@ -1,4 +1,1285 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 body {
-    background-color: #000000;
-    color: #a5380a;
+    background-color: #0D1117;
+    color: white;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+}
+
+
+.background {
+    background: linear-gradient(180deg, rgba(31, 111, 235, 1) 0%, rgba(13, 17, 23, 1) 100%);
+    background-repeat: no-repeat;
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+.goback, .goback-edit {
+    position: absolute;
+    width: 35px;
+    fill: #C9D1D9;
+    top: 15%;
+    left: 1.2%;
+    transform: rotateY(3.142rad);
+
+}
+
+.goback:hover {
+    fill: #1F6FEB;
+}
+
+.goback-sign {
+    fill: #1F6FEB;
+    position: absolute;
+    width: 50px;
+    top: 5%;
+    left: 1.2%;
+    transform: rotateY(3.142rad);
+
+}
+
+.goback-edit:hover {
+    fill: #991FEB;
+}
+
+.goback-log {
+    position: absolute;
+    width: 50px;
+    fill: #C9D1D9;
+    top: 5%;
+    left: 1.2%;
+    transform: rotateY(3.142rad);
+}
+
+.goback-sign:hover {
+    fill: #C9D1D9;
+}
+
+.goback-log:hover {
+    fill: #1F6FEB;
+}
+
+h1 {
+    color: white;
+    font-size: 2.2rem;
+    margin-top : 20px;
+    margin-bottom: 10px;
+    font-weight: 550;
+}
+
+.box-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    align-items: center;
+    
+}
+
+.logo svg {
+    height: auto;
+    width: 100%;
+}
+.logo-nav {
+    width: 55px;
+}
+
+.nav-bar {
+    background-color: transparent;
+    border-bottom: 1px solid #C9D1D9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px 20px;
+}
+
+.pp-nav-box {
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.pp-nav {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.comment-nf {
+    margin-top: 10px;
+}
+
+.btn-logout {
+    width: 30px;
+}
+
+.logout-svg {
+    fill : #C9D1D9;
+    transform: rotateY(3.142rad);
+
+}
+
+.btn-logout:hover .logout-svg {
+    fill: aliceblue;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-register, .btn-login {
+    width: 90%;
+    max-width: 100%;
+    height: auto;
+    color: white;
+    text-align: center;
+    border-radius: 30px;
+    border: 2px solid white;
+    line-height: 55px;
+    font-size: 1.2rem;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.btn-login {
+    color: #0D1117;
+    border: 2px solid #0D1117;
+}
+
+.btn-register:hover {
+    background-color: white;
+    color: #0D1117;
+}
+
+.btn-login:hover {
+    background-color: #0D1117;
+    color: white;
+}
+
+.h1-register {
+    margin: 10px;
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #C9D1D9;
+    color: white;
+    margin-top: auto;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left : 0;
+}
+
+.register-page, .edit-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 20px; */
+}
+
+
+.form-login, .form-post {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.form-edit, .form-register {
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.form-edit{
+    padding: 0;
+}
+
+.form-register {
+ gap: 10px;
+
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group, .form-register, .form-edit {
+    width: 100%;
+}
+
+.input-login, .input-register, .button-login, .button-register, .input-edit, .button-edit {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input-login {
+    background-color: #30363D;
+    outline: none;
+    border: none;
+    color: #C9D1D9;
+}
+
+.input-register {
+    background-color: #30363D;
+    outline: none;
+    border: none;
+    color: #1F6FEB;
+    margin: 7px 0;
+
+}
+
+.input-edit {
+    background-color: #30363D;
+    outline: none;
+    border: none;
+    color: white;
+    margin: 8px 0;
+}
+
+.input-login:focus {
+    border-color: #C9D1D9;
+    background-color: #30363D;
+    outline: none;
+    border: none;
+    border: 1px solid #C9D1D9;
+    color: #C9D1D9;
+}
+
+.input-register:focus {
+    background-color: #30363D;
+    border: 1px solid #1F6FEB;
+    color: #1F6FEB;
+}
+
+.input-edit {
+    background-color: #30363D;
+    border: 1px solid white;
+    color: white;
+}
+
+input:focus {
+    background-color: #30363D;
+    outline: none !important;
+    box-shadow: none !important;
+
+}
+
+.button-login {
+    background-color: transparent;
+    color: #C9D1D9;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #C9D1D9;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-register {
+    background-color: transparent;
+    color: #1F6FEB;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #1F6FEB;
+    margin-bottom: 50px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-edit {
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+.button-login:hover {
+    background-color: #C9D1D9;
+    color: #1F6FEB;
+    transform: scale(1.05);
+}
+
+.button-register:hover {
+    background-color: #1F6FEB;
+    color: #C9D1D9;
+    transform: scale(1.05);
+}
+
+.button-edit:hover {
+    background-color: white;
+    color: #0D1117;
+    transform: scale(1.05);
+}
+
+.button-edit:hover {
+    background-color: white;
+    color: #991FEB;
+    transform: scale(1.05);
+}
+
+.button-login:active, .button-register:active, .button-edit:active {
+    transform: scale(0.95);
+}
+
+.label-login, .label-register, .label-edit {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #999999;
+    padding: 0 4px;
+    transition: 0.3s ease all, background 0.2s;
+    pointer-events: none;
+}
+
+.input-login:focus + .label-login,
+.input-login:not(:placeholder-shown) + .label-login {
+    top: 0;
+    transform: translateY(-50%) scale(0.9);
+    font-size: 12px;
+    color: #C9D1D9;
+    background: linear-gradient(to bottom, #0D1117 50%, #30363D 50%);
+
+}
+
+.input-register:focus + .label-register,
+.input-register:not(:placeholder-shown) + .label-register {
+    top: 0;
+    transform: translateY(-50%) scale(0.9);
+    font-size: 12px;
+    color: #1F6FEB;
+    background: linear-gradient(to bottom, #0D1117 50%, #30363D 50%);
+
+}
+
+.input-edit:focus + .label-edit,
+.input-edit:not(:placeholder-shown) + .label-edit {
+    top: 0;
+    transform: translateY(-50%) scale(0.9);
+    font-size: 12px;
+    color: white;
+    background: linear-gradient(to bottom, #0D1117 50%, #30363D 50%);
+}
+
+.form-login + .label-login {
+    display: none; 
+}
+
+.form-register + .label-register {
+    display: none; 
+}
+
+.form-edit + .label-edit {
+    display: none; 
+}
+.form-check {
+    margin: 5px 0;
+}
+
+.agree-terms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-register {
+    border-radius: 0;
+    background-color: #30363D;
+    border: none;
+    transition: 0.3s ease all;
+
+}
+
+.checkbox-register:hover {
+    border: 1px solid #1F6FEB;
+}
+
+.login-svg {
+    width: 25px;
+    fill: #C9D1D9;
+    transition: fill 0.3s ease;
+}
+
+.button-login:hover .login-svg {
+    fill: #1F6FEB;
+}
+
+.signin-svg {
+    width: 23px;
+    fill: #1F6FEB;
+    transition: fill 0.3s ease;
+}
+
+.button-register:hover .signin-svg {
+    fill: #C9D1D9;
+}
+
+
+.edit-page {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.pp-edit {
+    height: 70px;
+    width: 70px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.img-edit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.edit-svg {
+    width: 25px;
+    stroke: white;
+    transition: fill 0.3s ease;
+}
+
+.button-edit:hover .edit-svg {
+    stroke: #0D1117;
+}
+
+.h1-edit {
+    font-size: 24px;
+    margin: 0;
+
+}
+/* 
+.delete-post {
+
+} */
+
+.delete-post-svg, .delete-comment-svg {
+    stroke: #C9D1D9;
+    width: 25px;
+    transition: stroke 0.3s ease;
+}
+
+.delete-post-svg:hover, .delete-comment-svg:hover {
+    stroke: #1F7A8C;
+}
+
+
+
+
+.button-delete-account{
+    background-color: transparent;
+    border: none;
+}
+
+.delete-svg {
+    width: 30px;
+    position: absolute;
+    top: 15%;
+    right: 1.2%;
+    stroke: white;
+    transition: stroke 0.3s ease;
+
+}
+
+.button-delete-account:hover .delete-svg {
+    stroke: #991FEB;
+}
+
+
+
+
+
+
+.pp-edit {
+    position: relative;
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.img-edit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hidden-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; 
+    cursor: pointer;  
+    z-index: 1; 
+}
+
+.camera-btn {
+    position: absolute;
+    bottom: 3px;
+    right: 3px; 
+    border: none;
+    padding: 5px 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.camera-icon {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+.camera-btn:hover .camera-icon {
+    fill: #991FEB;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tweet-page {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    overflow-y: auto;
+    height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* position: relative; */
+}
+
+.tweet {
+    border: 1px solid #30363D;
+    padding: 18px;
+    width: 100%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.userIDTweet {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.userIDTweet h3 {
+    margin: 0;
+    line-height: 1.2;
+}
+
+.dateTweet {
+    color: #30363D;
+    margin-left: auto;
+    padding-top: 18px;
+
+}
+
+
+.box-pp2 {
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    margin-right: 10px;
+}
+
+.imgProfileTweet {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.userContentTweet {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.userContentTweet p {
+    font-size: 1rem;
+}
+
+
+.tweetContent {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.interactions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.interactions svg {
+    margin-left: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.interaction-count {
+    font-size: 1.1rem;
+    color: #30363D;
+    margin: 0 5px;
+}
+
+.retweet-svg {
+    width: 25px;
+    fill: #C9D1D9;
+    stroke-width: 1.5;
+}
+
+.retweet-svg:hover {
+    fill: #1F6FEB;
+}
+
+.like-svg {
+    width: 26px;
+    stroke: #C9D1D9;
+    stroke-width: 1.5;
+}
+
+.like-svg:hover {
+    stroke: #991FEB;
+}
+
+.comments-svg {
+    width: 23px;
+    fill: #C9D1D9;
+    stroke-width: 1.5;
+}
+
+.comments-svg:hover {
+    fill: #1F7A8C;
+}
+
+.see-svg {
+    width: 25px;
+    stroke: #C9D1D9;
+    stroke-width: 1.5;
+}
+
+.see-svg:hover {
+    stroke: #1F7A8C;
+}
+
+.createPost-svg {
+    width: 35px;
+    stroke: #C9D1D9;
+    stroke-width: 2;
+
+}
+
+.button-createPost {
+    background-color: #1F6FEB;
+    border-radius: 50%;
+    padding: 8px;
+    position: absolute;
+    bottom: 75px;
+    right: 15px;
+    z-index: 10;
+    margin-left: 10px;
+
+}
+
+.button-like, .button-retweet {
+    border: none;
+    background-color: transparent;
+}
+
+
+.footer {
+    background-color: #0D1117;
+}
+
+
+.settings, .hover-animation {
+    width: 40px;
+    stroke: #C9D1D9;
+    stroke-width: 1.5;
+}
+
+
+.edit-button-svg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    position: relative;
+
+}
+
+.btn-edit {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+
+.static {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s ease;
+}
+
+
+.hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    pointer-events: none;
+}
+
+
+.btn-edit:hover .static {
+    display: none;
+}
+
+.btn-edit:hover .hover {
+    display: block;
+} 
+
+.pen-svg {
+    width: 23px;
+    stroke: #C9D1D9;
+    stroke-width: 1.5;
+}
+
+.pen-svg:hover {
+    stroke: #1F7A8C;
+}
+
+.profile-page {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    overflow-y: auto;
+    height: calc(100vh - 150px);
+
+}
+
+.infoUser {
+    border: 1px solid #30363D;
+    padding: 18px;
+    width: 100%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.box-pp {
+    height: 60px;
+    width: 60px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.photo-profil {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.userProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.interactionsProfile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .profile-see-svg {
+    stroke: #1F7A8C;
+
+} */
+
+.profile-see-svg:hover {
+    stroke: #C9D1D9;
+}
+
+.profile-comments-svg {
+    fill: #1F7A8C;
+
+}
+
+.profile-retweet-svg {
+    fill: #1F6FEB;
+
+}
+
+.profile-like-svg {
+    stroke: #991FEB;
+
+}
+
+.h3 {
+    margin-top: 5px;
+}
+
+.username {
+    margin-top: 5px;
+}
+
+.tweetProfile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.post-page {
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.form-post {
+    position: relative;
+
+}
+
+.box-post {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.text-post {
+    width: 100%;
+    padding: 20px 10px;
+    min-height: 100px;
+    border-radius: 0;
+    background-color: #30363D;
+    border: none;
+    transition: border 0.3s ease, background-color 0.3s ease;
+    font-size: 16px;
+    color: #1F6FEB;
+    resize: vertical;
+    overflow-x: auto;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+
+.text-post:focus {
+    background-color: #30363D;
+    border: 1px solid #1F6FEB;
+    outline: none;
+    color: #1F6FEB;
+}
+
+.button-post {
+    background-color: transparent;
+    color: #1F6FEB;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px;
+    border: 1px solid #1F6FEB;
+    margin-bottom: 50px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-post:hover {
+    background-color: #1F6FEB;
+    color: #C9D1D9;
+    transform: scale(1.05);
+}
+
+.button-post:active{
+    transform: scale(0.95);
+}
+
+.label-post {
+    position: absolute;
+    top: 20px;
+    left: 8px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #1F6FEB;
+    padding: 0 4px;
+    transition: 0.3s ease all, background 0.2s;
+    pointer-events: none;
+}
+
+
+
+.text-post:focus + .label-post,
+.text-post:not(:placeholder-shown) + .label-post {
+    top: 0;
+    transform: translateY(-50%) scale(0.9);
+    font-size: 12px;
+    color: #1F6FEB;
+    background: linear-gradient(to bottom, #0D1117 50%, #30363D 50%);
+}
+
+.form-post + .label-post {
+    display: none; 
+}
+
+.post-svg {
+    width: 25px;
+    stroke: #1F6FEB;
+}
+
+.button-post:hover .post-svg {
+    stroke: white;
+}
+
+.h1-register, .h1-post {
+    color: #1F6FEB;
+}
+
+.createdAt {
+    text-align: left;
+}
+
+.comment-svg {
+    width: 25px;
+    fill: #1F6FEB;
+    transition: fill 0.3s ease;
+
+}
+
+.button-post:hover .comment-svg {
+    fill: white;
+}
+
+.alert-danger {
+    padding: 10px 15px;
+    border: 1px solid #991FEB;
+    color: #991FEB;
+    background-color: transparent;
+    margin: 5px;
+}
+
+.button-delete1 {
+    background-color: transparent;
+    border: none;
+}
+
+.button-delete1:hover {
+    background-color: transparent;
+    border: none;
+}
+.button-delete1:active {
+    background-color: transparent;
+    border: none;
+}
+
+@media (min-width: 769px) and (max-width: 1279px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .logo {
+        width: 160px;
+
+    }
+
+    .btn-register, .btn-login {
+        font-size: 1.8rem;
+        width: 400px;
+        max-width: 500px;
+        height: 60px;
+        padding: 25px;
+
+
+    }
+    
+    .logo-register, .logo-login {
+        width: 130px;
+        margin: 0;
+    }
+
+    .box-pp {
+        width: 100px;
+        height: 100px;
+    }
+
+    .h1-edit, .h1-register {
+        margin-bottom: 10px;
+    }
+
+    .h1-register, .h1-post  {
+        margin: 15px 0;
+    }
+
+    .pp-edit {
+        width: 75px;
+        height: 75px;
+    }
+
+    .camera-btn {
+        bottom: 3px;
+        right: 3px; 
+        padding: 8px;
+    }
+
+    .main {
+        max-width: 600px;
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box; 
+    }
+
+    .input-edit {
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 1280px) {
+
+    .main {
+        max-width: 1200px;
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box; 
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .logo {
+        width: 180px;
+
+    }
+
+    .btn-register, .btn-login {
+        font-size: 1.8rem;
+        width: 500px;
+        max-width: 600px;
+        height: 60px;
+        padding: 25px;
+
+
+    }
+
+    .button-login, .button-register {
+        margin-top: 10px;
+
+    }
+
+    .logo-register, .logo-login {
+        width: 110px;
+        margin: 0;
+    }
+
+    .input-register:focus + .label-register,
+    .input-register:not(:placeholder-shown) + .label-register {
+        display: block;
+    }
+
+    .input-register {
+        margin: 7px 0;
+    }
+
+    .tweet, .infoUser {
+        width: 60%;
+    }
+
+    .userContentTweet {
+    width: calc(100% - 80px);
+    }
+
+    .box-pp {
+        width: 120px;
+        height: 120px;
+    }
+
+    .form-edit {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .form-register {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .h1-edit {
+        margin: 8px 0;
+        margin-bottom: 25px;
+
+    }
+
+    .h1-register, .h1-post {
+        margin: 15px 0;
+    }
+
+    .goback, .goback-edit {
+        width: 50px;
+    }
+
+    
+
+    .pp-edit {
+        width: 100px;
+        height: 100px;
+    }
+
+    .camera-btn {
+        bottom: 5px;
+        right: 5px; 
+        padding: 8px;
+    }
+
+    .input-edit {
+        margin-bottom: 20px;
+    }
+
+    .camera-icon {
+        width: 23px;
+        height: 23px;
+    }
+
+    .delete-svg {
+        width: 35px;
+    }
 }
