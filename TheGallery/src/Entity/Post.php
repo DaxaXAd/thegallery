@@ -15,7 +15,7 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\OneToOne(inversedBy: 'post', cascade: ['persist', 'remove'])]

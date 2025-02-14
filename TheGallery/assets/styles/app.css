@@ -151,6 +151,8 @@ h1 {
 .logout-svg {
     fill : #C9D1D9;
     transform: rotateY(3.142rad);
+    height: 40px;
+    width: 40px;
 
 }
 
@@ -684,8 +686,8 @@ input:focus {
 }
 
 .imgProfileTweet {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
     object-fit: cover;
     object-position: center;
 }

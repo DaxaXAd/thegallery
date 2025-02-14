@@ -3,7 +3,8 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <main class="user-profile-page">
+        <h1>{{ user.username }}'s Profile</h1>
 
     <table class="table">
         <tbody>
@@ -36,6 +37,18 @@
                 <td>{{ user.profilePic }}</td>
             </tr>
         </tbody>
+        
+
+        <a href="{{ path('app_user_image_add', {'id': user.id}) }}" class="btn btn-primary">Add Image</a>
+        <section class="user-images">
+            <h2>Gallery</h2>
+            {% for image in user.images %}
+                <div class="image-item">
+                    <img src="{{ asset('uploads/' ~ image.filename) }}" alt="User Image">
+                </div>
+            {% else %}
+                <p>No images found.</p>
+            {% endfor %}
     </table>
 
     <a href="{{ path('app_user_index', {'id': user.id}) }}">back to list</a>
