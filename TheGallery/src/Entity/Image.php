@@ -41,6 +41,7 @@ class Image
 
     public function setTitle(?string $title): static
     {
+        $title = '';
         $this->title = $title;
 
         return $this;

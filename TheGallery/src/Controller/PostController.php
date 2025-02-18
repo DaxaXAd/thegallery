@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\User;
+use App\Entity\Image;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +30,7 @@ final class PostController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $post = new Post();
+        
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 

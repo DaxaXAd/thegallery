@@ -15,7 +15,8 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
+    
     private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\OneToOne(inversedBy: 'post', cascade: ['persist', 'remove'])]
@@ -32,6 +33,11 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_user = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $title = null;
+
+    
+
     public function __construct()
     {
         $this->id_comment = new ArrayCollection();
@@ -41,6 +47,10 @@ class Post
     {
         return $this->id;
     }
+
+    // Getter pour title
+    
+    
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -107,4 +117,18 @@ class Post
 
         return $this;
     }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    
 }
