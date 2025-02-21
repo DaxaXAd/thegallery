@@ -8,18 +8,31 @@
 
 		<main>
 			<div class="box-logo">
+
+				<h1>Welcome!</h1>
 				
-			<h1>Welcome!</h1>
+				<div class="card-author">
+					<div class="author">Author’s name</div>
+					<img class="underline" src=""/>
+					<div class="preview-img"></div>
+					<div class="tag-input-select">
+						<div class="overlap-group">
+							<div class="text-wrapper">tag#1</div>
+						</div>
+					</div>
+					<img class="pixelarticons-heart" src=""/>
+				</div>
 
-			<div class="buttons">
-				<a href="{{ path('app_register') }}" class="btn-register">Register</a>
-				<a href="{{ path('app_login') }}" class="btn-login">Login</a>
-			</div>
-			
-		{# {% endif %} #}
-			
-		</main>
-		<footer>&copy; Copyright 2025 - TheGallery</footer>
+				<div class="button">
+					<a href="{{ path('app_register') }}" class="btn-register">Register</a>
+					<a href="{{ path('app_login') }}" class="btn-login">Login</a>
+				</div>
 
-	</body>
-{% endblock %}
+				{# {% endif %} #}
+
+			</main>
+			<footer>&copy; Copyright 2025 - TheGallery</footer>
+
+		</body>
+	{% endblock %}
+

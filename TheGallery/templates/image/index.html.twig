@@ -1,36 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Image index{% endblock %}
+{% block title %}Image Gallery{% endblock %}
 
 {% block body %}
-    <h1>Image index</h1>
+    <h1>Image Gallery</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Path</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for image in images %}
-            <tr>
-                <td>{{ image.id }}</td>
-                <td>{{ image.title }}</td>
-                <td>{{ image.path }}</td>
-                <td>
-                    <a href="{{ path('app_image_show', {'id': image.id}) }}">show</a>
-                    <a href="{{ path('app_image_edit', {'id': image.id}) }}">edit</a>
-                </td>
-            </tr>
+    <div class="gallery">
+        {% for filename in imageFiles %}
+            <div class="gallery-item">
+                <a href="{{ asset('uploads/images/' ~ filename) }}" data-lightbox="image-{{ loop.index }}">
+                    <img src="{{ asset('uploads/images/' ~ filename) }}" alt="{{ filename }}" class="gallery-image">
+                </a>
+                <div class="gallery-overlay">
+                    <div class="gallery-text">
+                        <p>{{ filename }}</p>
+                        <a href="{{ path('app_image_edit', {'id': loop.index}) }}">Edit</a>
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+            <div class="no-records">No records found</div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
-    <a href="{{ path('app_image_new') }}">Create new</a>
+    <a href="{{ path('app_image_new') }}" class="create-new-link">Create new</a>
 {% endblock %}

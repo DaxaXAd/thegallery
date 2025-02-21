@@ -26,7 +26,7 @@ class Image
     private ?Post $post = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "id_user_id", nullable: false)]
     private ?User $id_user = null;
 
     public function getId(): ?int

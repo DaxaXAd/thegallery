@@ -1,4 +1,5 @@
-html, body {
+/* html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -14,7 +15,7 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     text-align: center;
 }
@@ -33,7 +34,8 @@ body {
 }
 
 
-.goback, .goback-edit {
+.goback,
+.goback-edit {
     position: absolute;
     width: 35px;
     fill: #C9D1D9;
@@ -81,7 +83,7 @@ body {
 h1 {
     color: white;
     font-size: 2.2rem;
-    margin-top : 20px;
+    margin-top: 20px;
     margin-bottom: 10px;
     font-weight: 550;
 }
@@ -96,13 +98,14 @@ h1 {
     width: 100px;
     height: auto;
     align-items: center;
-    
+
 }
 
 .logo svg {
     height: auto;
     width: 100%;
 }
+
 .logo-nav {
     width: 55px;
 }
@@ -149,7 +152,7 @@ h1 {
 }
 
 .logout-svg {
-    fill : #C9D1D9;
+    fill: #C9D1D9;
     transform: rotateY(3.142rad);
     height: 40px;
     width: 40px;
@@ -174,7 +177,8 @@ a {
     text-decoration: none;
 }
 
-.btn-register, .btn-login {
+.btn-register,
+.btn-login {
     width: 90%;
     max-width: 100%;
     height: auto;
@@ -220,19 +224,21 @@ footer {
     width: 100%;
     position: absolute;
     bottom: 0;
-    left : 0;
+    left: 0;
 }
 
-.register-page, .edit-page {
+.register-page,
+.edit-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* padding-top: 20px; */
-}
+    /* padding-top: 20px; }*/
 
 
-.form-login, .form-post {
+
+.form-login,
+.form-post {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -243,7 +249,8 @@ footer {
     width: 100%;
 }
 
-.form-edit, .form-register {
+.form-edit,
+.form-register {
     gap: 20px;
     max-width: 400px;
     margin: 0 auto;
@@ -251,12 +258,12 @@ footer {
     width: 100%;
 }
 
-.form-edit{
+.form-edit {
     padding: 0;
 }
 
 .form-register {
- gap: 10px;
+    gap: 10px;
 
 }
 
@@ -264,11 +271,18 @@ footer {
     position: relative;
 }
 
-.form-group, .form-register, .form-edit {
+.form-group,
+.form-register,
+.form-edit {
     width: 100%;
 }
 
-.input-login, .input-register, .button-login, .button-register, .input-edit, .button-edit {
+.input-login,
+.input-register,
+.button-login,
+.button-register,
+.input-edit,
+.button-edit {
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -383,11 +397,15 @@ input:focus {
     transform: scale(1.05);
 }
 
-.button-login:active, .button-register:active, .button-edit:active {
+.button-login:active,
+.button-register:active,
+.button-edit:active {
     transform: scale(0.95);
 }
 
-.label-login, .label-register, .label-edit {
+.label-login,
+.label-register,
+.label-edit {
     position: absolute;
     top: 50%;
     left: 12px;
@@ -399,8 +417,8 @@ input:focus {
     pointer-events: none;
 }
 
-.input-login:focus + .label-login,
-.input-login:not(:placeholder-shown) + .label-login {
+.input-login:focus+.label-login,
+.input-login:not(:placeholder-shown)+.label-login {
     top: 0;
     transform: translateY(-50%) scale(0.9);
     font-size: 12px;
@@ -409,8 +427,8 @@ input:focus {
 
 }
 
-.input-register:focus + .label-register,
-.input-register:not(:placeholder-shown) + .label-register {
+.input-register:focus+.label-register,
+.input-register:not(:placeholder-shown)+.label-register {
     top: 0;
     transform: translateY(-50%) scale(0.9);
     font-size: 12px;
@@ -419,8 +437,8 @@ input:focus {
 
 }
 
-.input-edit:focus + .label-edit,
-.input-edit:not(:placeholder-shown) + .label-edit {
+.input-edit:focus+.label-edit,
+.input-edit:not(:placeholder-shown)+.label-edit {
     top: 0;
     transform: translateY(-50%) scale(0.9);
     font-size: 12px;
@@ -428,17 +446,18 @@ input:focus {
     background: linear-gradient(to bottom, #0D1117 50%, #30363D 50%);
 }
 
-.form-login + .label-login {
-    display: none; 
+.form-login+.label-login {
+    display: none;
 }
 
-.form-register + .label-register {
-    display: none; 
+.form-register+.label-register {
+    display: none;
 }
 
-.form-edit + .label-edit {
-    display: none; 
+.form-edit+.label-edit {
+    display: none;
 }
+
 .form-check {
     margin: 5px 0;
 }
@@ -525,25 +544,28 @@ input:focus {
     margin: 0;
 
 }
+
 /* 
 .delete-post {
 
 } */
 
-.delete-post-svg, .delete-comment-svg {
+.delete-post-svg,
+.delete-comment-svg {
     stroke: #C9D1D9;
     width: 25px;
     transition: stroke 0.3s ease;
 }
 
-.delete-post-svg:hover, .delete-comment-svg:hover {
+.delete-post-svg:hover,
+.delete-comment-svg:hover {
     stroke: #1F7A8C;
 }
 
 
 
 
-.button-delete-account{
+.button-delete-account {
     background-color: transparent;
     border: none;
 }
@@ -569,7 +591,7 @@ input:focus {
 
 .pp-edit {
     position: relative;
-    width: 60px; 
+    width: 60px;
     height: 60px;
     border-radius: 50%;
     overflow: hidden;
@@ -587,15 +609,15 @@ input:focus {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0; 
-    cursor: pointer;  
-    z-index: 1; 
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
 }
 
 .camera-btn {
     position: absolute;
     bottom: 3px;
-    right: 3px; 
+    right: 3px;
     border: none;
     padding: 5px 6px;
     border-radius: 50%;
@@ -649,7 +671,7 @@ input:focus {
     border: 1px solid #30363D;
     padding: 18px;
     width: 100%;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.3s ease-in-out;
 }
 
@@ -788,7 +810,8 @@ input:focus {
 
 }
 
-.button-like, .button-retweet {
+.button-like,
+.button-retweet {
     border: none;
     background-color: transparent;
 }
@@ -799,7 +822,8 @@ input:focus {
 }
 
 
-.settings, .hover-animation {
+.settings,
+.hover-animation {
     width: 40px;
     stroke: #C9D1D9;
     stroke-width: 1.5;
@@ -852,7 +876,7 @@ input:focus {
 
 .btn-edit:hover .hover {
     display: block;
-} 
+}
 
 .pen-svg {
     width: 23px;
@@ -877,7 +901,7 @@ input:focus {
     border: 1px solid #30363D;
     padding: 18px;
     width: 100%;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.3s ease-in-out;
 }
 
@@ -1024,7 +1048,7 @@ input:focus {
     transform: scale(1.05);
 }
 
-.button-post:active{
+.button-post:active {
     transform: scale(0.95);
 }
 
@@ -1042,8 +1066,8 @@ input:focus {
 
 
 
-.text-post:focus + .label-post,
-.text-post:not(:placeholder-shown) + .label-post {
+.text-post:focus+.label-post,
+.text-post:not(:placeholder-shown)+.label-post {
     top: 0;
     transform: translateY(-50%) scale(0.9);
     font-size: 12px;
@@ -1051,8 +1075,8 @@ input:focus {
     background: linear-gradient(to bottom, #0D1117 50%, #30363D 50%);
 }
 
-.form-post + .label-post {
-    display: none; 
+.form-post+.label-post {
+    display: none;
 }
 
 .post-svg {
@@ -1064,7 +1088,8 @@ input:focus {
     stroke: white;
 }
 
-.h1-register, .h1-post {
+.h1-register,
+.h1-post {
     color: #1F6FEB;
 }
 
@@ -1100,6 +1125,7 @@ input:focus {
     background-color: transparent;
     border: none;
 }
+
 .button-delete1:active {
     background-color: transparent;
     border: none;
@@ -1115,7 +1141,8 @@ input:focus {
 
     }
 
-    .btn-register, .btn-login {
+    .btn-register,
+    .btn-login {
         font-size: 1.8rem;
         width: 400px;
         max-width: 500px;
@@ -1124,8 +1151,9 @@ input:focus {
 
 
     }
-    
-    .logo-register, .logo-login {
+
+    .logo-register,
+    .logo-login {
         width: 130px;
         margin: 0;
     }
@@ -1135,11 +1163,13 @@ input:focus {
         height: 100px;
     }
 
-    .h1-edit, .h1-register {
+    .h1-edit,
+    .h1-register {
         margin-bottom: 10px;
     }
 
-    .h1-register, .h1-post  {
+    .h1-register,
+    .h1-post {
         margin: 15px 0;
     }
 
@@ -1150,7 +1180,7 @@ input:focus {
 
     .camera-btn {
         bottom: 3px;
-        right: 3px; 
+        right: 3px;
         padding: 8px;
     }
 
@@ -1159,7 +1189,7 @@ input:focus {
         width: 60%;
         margin: 0 auto;
         padding: 20px;
-        box-sizing: border-box; 
+        box-sizing: border-box;
     }
 
     .input-edit {
@@ -1174,7 +1204,7 @@ input:focus {
         width: 80%;
         margin: 0 auto;
         padding: 20px;
-        box-sizing: border-box; 
+        box-sizing: border-box;
     }
 
     h1 {
@@ -1186,7 +1216,8 @@ input:focus {
 
     }
 
-    .btn-register, .btn-login {
+    .btn-register,
+    .btn-login {
         font-size: 1.8rem;
         width: 500px;
         max-width: 600px;
@@ -1196,18 +1227,20 @@ input:focus {
 
     }
 
-    .button-login, .button-register {
+    .button-login,
+    .button-register {
         margin-top: 10px;
 
     }
 
-    .logo-register, .logo-login {
+    .logo-register,
+    .logo-login {
         width: 110px;
         margin: 0;
     }
 
-    .input-register:focus + .label-register,
-    .input-register:not(:placeholder-shown) + .label-register {
+    .input-register:focus+.label-register,
+    .input-register:not(:placeholder-shown)+.label-register {
         display: block;
     }
 
@@ -1215,12 +1248,13 @@ input:focus {
         margin: 7px 0;
     }
 
-    .tweet, .infoUser {
+    .tweet,
+    .infoUser {
         width: 60%;
     }
 
     .userContentTweet {
-    width: calc(100% - 80px);
+        width: calc(100% - 80px);
     }
 
     .box-pp {
@@ -1251,15 +1285,17 @@ input:focus {
 
     }
 
-    .h1-register, .h1-post {
+    .h1-register,
+    .h1-post {
         margin: 15px 0;
     }
 
-    .goback, .goback-edit {
+    .goback,
+    .goback-edit {
         width: 50px;
     }
 
-    
+
 
     .pp-edit {
         width: 100px;
@@ -1268,7 +1304,7 @@ input:focus {
 
     .camera-btn {
         bottom: 5px;
-        right: 5px; 
+        right: 5px;
         padding: 8px;
     }
 
@@ -1284,4 +1320,125 @@ input:focus {
     .delete-svg {
         width: 35px;
     }
+}
+
+.button {
+    display: flex;
+    width: 113px;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-top-bar {
+    display: flex;
+    width: 1920px;
+    height: 60px;
+    padding: 0px 128px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-author {
+    display: flex;
+    width: 421px;
+    padding: 20px 23px;
+    align-items: center;
+    align-content: center;
+    gap: 43px 12px;
+    flex-wrap: wrap;
+    border: 1px solid var(--white, #FFF);
+    background: var(--Primary-dark, #000);
+}
+
+.card-author .title-card {
+    color: #FFF;
+    font-family: Lexend;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.card-author {
+    display: flex;
+    flex-wrap: wrap;
+    width: 421px;
+    align-items: center;
+    gap: 43px 12px;
+    padding: 20px 23px;
+    position: relative;
+    background-color: var(--variable-collection-primary-dark);
+    border: 1px solid;
+    border-color: var(--variable-collection-white);
+}
+
+.card-author .author {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: "Lexend-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.card-author .underline {
+    position: relative;
+    width: 239px;
+    height: 1px;
+    object-fit: cover;
+}
+
+.card-author .preview-img {
+    position: relative;
+    width: 375px;
+    height: 341px;
+    background-image: url('');
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.card-author .tag-input-select {
+    position: relative;
+    width: 105px;
+    height: 24px;
+}
+
+.card-author .overlap-group {
+    position: relative;
+    width: 103px;
+    height: 24px;
+    background-color: #d9d9d9;
+}
+
+.card-author .text-wrapper {
+    position: absolute;
+    top: 4px;
+    left: 33px;
+    font-family: "Lexend-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.card-author .pixelarticons-heart {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+
+:root {
+    --variable-collection-primary-dark: rgba(0, 0, 0, 1);
+    --variable-collection-primary-purple: rgba(113, 16, 216, 1);
+    --variable-collection-pers-green: rgba(8, 165, 36, 1);
+    --variable-collection-primary-automn: rgba(165, 56, 10, 1);
+    --variable-collection-white: rgba(255, 255, 255, 1);
+    --variable-collection-text-autumn: rgba(202, 113, 12, 1);
+    --variable-collection-autumn-back: rgba(154, 100, 0, 0.58);
 }
