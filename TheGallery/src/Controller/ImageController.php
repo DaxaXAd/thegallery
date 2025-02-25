@@ -21,7 +21,7 @@ final class ImageController extends AbstractController
     #[Route(name: 'app_image_index', methods: ['GET'])]
     public function index(ImageRepository $imageRepository): Response
     {
-        $imagesDirectory = $this->getParameter('images_directory');  
+        $imagesDirectory = $this->getParameter('images_directory'); 
 
         $images = scandir($imagesDirectory);
 
@@ -33,7 +33,7 @@ final class ImageController extends AbstractController
         $imageFiles = array_values($imageFiles);
 
         return $this->render('image/index.html.twig', [
-            'imageFiles' => $imageFiles,
+            'imageFiles' => $imageFiles, 
             'images' => $imageRepository->findAll(),
         ]);
     }
@@ -43,13 +43,13 @@ final class ImageController extends AbstractController
     {
         // $user = $this->getUser();
         $image = new Image();
-        $image->setIdUser($this->getUser());
+        
 
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('file')->getData();
+            $file = $form->get('path')->getData();
 
             if ($file) {
                 $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME); 
@@ -72,6 +72,9 @@ final class ImageController extends AbstractController
 
                 // Enregistrer le chemin partiel dans la base de données
                 $image->setPath('*/uploads/images/' . $newFilename);
+                $image->setTitle($form->get('title')->getData()); // Add our title to the image
+
+                dump($image);
 
                 $user = $this->getUser();
                 if ($user) {

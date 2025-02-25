@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Image Gallery</h1>
-
+    {{ dump(images) }}
     <div class="gallery">
         {% for filename in imageFiles %}
             <div class="gallery-item">

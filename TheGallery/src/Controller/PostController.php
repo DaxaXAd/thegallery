@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\Image;
 use App\Form\PostType;
+use App\Form\ImageType;
 use App\Repository\PostRepository;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,6 +30,7 @@ final class PostController extends AbstractController
     #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $image = new Image();
         $post = new Post();
         
         $form = $this->createForm(PostType::class, $post);

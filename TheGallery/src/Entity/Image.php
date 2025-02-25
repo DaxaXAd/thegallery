@@ -13,7 +13,7 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 50, nullable: false)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -41,7 +41,7 @@ class Image
 
     public function setTitle(?string $title): static
     {
-        $title = '';
+        $title;
         $this->title = $title;
 
         return $this;

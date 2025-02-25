@@ -12,30 +12,34 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType; 
 use Symfony\Component\Validator\Constraints\File; 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
+            ->add('title', TextType::class, [
+                'label' => 'title',
+                'required' => true,
+            ])
             ->add('path', FileType::class, [                 
-                'label' => 'Photo',                 
-                'mapped' => false,                 
-                'required' => false,
+                'label' => 'image',                 
+                'mapped' => true,                 
+                'required' => true,
             ])
-            ->add('id_tag', EntityType::class, [
-                'class' => Tag::class,
-                'choice_label' => 'name',
-            ])
-            ->add('post', EntityType::class, [
-                'class' => Post::class,
-                'choice_label' => 'title',
-            ])
-            ->add('id_user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'username',
-            ])
+            // ->add('id_tag', EntityType::class, [
+            //     'class' => Tag::class,
+            //     'choice_label' => 'name',
+            // ])
+            // ->add('post', EntityType::class, [
+            //     'class' => Post::class,
+            //     'choice_label' => 'title',
+            // ])
+            // ->add('id_user', EntityType::class, [
+            //     'class' => User::class,
+            //     'choice_label' => 'username',
+            // ])
         ;
     }
 

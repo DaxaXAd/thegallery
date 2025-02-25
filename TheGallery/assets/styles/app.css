@@ -1,5 +1,4 @@
-/* html,
-body {
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -7,7 +6,11 @@ body {
     flex-direction: column;
 }
 
-body {
+/* header {
+    min-height: 20vh;
+
+} */
+main {
     background-color: #0D1117;
     color: white;
     min-height: 100vh;
@@ -21,7 +24,7 @@ body {
 }
 
 
-.background {
+/* .background {
     background: linear-gradient(180deg, rgba(31, 111, 235, 1) 0%, rgba(13, 17, 23, 1) 100%);
     background-repeat: no-repeat;
     color: white;
@@ -31,8 +34,9 @@ body {
     align-items: center;
     text-align: center;
     flex-grow: 1;
-}
+} */
 
+/*
 
 .goback,
 .goback-edit {
@@ -1322,12 +1326,50 @@ input:focus {
     }
 }
 
-.button {
+
+/* my css */
+
+body .header_image{
+    background-image: url(/TheGallery/assets/styles/images/header_automn.png);
+    background-position: cover;
+    width: 100%;
+    height: 865px;
+}
+
+.top-bar {
+    position: absolute;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.80);
+    width: 100%;
+}
+
+.top-bar .top-bar_item {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    padding: 0px 128px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar .button {
     display: flex;
     width: 113px;
     padding: 4px 24px;
     justify-content: center;
     align-items: center;
+}
+
+.button .register-btn {
+    color: var(--Primary-dark, #000);
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .item-top-bar {
@@ -1337,6 +1379,17 @@ input:focus {
     padding: 0px 128px;
     justify-content: space-between;
     align-items: center;
+}
+
+.container-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    column-gap: 145px;
+}
+
+.gapper {
+    margin-top: 78px;
 }
 
 .card-author {
@@ -1432,6 +1485,19 @@ input:focus {
     height: 24px;
 }
 
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: var(--variable-collection-primary-automn);
+}
+
+.footer .footer_copyright {
+    width: 401px;
+    height: 31px;
+    flex-shrink: 0;
+}
 
 :root {
     --variable-collection-primary-dark: rgba(0, 0, 0, 1);
