@@ -25,7 +25,7 @@ class ImageType extends AbstractType
             ])
             ->add('path', FileType::class, [                 
                 'label' => 'image',                 
-                'mapped' => true,                 
+                'mapped' => false,                 
                 'required' => true,
             ])
             // ->add('id_tag', EntityType::class, [

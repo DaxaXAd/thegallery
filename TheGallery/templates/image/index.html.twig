@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Image Gallery{% endblock %}
 
@@ -14,7 +14,8 @@
                 <div class="gallery-overlay">
                     <div class="gallery-text">
                         <p>{{ filename }}</p>
-                        <a href="{{ path('app_image_edit', {'id': loop.index}) }}">Edit</a>
+                        <a href="{{ path('app_image_edit', {'id': loop.index}) }}">Edit</a> 
+                        <a href="{{ path('app_image_delete', {'id': loop.index}) }}" onclick="return confirm('Are you sure?')">Delete</a>
                     </div>
                 </div>
             </div>
@@ -23,5 +24,42 @@
         {% endfor %}
     </div>
 
+    <a href="{{ path('app_image_new') }}" class="create-new-link">Create new</a>
+{% endblock %} #}
+
+
+{# version using image #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Images</h1>
+    {% for image in images %}
+    <div class="container-card gapper">
+					<div class="card-author">
+						<div class="author"><p>{{ image.getTitle() }}</p></div>
+						<img class="underline" src=""/>
+						<div class="preview-img">
+                            <img src="{{ asset('' ~ image.path) }}" alt="{{ image.title }}" style="max-width: 100px;">
+                        </div>
+						<div class="tag-input-select">
+							<div class="overlap-group">
+								<div class="text-wrapper">tag#1</div>
+							</div>
+						</div>
+						<img alt="button like" class="pixelarticons-heart" src=""/>
+					</div>
+    </div>
+        <div>
+            {# <img src="{{ asset('' ~ image.getPath()) }}" alt="{{ image.getTitle() }}" style="max-width: 100px;"> #}
+            
+            <div class="gallery-overlay">
+                    <div class="gallery-text">
+                        <p>{{ image.title }}</p>
+                        <a href="{{ path('app_image_edit', {'id': loop.index}) }}">Edit</a> 
+                        <a href="{{ path('app_image_delete', {'id': loop.index}) }}" onclick="return confirm('Are you sure?')">Delete</a>
+                    </div>
+                </div>
+        </div>
+    {% endfor %}
     <a href="{{ path('app_image_new') }}" class="create-new-link">Create new</a>
 {% endblock %}

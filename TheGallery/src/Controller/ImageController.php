@@ -14,29 +14,36 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[Route('/image')]
 final class ImageController extends AbstractController
 {
-    #[Route(name: 'app_image_index', methods: ['GET'])]
+
+    // version using filename
+    #[Route('/' ,name: 'app_image_index', methods: ['GET'])]
     public function index(ImageRepository $imageRepository): Response
     {
-        $imagesDirectory = $this->getParameter('images_directory'); 
+        // $imagesDirectory = $this->getParameter('images_directory'); 
 
-        $images = scandir($imagesDirectory);
+        $images = $imageRepository->findBy([], ['created_at' => 'DESC']);
 
         // Filtrer les fichiers pour n'afficher que les images
-        $imageFiles = array_filter($images, function($file) {
-            return in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']);
-        });
+        // $imageFiles = array_filter($images, function($file) {
+        //     return in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']);
+        // });
 
-        $imageFiles = array_values($imageFiles);
+        // $imageFiles = array_values($imageFiles);
 
         return $this->render('image/index.html.twig', [
-            'imageFiles' => $imageFiles, 
-            'images' => $imageRepository->findAll(),
+            // 'imageFiles' => $imageFiles, 
+            'images' => $images,
         ]);
     }
+
+
+
+
 
     #[Route('/new', name: 'app_image_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
@@ -51,7 +58,7 @@ final class ImageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('path')->getData();
 
-            if ($file) {
+            if ($file instanceof UploadedFile) {
                 $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME); 
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
@@ -71,8 +78,9 @@ final class ImageController extends AbstractController
                 }
 
                 // Enregistrer le chemin partiel dans la base de données
-                $image->setPath('*/uploads/images/' . $newFilename);
-                $image->setTitle($form->get('title')->getData()); // Add our title to the image
+                $image->setPath('uploads/images/' . $newFilename);
+                $image->setTitle($form->get('title')->getData());
+                $image->setCreatedAt(new \DateTimeImmutable()); 
 
                 dump($image);
 
@@ -85,6 +93,8 @@ final class ImageController extends AbstractController
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
+            } else {
+                $this->addFlash('error', 'Invalid file upload.');
             }
         }
 
@@ -113,6 +123,11 @@ final class ImageController extends AbstractController
     //     ]);
     // }
 
+
+
+
+
+
     #[Route('/{id}', name: 'app_image_show', methods: ['GET'])]
     public function show(Image $image): Response
     {
@@ -135,7 +150,7 @@ final class ImageController extends AbstractController
 
         return $this->render('image/edit.html.twig', [
             'image' => $image,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

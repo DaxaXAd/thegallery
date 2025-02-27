@@ -29,6 +29,9 @@ class Image
     #[ORM\JoinColumn(name: "id_user_id", nullable: false)]
     private ?User $id_user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $created_at = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +99,18 @@ class Image
     public function setIdUser(?User $id_user): static
     {
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }
