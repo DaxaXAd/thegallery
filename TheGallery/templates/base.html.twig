@@ -19,7 +19,7 @@
 		{% endblock %}
 	</head>
 	<body>
-
+		{% block body %}
 		<header>
 			
 				<div class="header_image">
@@ -36,8 +36,6 @@
 								</svg>
 							</div>
 							<a href="{#{{ path('app_contact') #}}}" aria-label="contact">Contact</a>
-							<a href="{#{{ path('app_contact') #}}}" aria-label="contact">Contact</a>
-							<a href="{#{{ path('app_contact') #}}}" aria-label="contact">Contact</a>
 							<a href="{{ path('app_register') }}" class="register-btn button" aria-label="registration">Register</a>
 							<a href="{{ path('app_login') }}" class=" button" aria-label="login">Login</a>
 						</div>
@@ -47,9 +45,7 @@
 				
 			
 		</header>
-
-
-		{% block body %}{% endblock %}
+		{% endblock %}
 		<footer class="footer">
 			<p class="footer_copyright">&copy; 2025 - TheGallery</p>
 		</footer>
