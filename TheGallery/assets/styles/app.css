@@ -27,10 +27,23 @@ main {
 /* my css */
 
 body .header_image {
-    background-color: var(--variable-collection-primary-automn);
-    background-position: cover;
+    /* background-color: var(--variable-collection-primary-automn); */
+    background-image: url(images/header_automn.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
-    height: 400px;
+    height: 600px;
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+}
+
+svg {
+    /* default-height: 46px; */
+    /* default-width: 46px; */
+    width: 52px;
+    height: 52px;
 }
 
 .top-bar {
@@ -51,6 +64,14 @@ body .header_image {
     justify-content: space-between;
     align-items: center;
 }
+
+.top-bar_item .top-bar_menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 100px;
+}
+
 
 .top-bar .button {
     display: flex;
@@ -96,14 +117,50 @@ body .header_image {
     text-decoration: none;
 }
 
-.item-top-bar {
+/* .item-top-bar {
     display: flex;
     width: 1920px;
     height: 60px;
     padding: 0px 128px;
     justify-content: space-between;
     align-items: center;
+} */
+
+
+.header_image .welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 20%;
+    height: 80%;
 }
+
+.welcome-container .welcome-h1 {
+    align-self: stretch;
+    /* typo */
+    color: var(--white, #fff);
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: var(--Primary-automn, #130d0a);
+    font-family: Lexend, Helvetica;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+} 
+.welcome-container .welcome-msg {
+    align-items: center;
+    /* typo */
+    -webkit-text-stroke: 0.6px var(--variable-collection-text-autumn);
+    font-family: "Lexend-Semibold", Helvetica;
+    font-weight: 600;
+    color: var(--variable-collection-primary-dark);
+    font-size: 24px;
+    text-align: center;
+    
+}
+
 
 .container-card {
     display: flex;
