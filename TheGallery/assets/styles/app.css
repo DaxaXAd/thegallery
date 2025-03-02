@@ -24,7 +24,7 @@ main {
 }
 
 
-/* my css */
+/* === home page === */
 
 body .header_image {
     /* background-color: var(--variable-collection-primary-automn); */
@@ -33,17 +33,18 @@ body .header_image {
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: 600px;
+    height: 926px;
     display: flex; 
     flex-direction: row;
     justify-content: center;
+    
 }
 
-svg {
+.welcome-logo {
     /* default-height: 46px; */
     /* default-width: 46px; */
-    width: 52px;
-    height: 52px;
+    width: 64px;
+    height: 64px;
 }
 
 .top-bar {
@@ -126,6 +127,7 @@ svg {
     align-items: center;
 } */
 
+/* === home page === */
 
 .header_image .welcome-container {
     display: flex;
@@ -138,13 +140,13 @@ svg {
 }
 
 .welcome-container .welcome-h1 {
-    align-self: stretch;
+    align-self: center;
     /* typo */
     color: var(--white, #fff);
     -webkit-text-stroke-width: 4px;
     -webkit-text-stroke-color: var(--Primary-automn, #130d0a);
     font-family: Lexend, Helvetica;
-    font-size: 50px;
+    font-size: 60px;
     font-style: normal;
     font-weight: 700;
     text-transform: uppercase;
@@ -156,10 +158,11 @@ svg {
     font-family: "Lexend-Semibold", Helvetica;
     font-weight: 600;
     color: var(--variable-collection-primary-dark);
-    font-size: 24px;
+    font-size: 28px;
     text-align: center;
     
 }
+
 
 
 .container-card {
@@ -281,38 +284,41 @@ svg {
 }
 
 
-/* login page */
 
-.box {
-    width: 100%;
+/*====== login page =======*/
 
+.login-logo {
+    width: 85px;
+    height: 85px;
+}
+
+.header_image .login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 20%;
+    height: 80%;
 }
 
-.login-title {
-    width: 465px;
-    height: 80px;
-}
-
-.login-title .title {
-    /* position: fixed; */
-    width: 465px;
-    top: 0;
-    left: 0;
-    -webkit-text-stroke: 4px #a43809;
-    font-family: "Lexend-Bold", Helvetica;
+.login-container .login-h1 {
+    align-self: center;
+    /* typo */
+    color: var(--white, #fff);
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: var(--Primary-automn, #130d0a);
+    font-family: Lexend, Helvetica;
+    font-size: 100px;
+    font-style: normal;
     font-weight: 700;
-    color: var(--variable-collection-white);
-    font-size: 64px;
-    letter-spacing: 0;
-    line-height: normal;
-    border-color: var(--variable-collection-primary-automn);
-}
+    text-transform: uppercase;
+} 
 
-/* end login page */
+/*====== end login page ======*/
 
+
+/* === variable === */
 :root {
     --variable-collection-primary-dark: rgba(0, 0, 0, 1);
     --variable-collection-primary-purple: rgba(113, 16, 216, 1);
