@@ -17,9 +17,10 @@
 						<div class="text-wrapper">tag#1</div>
 					</div>
 				</div>
-				<img alt="button like" class="pixelarticons-heart" src=""/>
+				<img aria-label="button like" class="pixelarticons-heart"/>
+				<span class="like-count">0</span>
 			</div>
-			{# <img src="{{ asset('' ~ image.getPath()) }}" alt="{{ image.getTitle() }}" style="max-width: 100px;"> #}
+			
 		</div>
 		{% if app.user == image.idUser %}
 		<div class="gallery-overlay">

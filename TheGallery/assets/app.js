@@ -24,3 +24,27 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
   });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const likeButton = document.querySelector("pixelarticons-heart");
+
+    likeButton.addEventListener('click', function (event) {
+        const likeCount = likeButton.nextElementSibling;
+        let count = parseInt(likeCount.innerText);
+
+        // Vérifie si le bouton a déjà été cliqué
+        if (likeButton.classList.contains('liked')) {
+            // Retire le like
+            count--;
+            likeButton.classList.remove('liked');
+        } else {
+            // Ajoute un like
+            count++;
+            likeButton.classList.add('liked');
+        }
+        likeCount.innerText = count;
+    });
+});
