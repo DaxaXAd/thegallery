@@ -82,6 +82,7 @@ final class UserController extends AbstractController
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'posts' => $user->getPosts(),
         ]);
     }
 
@@ -153,7 +154,7 @@ final class UserController extends AbstractController
     }
 
 
-    
+
 
     #[Route('/profile/{id}', name: 'app_profile', methods: ['GET'])]
     public function profile(int $id, User $user, ManagerRegistry $doctrine): Response
