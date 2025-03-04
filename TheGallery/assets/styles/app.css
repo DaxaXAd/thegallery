@@ -5,7 +5,9 @@ html {
     display: flex;
     flex-direction: column;
 }
-
+body {
+    background-color: var(--variable-collection-grey-back);
+}
 /* header {
     min-height: 20vh;
 
@@ -129,6 +131,26 @@ body .header_image {
     text-decoration: none;
 }
 
+
+
+.logout-btn {
+    display: flex;
+    width: 113px;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 23px;
+    background: #ff0000;
+    /* typo */
+    color: var(--Primary-dark, #000000);
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+
 /* .item-top-bar {
     display: flex;
     width: 1920px;
@@ -238,6 +260,8 @@ body .header_image {
     width: 239px;
     height: 1px;
     object-fit: cover;
+    border: 1px solid var(--white, #FFF);
+    background: var(--Primary-dark, #000);
 }
 
 .card-author .preview-img {
@@ -328,6 +352,51 @@ body .header_image {
 
 /*====== end login page ======*/
 
+/*====== post page =======*/
+
+.post-logo {
+    width: 85px;
+    height: 85px;
+}
+
+.header_image .post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 20%;
+    height: 80%;
+}
+
+.post-container .post-h1 {
+    align-self: center;
+    /* typo */
+    color: var(--white, #fff);
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: var(--Primary-automn, #130d0a);
+    font-family: Lexend, Helvetica;
+    font-size: 100px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+} 
+
+.post-container .post-msg {
+    align-items: center;
+    /* typo */
+    -webkit-text-stroke: 0.6px var(--variable-collection-text-autumn);
+    font-family: "Lexend-Semibold", Helvetica;
+    font-weight: 600;
+    color: var(--variable-collection-primary-dark);
+    font-size: 28px;
+    text-align: center;
+    
+}
+
+/*====== end post page ======*/
+
+
 
 /* === variable === */
 :root {
@@ -338,4 +407,5 @@ body .header_image {
     --variable-collection-white: rgba(255, 255, 255, 1);
     --variable-collection-text-autumn: rgba(202, 113, 12, 1);
     --variable-collection-autumn-back: rgba(154, 100, 0, 0.58);
+    --variable-collection-grey-back: rgba(43, 43, 43, 1);
 }

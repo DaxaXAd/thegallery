@@ -27,27 +27,58 @@ final class PostController extends AbstractController
         ]);
     }
 
+
+
+
+
     #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ImageRepository $imageRepository): Response
     {
         $image = new Image();
         $post = new Post();
-        
+        $imageId = $request->query->get('imageId');
+        $title = $request->query->get('title');
+
+        if ($imageId) {
+            $image = $imageRepository->find($imageId);
+            if ($image) {
+                $post->setIdImg($image);
+            }
+        }
+
+        if ($title) {
+            $post->setTitle($title);
+        }
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            if ($user) {
+                $post->setIdUser($user);
+            } else {
+                throw new \Exception('User not found or not authenticated.');
+            }
+
             $entityManager->persist($post);
             $entityManager->flush();
+
+            
 
             return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('post/new.html.twig', [
             'post' => $post,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
+
+
+
+
+
 
     #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
     public function show(Post $post): Response
@@ -56,6 +87,10 @@ final class PostController extends AbstractController
             'post' => $post,
         ]);
     }
+
+
+
+
 
     #[Route('/{id}/edit', name: 'app_post_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
@@ -75,10 +110,13 @@ final class PostController extends AbstractController
         ]);
     }
 
+
+
+
     #[Route('/{id}', name: 'app_post_delete', methods: ['POST'])]
     public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($post);
             $entityManager->flush();
         }

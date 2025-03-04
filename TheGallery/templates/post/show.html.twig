@@ -1,4 +1,5 @@
-{# templates/post/show.html.twig #}
+
+
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ post.title }}{% endblock %}
@@ -6,15 +7,17 @@
 {% block body %}
     <h1>{{ post.title }}</h1>
 
-    <p>{{ post.content }}</p>
+    
 
-    {% if post.photoFilename %}
-        <img src="{{ asset('uploads/photos/' ~ post.photoFilename) }}" alt="{{ post.title }}">
+    {% if post.idImg %}
+        <div class="post-image">
+            <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
+        </div>
     {% endif %}
 
-    <a href="{{ path('app_post_index') }}">Back to list</a>
-
-    <a href="{{ path('app_post_edit', {'id': post.id}) }}">Edit</a>
-
-    {{ include('post/_delete_form.html.twig') }}
+    <div class="post-actions">
+        <a href="{{ path('app_post_index') }}">Back to list</a>
+        <a href="{{ path('app_post_edit', {'id': post.id}) }}">Edit</a>
+        {{ include('post/_delete_form.html.twig', {'post': post}) }}
+    </div>
 {% endblock %}

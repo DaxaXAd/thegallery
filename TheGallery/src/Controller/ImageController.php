@@ -28,15 +28,7 @@ final class ImageController extends AbstractController
 
         $images = $imageRepository->findBy([], ['created_at' => 'DESC']);
 
-        // Filtrer les fichiers pour n'afficher que les images
-        // $imageFiles = array_filter($images, function($file) {
-        //     return in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']);
-        // });
-
-        // $imageFiles = array_values($imageFiles);
-
         return $this->render('image/index.html.twig', [
-            // 'imageFiles' => $imageFiles, 
             'images' => $images,
         ]);
     }
@@ -82,7 +74,6 @@ final class ImageController extends AbstractController
                 $image->setTitle($form->get('title')->getData());
                 $image->setCreatedAt(new \DateTimeImmutable()); 
 
-                dump($image);
 
                 $user = $this->getUser();
                 if ($user) {
@@ -92,7 +83,9 @@ final class ImageController extends AbstractController
                 $entityManager->persist($image);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
+                // return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
+                // Rediriger vers la création de post avec l'ID de l'image
+                return $this->redirectToRoute('app_post_new', ['imageId' => $image->getId(), 'title' => $request->query->get('title')], Response::HTTP_SEE_OTHER);
             } else {
                 $this->addFlash('error', 'Invalid file upload.');
             }
