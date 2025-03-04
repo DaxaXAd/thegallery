@@ -3,57 +3,39 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <main class="user-profile-page">
-        <h1>{{ user.username }}'s Profile</h1>
+    {% if app.user == user %}
+        <main class="user-profile-page">
+            <h1>{{ user.username }}'s Profile</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Bio</th>
-                <td>{{ user.bio }}</td>
-            </tr>
-            <tr>
-                <th>Profile_pic</th>
-                <td>{{ user.profilePic }}</td>
-            </tr>
-        </tbody>
-        
+            <div>
+                <p>Email: {{ user.email }}</p>
+                <p>Username: {{ user.username }}</p>
+            </div>
 
-        <a href="{{ path('app_user_image_add', {'id': user.id}) }}" class="btn btn-primary">Add Image</a>
-        <section class="user-images">
-            <h2>Gallery</h2>
-            {% for image in user.images %}
-                <div class="image-item">
-                    <img src="{{ asset('uploads/' ~ image.filename) }}" alt="User Image">
+            <h1>{{ user.username }}'s Posts</h1>
+
+            <div class="posts-list">
+                {% for post in posts %}
+                <div class="container-card gapper">
+                    <div class="card-author">
+                        <div class="author">
+                            <h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a></h2>
+                            <img class="underline" src=""/>
+                        </div>
+                        {% if post.idImg %}
+                            <div class="preview-img">
+                                <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-            {% else %}
-                <p>No images found.</p>
-            {% endfor %}
-    </table>
+                {% endfor %}
+            </div>
 
-    <a href="{{ path('app_user_index', {'id': user.id}) }}">back to list</a>
+        <a href="{{ path('app_user_index', {'id': user.id}) }}">back to list</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+        <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
 
-    {{ include('user/_delete_form.html.twig') }}
+        {{ include('user/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

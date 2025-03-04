@@ -7,14 +7,17 @@ html {
 }
 body {
     background-color: var(--variable-collection-grey-back);
+    color: var(--variable-collection-white);
 }
 /* header {
     min-height: 20vh;
 
 } */
 main {
-    background-color: #0D1117;
-    color: white;
+    /* background-color: #0D1117;
+    color: white; */
+    background-color: var(--variable-collection-grey-back);
+    color: var(--variable-collection-white);
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -113,6 +116,37 @@ body .header_image {
     text-decoration: none;
 }
 
+.edit-btn {
+    display: flex;
+    width: 113px;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 23px;
+    background: #515fdc;
+    /* typo */
+    color: var(--Primary-dark, #ffffff);
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.btn-danger {
+    border-radius: 23px;
+    padding: 4px 20px;
+    /* typo */
+    color: var(--Primary-dark, #000000);
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+
 .login-btn {
     display: flex;
     width: 113px;
@@ -123,6 +157,47 @@ body .header_image {
     background: var(--Primary-automn, #A5380A);
     /* typo */
     color: var(--Primary-dark, #000000);
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.save-btn {
+    display: flex;
+    width: 113px;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 23px;
+    background: var(--Primary-automn, #A5380A);
+    /* typo */
+    color: var(--Primary-dark, #000000);
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.save-btn:hover {
+    background-color: var(--variable-collection-white);
+    color: var(--variable-collection-primary-dark);
+}
+
+.backlist-btn {
+    display: flex;
+    width: 113px;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 23px;
+    background: #515fdc;
+    /* typo */
+    color: var(--Primary-dark, #ffffff);
     font-family: "Lexend-Bold", Helvetica;
     font-size: 16px;
     font-style: normal;
@@ -211,7 +286,7 @@ body .header_image {
 
 .card-author {
     display: flex;
-    width: 421px;
+    width: 428px;
     padding: 20px 23px;
     align-items: center;
     align-content: center;
@@ -271,6 +346,14 @@ body .header_image {
     background-image: url('');
     background-size: cover;
     background-position: 50% 50%;
+    overflow: hidden;
+}
+
+.card-author .preview-img img {
+    max-width: 100%;
+    max-height: 100%; 
+    object-fit: contain; /* keep image proportion */
+    cursor: pointer;
 }
 
 .card-author .tag-input-select {
@@ -376,7 +459,7 @@ body .header_image {
     -webkit-text-stroke-width: 4px;
     -webkit-text-stroke-color: var(--Primary-automn, #130d0a);
     font-family: Lexend, Helvetica;
-    font-size: 100px;
+    font-size: 75px;
     font-style: normal;
     font-weight: 700;
     text-transform: uppercase;
@@ -391,8 +474,38 @@ body .header_image {
     color: var(--variable-collection-primary-dark);
     font-size: 28px;
     text-align: center;
+}
+
+.post-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+main .form_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 30%;
+    border-radius: 46px;
+    border: 25px solid;
+    background-color: var(--variable-collection-primary-dark);
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+.form_container .post-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    row-gap: 10x;
     
 }
+
+
 
 /*====== end post page ======*/
 
@@ -408,4 +521,8 @@ body .header_image {
     --variable-collection-text-autumn: rgba(202, 113, 12, 1);
     --variable-collection-autumn-back: rgba(154, 100, 0, 0.58);
     --variable-collection-grey-back: rgba(43, 43, 43, 1);
+}
+
+#post_addImage {
+    background-color: var(--variable-collection-pers-green, #ffffff);
 }

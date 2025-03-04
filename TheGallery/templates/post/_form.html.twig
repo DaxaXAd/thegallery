@@ -1,4 +1,10 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="post-button">
+        <button class="btn save-btn" arial-label="save post">{{ button_label|default('Save') }}</button>
+        
+    </div>
 {{ form_end(form) }}
+<div class="post-button">
+    <a href="{{ path('app_post_index') }}" class="btn backlist-btn" aria-label="cancel">{{ button_label|default('Cancel') }}</a>
+</div>

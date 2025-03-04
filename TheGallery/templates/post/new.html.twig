@@ -4,16 +4,18 @@
 {% endblock %}
 
 {% block body %}
+<main>
 	{% if app.user %}
+	<div class="form_container">
 		<h1>Create new Post</h1>
-
-		{{ include('post/_form.html.twig') }}
-		<a href="{{ path('app_image_new') }}" class="btn btn-secondary">Add Image</a>
-		<a href="{{ path('app_post_index') }}">back to list</a>
+		{# <div class="post-button"> #}
+			{{ include('post/_form.html.twig') }}		
+		{# </div> #}
+	</div>
 	{% else %}
 		<h1>Access Denied</h1>
 		<p>You must be logged in to create a new post.</p>
 		<a href="{{ path('app_login') }}">Login</a>
 	{% endif %}
-
+</main>
 {% endblock %}

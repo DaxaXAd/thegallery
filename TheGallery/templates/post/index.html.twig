@@ -41,14 +41,13 @@
 					</svg>
 				</div>
 				<h1 class="post-h1">Posts List</h1>
-				<p class="post-msg">Take to other's post or add your own post</p>
+				<p class="post-msg">Take a look to other's post or add your own post</p>
 			</div>
 		</div>
 
     </header>
     
 
-    <a href="{{ path('app_post_new') }}">Create new post</a>
 
     <div class="posts-list">
         {% for post in posts %}
@@ -60,7 +59,9 @@
                 </div>
                 {% if post.idImg %}
                     <div class="preview-img">
-                        <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}" style="max-width: 100px;">
+                        <a href="{{ path('app_post_show', {'id': post.id}) }}">
+                            <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
+                        </a>
                     </div>
                 {% endif %}
                 <div class="tag-input-select">
@@ -72,7 +73,7 @@
 				<span class="like-count">0</span>
                 <div class="post-actions">
                 {% if app.user == post.idUser %}
-                    <a href="{{ path('app_post_edit', {'id': post.id}) }}">Edit</a>
+                    <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn">Edit</a>
                     {{ include('post/_delete_form.html.twig', {'post': post}) }}
                 {% endif %}
                 </div>

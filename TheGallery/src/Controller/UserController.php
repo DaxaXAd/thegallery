@@ -2,14 +2,7 @@
 
 namespace App\Controller;
 
-// use App\Entity\User;
-// use App\Form\UserType;
-// use App\Repository\UserRepository;
-// use Doctrine\ORM\EntityManagerInterface;
-// use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-// use Symfony\Component\HttpFoundation\Request;
-// use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\Routing\Attribute\Route;
+
 use App\Entity\User;
 use App\Entity\Post;
 use App\Form\UserType;
@@ -35,7 +28,7 @@ final class UserController extends AbstractController
     }
 
     #[Route('/user/{id}', name: 'app_user_index', methods: ['GET'])]
-    public function index(int $id, UserRepository $userRepository, /*PostsRepository $postsRepository, RetweetsRepository $retweetRepository, LikesRepository $likeRepository, CommentRepository $commentRepository*/): Response
+    public function index(int $id, UserRepository $userRepository): Response
     {
         $user = $userRepository->find($id);
         if (!$user) {
@@ -46,6 +39,9 @@ final class UserController extends AbstractController
             
         ]);
     }
+
+
+
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -72,6 +68,9 @@ final class UserController extends AbstractController
         ]);
     }
 
+
+
+
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(int $id, UserRepository $userRepository): Response
     {
@@ -85,6 +84,9 @@ final class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+
+
+
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
@@ -124,6 +126,8 @@ final class UserController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
@@ -147,6 +151,9 @@ final class UserController extends AbstractController
 
         return $this->redirectToRoute('home_page', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    
 
     #[Route('/profile/{id}', name: 'app_profile', methods: ['GET'])]
     public function profile(int $id, User $user, ManagerRegistry $doctrine): Response
