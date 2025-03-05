@@ -1,0 +1,47 @@
+@use '../abstracts/variables' as *;
+
+.button {
+    display: flex;
+    width: 113px;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 23px;
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $white;
+        color: $primary-dark;
+        border: 3px solid;
+        border-color: $text-autumn;
+        transform: scale(1.1);
+    }
+}
+
+.sign-in,
+.register-btn,
+.login-btn,
+.save-btn {
+    @extend .button;
+    background: $primary-automn;
+    color: $primary-dark;
+}
+
+.edit-btn,
+.backlist-btn {
+    @extend .button;
+    background: #515fdc;
+    color: $white;
+}
+
+.logout-btn {
+    @extend .button;
+    background: #ff0000;
+    color: $primary-dark;
+}

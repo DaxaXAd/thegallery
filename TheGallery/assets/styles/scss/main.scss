@@ -1,0 +1,17 @@
+// Import des fichiers partiels
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+@use 'base/reset';
+
+@use 'components/buttons';
+@use 'components/card';
+
+@use 'layouts/header';
+@use 'layouts/footer';
+@use 'layouts/main';
+
+@use 'pages/home';
+@use 'pages/login';
+@use 'pages/post';
+@use 'pages/register';

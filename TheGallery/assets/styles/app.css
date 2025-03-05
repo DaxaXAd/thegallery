@@ -45,7 +45,7 @@ main {
 body .header_image {
     /* background-color: var(--variable-collection-primary-automn); */
     background-image: url(images/header_automn.png);
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
@@ -96,6 +96,34 @@ body .header_image {
     padding: 4px 24px;
     justify-content: center;
     align-items: center;
+}
+
+.sign-in {
+    display: flex;
+    width: 113px;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 23px;
+    background: var(--Primary-automn, #A5380A);
+    /* typo */
+    color: var(--Primary-dark, #000000);
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+}
+
+.sign-in:hover {
+    background-color: var(--variable-collection-white);
+    color: var(--variable-collection-primary-dark);
+    border: 3px solid;
+    border-color: var(--variable-collection-text-autumn);
+    transform: scale(1.1);
 }
 
 .register-btn {
@@ -432,6 +460,25 @@ body .header_image {
     font-weight: 700;
     text-transform: uppercase;
 } 
+
+.form-container .form_group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_group .form_input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
 
 /*====== end login page ======*/
 

@@ -7,12 +7,14 @@
         <main class="user-profile-page">
             <h1>{{ user.username }}'s Profile</h1>
 
-            <div>
-                <img src="{{ asset(user.profilePic) }}" alt="Photo de profil" style="max-width: 200px;"/>
-                <p>Email: {{ user.email }}</p>
-                <p>Username: {{ user.username }}</p>
-                <p>Bio: {{ user.bio }}</p>
-                <p>Location: {{ user.location }}</p>
+            <div class="user-infos">
+                <div>
+                    <img src="{{ asset(user.profilePic) }}" alt="Photo de profil" style="max-width: 200px;"/>
+                </div>
+                <div><p>Email: {{ user.email }}</p></div>
+                <div><p>Username: {{ user.username }}</p></div>
+                <div><p>Bio: {{ user.bio }}</p></div>
+                <div><p>Location: {{ user.location }}</p></div>
             </div>
 
             <h1>{{ user.username }}'s Posts</h1>
