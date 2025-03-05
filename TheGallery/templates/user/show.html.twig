@@ -8,8 +8,11 @@
             <h1>{{ user.username }}'s Profile</h1>
 
             <div>
+                <img src="{{ asset(user.profilePic) }}" alt="Photo de profil" style="max-width: 200px;"/>
                 <p>Email: {{ user.email }}</p>
                 <p>Username: {{ user.username }}</p>
+                <p>Bio: {{ user.bio }}</p>
+                <p>Location: {{ user.location }}</p>
             </div>
 
             <h1>{{ user.username }}'s Posts</h1>
@@ -32,7 +35,7 @@
                 {% endfor %}
             </div>
 
-        <a href="{{ path('app_user_index', {'id': user.id}) }}">back to list</a>
+        <a href="{{ path('app_post_index') }}">back to list</a>
 
         <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
 

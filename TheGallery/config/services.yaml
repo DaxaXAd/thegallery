@@ -6,6 +6,7 @@
 parameters:
     # ce bout de code qui va indiquer à symfony le fichier de réception de vos documents. 
     images_directory: '%kernel.project_dir%/public/uploads/images/'
+    profile_pictures_directory: '%kernel.project_dir%/public/images/profil'
 
 services:
     # default configuration for services in *this* file

@@ -3,11 +3,56 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+    {% if app.user == user %}
+        <h1>Edit User</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ form_start(form, { 'attr': {'class': 'form-edit', 'enctype': 'multipart/form-data' }}) }}
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+        <div class="form-group">
+            <label for="profile_pic">
+                <div class="pp-edit">
+                    <img id="profilePicturePreview" class="img-edit" src="{{ asset(user.profilePic) }}" alt="Photo de profil">
+                    {{ form_widget(form.profile_pic, {'attr': {'id': 'profilePictureFile', 'class': 'hidden-input'}}) }}
+                    <label for="profilePictureFile" class="camera-btn">
+                        <svg class="camera-icon" id="_1-DSLR_Camera" data-name="1-DSLR Camera" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32">
+                            <title>1-DSLR Camera</title>
+                            <path d="M29,6H24.78L24,2.76A1,1,0,0,0,23,2H9a1,1,0,0,0-1,.76L7.22,6H3A3,3,0,0,0,0,9V27a3,3,0,0,0,3,3H29a3,3,0,0,0,3-3V9A3,3,0,0,0,29,6Zm1,21a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V9A1,1,0,0,1,3,8H8a1,1,0,0,0,1-.76L9.78,4H22.22L23,7.24A1,1,0,0,0,24,8h5a1,1,0,0,1,1,1Z"/>
+                            <path d="M16,10a8,8,0,1,0,8,8A8,8,0,0,0,16,10Zm0,14a6,6,0,1,1,6-6A6,6,0,0,1,16,24Z"/>
+                            <path d="M16,14a4,4,0,1,0,4,4A4,4,0,0,0,16,14Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,16,20Z"/>
+                            <rect x="12" y="6" width="8" height="2"/>
+                        </svg>
+                    </label>
+                </div>
+            </label>
+        </div>
 
-    {{ include('user/_delete_form.html.twig') }}
+        <div class="form-group">
+            {{ form_widget(form.username, {'attr': {'class': 'input-edit', 'placeholder': ' '}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.email, {'attr': {'class': 'input-edit', 'placeholder': ' '}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.bio, {'attr': {'class': 'input-edit', 'placeholder': ' '}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.password, {'attr': {'class': 'input-edit'}}) }}
+        </div>
+
+        <button class="button-edit">
+            <svg class="edit-svg" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('app_user_show' , {'id': user.id}) }}">back to list</a>
+
+        {{ include('user/_delete_form.html.twig') }}
+    {% else %}
+        <h1>Access Denied</h1>
+    {% endif %}
 {% endblock %}

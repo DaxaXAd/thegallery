@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Controller\SecurityController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/user')]
 final class UserController extends AbstractController
@@ -33,10 +34,10 @@ final class UserController extends AbstractController
         $user = $userRepository->find($id);
         if (!$user) {
             throw $this->createNotFoundException('User not found');
-                }
+        }
         return $this->render('user/index.html.twig', [
             'user' => $user
-            
+
         ]);
     }
 
@@ -51,7 +52,9 @@ final class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
+            $user->setRoles(['ROLE_USER']);
+
             if (!$user->getProfilePic()) {
                 $user->setProfilePic('images/profil/profil.png');
             }
@@ -87,7 +90,49 @@ final class UserController extends AbstractController
     }
 
 
+    // #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    // {
+    //     $form = $this->createForm(UserType::class, $user);
+    //     $form->handleRequest($request);
 
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         // Hashing and manage password
+    //         $newPassword = $form->get('password')->getData();
+    //         if (!empty($newPassword)) {
+    //             $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
+    //             $user->setPassword($hashedPassword);
+    //         }
+
+    //         // Manage and add profile_pic
+    //         $profilePicture = $form->get('profile_pic')->getData();
+    //         if ($profilePicture) {
+    //             $pictureFilename = uniqid() . '.' . $profilePicture->guessExtension();
+    //             try {
+    //                 $profilePicture->move(
+    //                     $this->getParameter('profile_pictures_directory'),
+    //                     $pictureFilename
+    //                 );
+    //                 $user->setProfilePic('images/profil/' . $pictureFilename);
+    //             } catch (FileException $e) {
+    //                 throw new \Exception($e->getMessage());
+    //             }
+    //         }
+
+    //         $entityManager->persist($user);
+    //         $entityManager->flush();
+
+    //         return $this->redirectToRoute('app_user_index', ['id' => $user->getId()]);
+    //     }
+
+    //     dump($user);
+    //     dump($form->createView());
+
+    //     return $this->render('user/edit.html.twig', [
+    //         'user' => $user,
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
@@ -98,27 +143,33 @@ final class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // Hashing and manage password
             $newPassword = $form->get('password')->getData();
             if (!empty($newPassword)) {
                 $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
                 $user->setPassword($hashedPassword);
             }
 
-            $profilePicture = $form->get('profilePicture')->getData();
+            // manage and add profile_pic
+            $profilePicture = $form->get('profile_pic')->getData();
             if ($profilePicture) {
-                
-                $pictureFilename = uniqid(). '.' .$profilePicture->guessExtension();
-                $profilePicture->move(
-                    $this->getParameter('profile_pictures_directory'),
-                    $pictureFilename
-                );
-                $user->setProfilePic('images/profil/' . $pictureFilename);
+
+                $pictureFilename = uniqid() . '.' . $profilePicture->guessExtension();
+                try {
+                    $profilePicture->move(
+                        $this->getParameter('profile_pictures_directory'),
+                        $pictureFilename
+                    );
+                    $user->setProfilePic('images/profil/' . $pictureFilename);
+                } catch (FileException $e) {
+                    throw new \Exception($e->getMessage());
+                }
             }
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_user_index', ['id' => $user->getId()]);
+            return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
         }
 
         return $this->render('user/edit.html.twig', [
@@ -132,7 +183,7 @@ final class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->getString('_token'))) {
 
             if ($user->getProfilePic()) {
                 $profilePicturePath = $this->getParameter('kernel.project_dir') . '/public' . $user->getProfilePic();
@@ -146,7 +197,7 @@ final class UserController extends AbstractController
 
             $request->getSession()->invalidate();
             $this->container->get('security.token_storage')->setToken(null);
-            
+
             return $this->redirectToRoute('app_logout');
         }
 
@@ -174,7 +225,7 @@ final class UserController extends AbstractController
 
         // Render a Twig template with the user and images
         return $this->render('user/profile.html.twig', [
-            'user'   => $user,
+            'user' => $user,
             'posts' => $posts,
         ]);
     }
