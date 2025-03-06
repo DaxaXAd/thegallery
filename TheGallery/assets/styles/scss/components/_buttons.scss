@@ -45,3 +45,14 @@
     background: #ff0000;
     color: $primary-dark;
 }
+
+.contact-btn {
+    background-color: transparent;
+    color: var(--variable-collection-primary-automn);
+    text-decoration: none;
+
+    &:hover {
+        background-color: transparent;
+        color: $primary-automn;
+    }
+}

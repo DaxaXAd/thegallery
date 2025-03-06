@@ -5,20 +5,32 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block body %}
-    <h1>{{ post.title }}</h1>
-    <h2>by {{ post.user.username }}</h2>
-
     
 
-    {% if post.idImg %}
-        <div class="post-image">
-            <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
+<main>
+    <div class="full-post">
+        <div class="post-container">
+            <h1>{{ post.title }}</h1>
+            <h2>by {{ user.username }}</h2>
+            <div class="post-image">
+                {% if post.idImg %}            
+                        <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">                
+                {% endif %}
+            </div>
+        
+        {% if app.user == post.idUser %}
+            <div class="post-actions">
+                <a href="{{ path('app_post_index') }}" class="backlist-btn">Go Back</a>
+                <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn">Edit</a>
+                {{ include('post/_delete_form.html.twig', {'post': post}) }}
+            </div>
+        {% endif %}
         </div>
-    {% endif %}
-
-    <div class="post-actions">
-        <a href="{{ path('app_post_index') }}">Back to list</a>
-        <a href="{{ path('app_post_edit', {'id': post.id}) }}">Edit</a>
-        {{ include('post/_delete_form.html.twig', {'post': post}) }}
+        <section class="comment-section">
+            <div class="comment-list">
+                {# comment list and add appear #}
+            </div>
+        </section>
     </div>
+</main>
 {% endblock %}

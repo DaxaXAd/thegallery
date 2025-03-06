@@ -64,7 +64,7 @@ body .header_image {
 }
 
 .top-bar {
-    position: absolute;
+    position: fixed;
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
@@ -88,6 +88,25 @@ body .header_image {
     align-items: center;
     gap: 100px;
 }
+
+.top-bar .button:hover {
+    background-color: var(--variable-collection-white);
+    color: var(--variable-collection-primary-dark);
+    transform: scale(1.1);
+}
+
+.top-bar .contact-btn {
+    background-color: transparent;
+    color: var(--variable-collection-primary-automn);
+    text-decoration: none;
+}
+
+.top-bar .contact-btn:hover {
+    background-color: transparent;
+    color: var(--variable-collection-primary-automn);
+}
+
+
 
 
 .top-bar .button {
@@ -126,6 +145,14 @@ body .header_image {
     transform: scale(1.1);
 }
 
+.agree-terms {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
 .register-btn {
     display: flex;
     width: 113px;
@@ -142,6 +169,22 @@ body .header_image {
     font-weight: 700;
     line-height: normal;
     text-decoration: none;
+}
+
+.signup-btn {
+    border-radius: 15px;
+    background-color: var(--variable-collection-primary-automn);
+    width: 50%;
+    height: 50px;
+    /* typo */
+    color: var(--Primary-dark, #000000);
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 20px;
+    padding: 4px 24px;
+
 }
 
 .edit-btn {
@@ -429,7 +472,21 @@ body .header_image {
     flex-shrink: 0;
 }
 
+/*====== register page =======*/
 
+
+.register-page .form-register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.form-register .input-register {
+    height: 52px;
+}
+
+/*====== end register page =======*/
 
 /*====== login page =======*/
 
@@ -461,7 +518,7 @@ body .header_image {
     text-transform: uppercase;
 } 
 
-.form-container .form_group {
+.form_container .form_group {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -552,6 +609,41 @@ main .form_container {
     
 }
 
+.post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.post-container .post-image {
+    width: 100%;
+    max-width: 1660px;
+    margin-bottom: 20px;
+    
+}
+
+.post-image img{
+    width: 100%;
+    height: auto;
+    object-fit: contain
+}
+
+/*====== comment side ======*/
+
+.full-post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* .comment-container {
+    
+} */
+
+/* .comment-container .comment-list {} */
+
+/*====== end comment side ======*/
 
 
 /*====== end post page ======*/
