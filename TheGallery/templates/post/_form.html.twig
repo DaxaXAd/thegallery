@@ -1,4 +1,8 @@
 {{ form_start(form) }}
+<div class="instructions">
+        <p><strong>Étape 1 :</strong> Remplissez le titre et le contenu de votre publication.</p>
+        <p><strong>Étape 2 :</strong> Si vous souhaitez ajouter une image, cliquez sur le bouton "Add Image".</p>
+    </div>
     {{ form_widget(form) }}
     <div class="post-button">
         <button class="btn save-btn" arial-label="save post">{{ button_label|default('Save') }}</button>
@@ -8,3 +12,29 @@
 <div class="post-button">
     <a href="{{ path('app_post_index') }}" class="btn backlist-btn" aria-label="cancel">{{ button_label|default('Cancel') }}</a>
 </div>
+<div id="image-preview"></div>
+
+// <script>
+// document.addEventListener('DOMContentLoaded', function() {
+//     var fileInput = document.querySelector('input[type="file"]');
+//     var imagePreview = document.getElementById('image-preview');
+
+//     fileInput.addEventListener('change', function(event) {
+//         var file = event.target.files[0];
+//         if (file && file.type.startsWith('image/')) {
+//             var reader = new FileReader();
+//             reader.onload = function(e) {
+//                 var img = document.createElement('img');
+//                 img.src = e.target.result;
+//                 img.style.maxWidth = '100%';
+//                 img.style.height = 'auto';
+//                 imagePreview.innerHTML = '';
+//                 imagePreview.appendChild(img);
+//             };
+//             reader.readAsDataURL(file);
+//         } else {
+//             imagePreview.innerHTML = 'Please select a valid image file.';
+//         }
+//     });
+// });
+// 

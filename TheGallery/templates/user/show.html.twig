@@ -3,6 +3,7 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
+<main>
     {% if app.user == user %}
         <main class="user-profile-page">
             <h1>{{ user.username }}'s Profile</h1>
@@ -32,6 +33,19 @@
                                 <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
                             </div>
                         {% endif %}
+                        <div class="tag-input-select">
+					<div class="overlap-group">
+						<div class="text-wrapper">tag#1</div>
+					</div>
+				</div>
+                <img aria-label="button like" class="pixelarticons-heart"/>
+				<span class="like-count">0</span>
+                <div class="post-actions">
+                {% if app.user == post.idUser %}
+                    <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn">Edit</a>
+                    {{ include('post/_delete_form.html.twig', {'post': post}) }}
+                {% endif %}
+                </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -43,4 +57,5 @@
 
         {{ include('user/_delete_form.html.twig') }}
     {% endif %}
+</main>
 {% endblock %}

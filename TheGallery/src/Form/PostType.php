@@ -19,10 +19,7 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('title', TextType::class, [
-            'label' => 'Title',
-            'required' => true,
-        ])
+        
         // ->add('content', TextareaType::class, [
         //     'label' => 'Content',
         // ]);
@@ -31,9 +28,15 @@ class PostType extends AbstractType
         //     'mapped' => false,
         //     'required' => false,
         // ])
+        
         ->add('addImage', ButtonType::class, [
             'label' => 'Add Image',
             'attr' => ['onclick' => 'window.location.href="' . $options['image_add_url'] . '"']
+        ])
+        
+        ->add('title', TextType::class, [
+            'label' => 'Title',
+            'required' => true,
         ]);
     }
 
