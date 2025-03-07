@@ -595,7 +595,7 @@ main .form_container {
     gap: 50px;
     width: 30%;
     border-radius: 46px;
-    border: 25px solid;
+    border: 25px solid var(--variable-collection-primary-automn);
     background-color: var(--variable-collection-primary-dark);
     padding-top: 120px;
     padding-bottom: 120px;
