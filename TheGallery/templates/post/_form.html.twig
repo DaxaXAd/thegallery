@@ -14,27 +14,3 @@
 </div>
 <div id="image-preview"></div>
 
-// <script>
-// document.addEventListener('DOMContentLoaded', function() {
-//     var fileInput = document.querySelector('input[type="file"]');
-//     var imagePreview = document.getElementById('image-preview');
-
-//     fileInput.addEventListener('change', function(event) {
-//         var file = event.target.files[0];
-//         if (file && file.type.startsWith('image/')) {
-//             var reader = new FileReader();
-//             reader.onload = function(e) {
-//                 var img = document.createElement('img');
-//                 img.src = e.target.result;
-//                 img.style.maxWidth = '100%';
-//                 img.style.height = 'auto';
-//                 imagePreview.innerHTML = '';
-//                 imagePreview.appendChild(img);
-//             };
-//             reader.readAsDataURL(file);
-//         } else {
-//             imagePreview.innerHTML = 'Please select a valid image file.';
-//         }
-//     });
-// });
-// 

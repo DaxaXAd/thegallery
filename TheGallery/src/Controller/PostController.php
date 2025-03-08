@@ -122,6 +122,7 @@ final class PostController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($post);
+            $entityManager->remove($post->getidImg());
             $entityManager->flush();
         }
 

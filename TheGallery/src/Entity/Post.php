@@ -36,11 +36,18 @@ class Post
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $title = null;
 
+    /**
+     * @var Collection<int, Like>
+     */
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'posts', orphanRemoval: true)]
+    private Collection $likes;
+
     
 
     public function __construct()
     {
         $this->id_comment = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +133,36 @@ class Post
     public function setTitle(?string $title): static
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setPosts($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getPosts() === $this) {
+                $like->setPosts(null);
+            }
+        }
 
         return $this;
     }
