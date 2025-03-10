@@ -23,9 +23,10 @@
 						</div>
 						<div class="top-bar_menu">
                         {% if app.user %}
-                            <a href="{{ path('app_post_new') }}" class="add-post" aria-label="create a post">Create new post</a>
+                            <a href="{{ path('app_post_new') }}" class="button-global" aria-label="create a post">new post</a>
+                            <a href="{{ path('app_user_show', {'slug': app.user.slug}) }}" class="button-global" aria-label="go to account">account</a>
                         {% endif %}
-							<a href="{#{{ path('app_contact') #}}}" aria-label="contact">Contact</a>
+							<a href="{#{{ path('app_contact') #}}}" class="button-global" aria-label="contact">Contact</a>
 							<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
 						</div>
 					</div>
@@ -56,7 +57,7 @@
         <div class="container-card gapper">
             <div class="card-author">
                 <div class="author">
-                    <h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a></h2>
+                    <h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.idUser.username }}</a></h2>
                     <img class="underline" src=""/>
                 </div>
                 {% if post.idImg %}

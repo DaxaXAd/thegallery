@@ -93,24 +93,31 @@ body .header_image {
     gap: 100px;
 }
 
-.top-bar .button:hover {
+.top-bar .button-global {
+    display: flex;
+    width: 113px;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 23px;
+    background: var(--Primary-automn, #A5380A);
+    /* typo */
+    color: var(--Primary-dark, #000000);
+    font-family: "Lexend-Bold", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.top-bar .button-global:hover {
     background-color: var(--variable-collection-white);
     color: var(--variable-collection-primary-dark);
     transform: scale(1.1);
 }
 
 
-
-
-
-
-.top-bar .button {
-    display: flex;
-    width: 113px;
-    padding: 4px 24px;
-    justify-content: center;
-    align-items: center;
-}
 
 .sign-in {
     display: flex;

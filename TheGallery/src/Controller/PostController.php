@@ -32,7 +32,7 @@ final class PostController extends AbstractController
 
 
     #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, ImageRepository $imageRepository): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ImageRepository $imageRepository, UserRepository $userRepository): Response
     {
         $image = new Image();
         $post = new Post();
@@ -55,8 +55,12 @@ final class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
+            
             if ($user) {
+                
+
                 $post->setIdUser($user);
+                
             } else {
                 throw new \Exception('User not found or not authenticated.');
             }

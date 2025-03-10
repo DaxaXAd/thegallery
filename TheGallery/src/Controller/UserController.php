@@ -74,10 +74,11 @@ final class UserController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(int $id, UserRepository $userRepository): Response
+    #[Route('/{slug}', name: 'app_user_show', methods: ['GET'])]
+    public function show(UserRepository $userRepository, string $slug): Response
     {
-        $user = $userRepository->find($id);
+        $user = $userRepository->findOneBy(['slug' => $slug]);
+        // $user = $userRepository->find($id);
 
         if (!$user) {
             throw $this->createNotFoundException('User not found');
@@ -134,9 +135,15 @@ final class UserController extends AbstractController
     //     ]);
     // }
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
-    {
+    #[Route('/{slug}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response
+    {   
+        $user = $userRepository->findOneBy(['slug' => $slug]);
+        // $user = $userRepository->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
