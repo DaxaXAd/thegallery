@@ -5,9 +5,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Post;
+use App\Entity\Image;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Repository\PostsRepository;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,49 +93,6 @@ final class UserController extends AbstractController
     }
 
 
-    // #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    // public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
-    // {
-    //     $form = $this->createForm(UserType::class, $user);
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         // Hashing and manage password
-    //         $newPassword = $form->get('password')->getData();
-    //         if (!empty($newPassword)) {
-    //             $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
-    //             $user->setPassword($hashedPassword);
-    //         }
-
-    //         // Manage and add profile_pic
-    //         $profilePicture = $form->get('profile_pic')->getData();
-    //         if ($profilePicture) {
-    //             $pictureFilename = uniqid() . '.' . $profilePicture->guessExtension();
-    //             try {
-    //                 $profilePicture->move(
-    //                     $this->getParameter('profile_pictures_directory'),
-    //                     $pictureFilename
-    //                 );
-    //                 $user->setProfilePic('images/profil/' . $pictureFilename);
-    //             } catch (FileException $e) {
-    //                 throw new \Exception($e->getMessage());
-    //             }
-    //         }
-
-    //         $entityManager->persist($user);
-    //         $entityManager->flush();
-
-    //         return $this->redirectToRoute('app_user_index', ['id' => $user->getId()]);
-    //     }
-
-    //     dump($user);
-    //     dump($form->createView());
-
-    //     return $this->render('user/edit.html.twig', [
-    //         'user' => $user,
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
 
     #[Route('/{slug}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response
@@ -176,7 +135,7 @@ final class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
+            return $this->redirectToRoute('app_user_show', ['id' => $user->getSlug()]);
         }
 
         return $this->render('user/edit.html.twig', [
@@ -187,11 +146,13 @@ final class UserController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    #[Route('/{slug}', name: 'app_user_delete', methods: ['POST'])]
+    public function delete(Request $request, string $slug, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->getString('_token'))) {
+        $user = $userRepository->findOneBy(['slug' => $slug]);
+        if ($this->isCsrfTokenValid('delete' . $user->getSlug(), $request->getPayload()->getString('_token'))) {
 
+            
             if ($user->getProfilePic()) {
                 $profilePicturePath = $this->getParameter('kernel.project_dir') . '/public' . $user->getProfilePic();
                 if (file_exists($profilePicturePath)) {
@@ -214,26 +175,29 @@ final class UserController extends AbstractController
 
 
 
-    #[Route('/profile/{id}', name: 'app_profile', methods: ['GET'])]
-    public function profile(int $id, User $user, ManagerRegistry $doctrine): Response
+    #[Route('/profile/{slug}', name: 'app_profile', methods: ['GET'])]
+    public function profile(string $slug, UserRepository $userRepository, ImageRepository $imageRepository, ManagerRegistry $doctrine): Response
     {
+        $user = $userRepository->findOneBy(['slug' => $slug]);
         // Fetch the user by id
-        $user = $this->doctrine->getRepository(User::class)->find($id);
+        
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
 
         // Fetch the images related to the user.
         // Option 1: If your User entity has a OneToMany relation named "images", then:
-        // $images = $user->getImages();
+        $images = $user->getImages();
         //
         // Option 2: Otherwise, query the Image repository:
-        $posts = $this->doctrine->getRepository(Post::class)->findBy(['id_user' => $user]);
+        $images = $this->doctrine->getRepository(Image::class)->findBy(['user' => $user]);
+        $posts = $this->doctrine->getRepository(Post::class)->findBy(['slug' => $slug]);
 
         // Render a Twig template with the user and images
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'posts' => $posts,
+            'images' => $images,
         ]);
     }
 }
