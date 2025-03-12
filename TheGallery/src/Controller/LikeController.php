@@ -18,34 +18,36 @@ final class LikeController extends AbstractController
     #[Route('/add/{id}',name: 'app_like')]
     public function addLike(Post $post, Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Vérifier si l'utilisateur est connecté
         $user = $this->getUser();
-        if (!$user){
+        if (!$user){ 
+            // Redirige vers l'inscription ou la connexion si l'utilisateur n'est pas authentifié
             return $this->redirectToRoute('app_login');
         }
-
-        $existingLike = $entityManager->getRepository(Like::class)->findOneBy([
+        // Vérifier si le like existe déjà pour ce post par cet utilisateur
+        $checkLike = $entityManager->getRepository(Like::class)->findOneBy([
             'post' => $post,
             'user' => $user,
         ]);
     
-        if ($existingLike) {
-            $entityManager->remove($existingLike);
+        if ($checkLike) {
+            // Si le like existe, on le supprime (annulation du like)
+            $entityManager->remove($checkLike);
             $entityManager->flush();
-            $this->addFlash('info', 'Vous avez annulé votre Like.');
-        }
-
-        else {
+            $this->addFlash('info', 'Unliked.');
+        } else {
+            // Sinon, on crée un nouveau like
             $like = new Like();
-            $like -> setPosts($post);
-            $like -> setUsers($user);
+            $like -> setPost($post);
+            $like -> setUser($user);
     
             $entityManager->persist($like);
             $entityManager->flush();
     
-            $this->addFlash('success', 'Vous avez like ce message !');
+            $this->addFlash('success', 'Liked !');
         }
-
-        return $this->redirectToRoute('app_posts_index');
+        // Rediriger vers l'index des posts (ou vers la page du post)
+        return $this->redirectToRoute('app_post_index');
     }
 
     #[Route(name:'show_like')]

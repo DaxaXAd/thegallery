@@ -27,7 +27,44 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+//   document.querySelectorAll('.like').forEach(button => {
+//     button.addEventListener('click', async () => {
+//         const postId = button.getAttribute('post-like');
+//         const likeCountSpan = button.nextElementSibling; // Le <span> qui affiche le nombre de likes
 
+//         const response = await fetch(`/like/${postId}`, { method: 'POST' });
+//         const data = await response.json();
+
+//         if (data.success) {
+//             likeCountSpan.textContent = data.likeCount;
+//         }
+//     });
+// });
+
+document.querySelectorAll('.like').forEach(function(button) {
+    button.addEventListener('click', function() {
+      // Récupérer l'ID du post depuis l'attribut data
+      var postId = button.getAttribute('post-like');
+      // Le span suivant contient le nombre de likes
+      var likeCountSpan = button.nextElementSibling;
+  
+      // Envoyer une requête POST à l'URL /like/{postId}
+      fetch('/like/' + postId, { method: 'POST' })
+        .then(function(response) {
+          // Convertir la réponse en JSON
+          return response.json();
+        })
+        .then(function(data) {
+          // Si l'opération a réussi, mettre à jour le compteur de likes
+          if (data.success) {
+            likeCountSpan.textContent = data.likeCount;
+          }
+        })
+        .catch(function(error) {
+          console.error('Erreur lors du like:', error);
+        });
+    });
+  });
 
 
 // document.addEventListener('DOMContentLoaded', function () {
@@ -51,25 +88,25 @@ document.addEventListener('DOMContentLoaded', function () {
 //     });
 // });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const likeButtons = document.querySelectorAll(".pixelarticons-heart");
+// document.addEventListener('DOMContentLoaded', function () {
+//     const likeButtons = document.querySelectorAll(".pixelarticons-heart");
 
-    likeButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const likeCount = this.nextElementSibling;
-            let count = parseInt(likeCount.innerText);
+//     likeButtons.forEach(button => {
+//         button.addEventListener('click', function () {
+//             const likeCount = this.nextElementSibling;
+//             let count = parseInt(likeCount.innerText);
 
-            if (this.classList.contains('liked')) {
-                count--;
-                this.classList.remove('liked');
-            } else {
-                count++;
-                this.classList.add('liked');
-            }
-            likeCount.innerText = count;
-        });
-    });
-});
+//             if (this.classList.contains('liked')) {
+//                 count--;
+//                 this.classList.remove('liked');
+//             } else {
+//                 count++;
+//                 this.classList.add('liked');
+//             }
+//             likeCount.innerText = count;
+//         });
+//     });
+// });
 
 document.addEventListener('DOMContentLoaded', function() {
     var fileInput = document.querySelector('input[type="file"]');

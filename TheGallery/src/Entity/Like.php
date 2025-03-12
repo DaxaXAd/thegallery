@@ -16,37 +16,37 @@ class Like
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
-    private ?User $users = null;
+    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
-    private ?Post $posts = null;
+    private ?Post $post = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsers(): ?User
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function setUsers(?User $users): static
+    public function setUser(?User $user): static
     {
-        $this->users = $users;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getPosts(): ?Post
+    public function getPost(): ?Post
     {
-        return $this->posts;
+        return $this->post;
     }
 
-    public function setPosts(?Post $posts): static
+    public function setPost(?Post $post): static
     {
-        $this->posts = $posts;
+        $this->post = $post;
 
         return $this;
     }

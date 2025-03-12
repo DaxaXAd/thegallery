@@ -150,7 +150,7 @@ class Post
     {
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
-            $like->setPosts($this);
+            $like->setPost($this);
         }
 
         return $this;
@@ -160,8 +160,8 @@ class Post
     {
         if ($this->likes->removeElement($like)) {
             // set the owning side to null (unless already changed)
-            if ($like->getPosts() === $this) {
-                $like->setPosts(null);
+            if ($like->getPost() === $this) {
+                $like->setPost(null);
             }
         }
 

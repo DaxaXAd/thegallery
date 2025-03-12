@@ -16,6 +16,18 @@ class LikeRepository extends ServiceEntityRepository
         parent::__construct($registry, Like::class);
     }
 
+    /**
+     * Retourne le nombre total de likes pour un post donné.
+     */
+    public function totalLike($postId): int
+    {    
+        $qb = $this->createQueryBuilder('l')
+            ->select('count(l.id)')
+            ->where('l.post = :postId')
+            ->setParameter('postId', $postId);
+        return $qb->getQuery()->getSingleScalarResult();
+
+    }    
     //    /**
     //     * @return Like[] Returns an array of Like objects
     //     */

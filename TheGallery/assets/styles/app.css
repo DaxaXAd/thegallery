@@ -48,7 +48,7 @@ main {
 
 body .header_image {
     /* background-color: var(--variable-collection-primary-automn); */
-    background-image: url(images/header_automn.png);
+    background-image: url("images/header_automn.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -394,15 +394,35 @@ body .header_image {
 }
 
 .card-author .author {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: baseline;
     position: relative;
     width: fit-content;
-    margin-top: -1.00px;
+    /* margin-top: -1.00px; */
     font-family: "Lexend-Bold", Helvetica;
     font-weight: 700;
     color: #ffffff;
     font-size: 32px;
     letter-spacing: 0;
     line-height: normal;
+    gap: 10px;
+}
+
+
+.author  a {
+    text-decoration: none;
+    color: var(--variable-collection-primary-automn);
+    font-family: "Lexend-Bold", Helvetica;
+    font-weight: 600;
+    font-size: 32px;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+}
+.author  a:hover {
+    transform: scale(1.2);
+    font-size: 35px;
 }
 
 .card-author .underline {

@@ -9,6 +9,7 @@ use App\Form\PostType;
 use App\Form\ImageType;
 use App\Repository\PostRepository;
 use App\Repository\ImageRepository;
+use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,10 +21,23 @@ use App\Repository\UserRepository;
 final class PostController extends AbstractController
 {
     #[Route(name: 'app_post_index', methods: ['GET'])]
-    public function index(PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository, LikeRepository $likeRepository): Response
     {
+
+        $posts = $postRepository->findBy([], ['created_at' => 'DESC']);
+        $likeCount = [];
+        foreach ($posts as $post) {
+            $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
+        }
+
+        // $commentCounts = [];
+        // foreach ($posts as $post) {
+        //     $commentCounts[$post->getId()] = $commentRepository->countComment($post->getId());
+        // }
+
         return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $posts,
+            'likeCount' => $likeCount,
         ]);
     }
 
@@ -55,10 +69,10 @@ final class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
-            
+            $post->setCreatedAt(new \DateTimeImmutable());
             if ($user) {
                 
-
+    
                 $post->setIdUser($user);
                 
             } else {
@@ -85,12 +99,13 @@ final class PostController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
-    public function show(Post $post): Response
+    public function show(Post $post, LikeRepository $likeRepository): Response
     {
         $user = $this->getUser();
+        $likeCount = $likeRepository->countLike($post->getId());
 
         return $this->render('post/show.html.twig', [
-            
+            'likeCount' => $likeCount,
             'user' => $user,
             'post' => $post,
         ]);
