@@ -80,7 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Like>
      */
-    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'users', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $likes;
 
     public function __construct()
@@ -346,7 +346,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
-            $like->setUsers($this);
+            $like->setUser($this);
         }
 
         return $this;
@@ -356,8 +356,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->likes->removeElement($like)) {
             // set the owning side to null (unless already changed)
-            if ($like->getUsers() === $this) {
-                $like->setUsers(null);
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
             }
         }
 

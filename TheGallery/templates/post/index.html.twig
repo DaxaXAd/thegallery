@@ -78,7 +78,7 @@
 									</div>
 									{# <img aria-label="button like" class="pixelarticons-heart like"/> #}
 									<img aria-label="button like" class="pixelarticons-heart like" post-like="{{ post.id }}" />
-									<span class="like-count">{{ likeCount[post.id] ?? 0 }}</span>
+									<span class="like-count">{{ likeCount[post.id] }}</span>
 									<div class="post-actions">
 									{% if app.user == post.idUser %}
 										<a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn">Edit</a>

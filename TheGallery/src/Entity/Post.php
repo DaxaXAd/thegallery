@@ -40,7 +40,7 @@ class Post
     /**
      * @var Collection<int, Like>
      */
-    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'posts', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'post', orphanRemoval: true)]
     private Collection $likes;
 
     

@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/likes')]
+#[Route('/like')]
 final class LikeController extends AbstractController
 {
-    #[Route('/add/{id}',name: 'app_like')]
+    #[Route('/{id}',name: 'app_like')]
     public function addLike(Post $post, Request $request, EntityManagerInterface $entityManager): Response
     {
         // Vérifier si l'utilisateur est connecté

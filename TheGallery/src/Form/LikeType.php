@@ -15,11 +15,11 @@ class LikeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('post_id', EntityType::class, [
+            ->add('post', EntityType::class, [
                 'class' => Post::class,
                 'choice_label' => 'id',
             ])
-            ->add('user_id', EntityType::class, [
+            ->add('user', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',
             ]);
