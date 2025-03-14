@@ -11,12 +11,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse; // Ajout important for AJAX
 
 #[Route('/like')]
 final class LikeController extends AbstractController
 {
     #[Route('/{id}',name: 'app_like')]
-    public function addLike(Post $post, Request $request, EntityManagerInterface $entityManager): Response
+    public function addLike(Post $post, Request $request, EntityManagerInterface $entityManager, LikeRepository $likeRepository): Response
     {
         // Vérifier si l'utilisateur est connecté
         $user = $this->getUser();
@@ -34,7 +35,8 @@ final class LikeController extends AbstractController
             // Si le like existe, on le supprime (annulation du like)
             $entityManager->remove($checkLike);
             $entityManager->flush();
-            $this->addFlash('info', 'Unliked.');
+            // $this->addFlash('info', 'Unliked.');
+            $action = 'unliked';
         } else {
             // Sinon, on crée un nouveau like
             $like = new Like();
@@ -43,11 +45,18 @@ final class LikeController extends AbstractController
     
             $entityManager->persist($like);
             $entityManager->flush();
+            $action = 'liked';
     
-            $this->addFlash('success', 'Liked !');
+            // $this->addFlash('success', 'Liked !');
         }
+
+        $likeCount = $likeRepository->count(['post' => $post]);
+        return new JsonResponse([
+            'action'  => $action,
+            'likes'   => $likeCount,
+        ]);
         // Rediriger vers l'index des posts (ou vers la page du post)
-        return $this->redirectToRoute('app_post_index');
+        // return $this->redirectToRoute('app_post_index');
     }
 
     #[Route(name:'show_like')]

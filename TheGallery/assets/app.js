@@ -27,86 +27,122 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-//   document.querySelectorAll('.like').forEach(button => {
-//     button.addEventListener('click', async () => {
-//         const postId = button.getAttribute('post-like');
-//         const likeCountSpan = button.nextElementSibling; // Le <span> qui affiche le nombre de likes
 
-//         const response = await fetch(`/like/${postId}`, { method: 'POST' });
-//         const data = await response.json();
-
-//         if (data.success) {
-//             likeCountSpan.textContent = data.likeCount;
-//         }
-//     });
-// });
-
-document.querySelectorAll('.like').forEach(function(button) {
-    button.addEventListener('click', function() {
-      // Récupérer l'ID du post depuis l'attribut data
-      var postId = button.getAttribute('post-like');
-      // Le span suivant contient le nombre de likes
-      var likeCountSpan = button.nextElementSibling;
-  
-      // Envoyer une requête POST à l'URL /like/{postId}
-      fetch('/like/' + postId, { method: 'POST' })
-        .then(function(response) {
-          // Convertir la réponse en JSON
-          return response.json();
-        })
-        .then(function(data) {
-          // Si l'opération a réussi, mettre à jour le compteur de likes
-          if (data.success) {
-            likeCountSpan.textContent = data.likeCount;
-          }
-        })
-        .catch(function(error) {
-          console.error('Erreur lors du like:', error);
-        });
-    });
-  });
+//   document.addEventListener('DOMContentLoaded', function () {
+//     // API to not scroll automatically when reloading page
+//     if ('scrollRestoration' in history) {
+//         history.scrollRestoration = 'manual';
+//     }
 
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     const likeButton = document.querySelector(".pixelarticons-heart");
+//     const savedPos = sessionStorage.getItem('positionClick');
+//     if (savedPos !== null) {
+//         window.scrollTo(0, parseInt(savedPos, 10));
+//         sessionStorage.removeItem('positionClick'); // Optionnel : supprime après restauration
+//     }
 
-//     likeButton.addEventListener('click', function () {
-//         const likeCount = likeButton.nextElementSibling;
-//         let count = parseInt(likeCount.innerText);
-
-//         // Vérifie si le bouton a déjà été cliqué
-//         if (likeButton.classList.contains('liked')) {
-//             // Retire le like
-//             count--;
-//             likeButton.classList.remove('liked');
-//         } else {
-//             // Ajoute un like
-//             count++;
-//             likeButton.classList.add('liked');
-//         }
-//         likeCount.innerText = count;
-//     });
-// });
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const likeButtons = document.querySelectorAll(".pixelarticons-heart");
+//     const likeButtons = document.querySelectorAll('.like-button');
 
 //     likeButtons.forEach(button => {
-//         button.addEventListener('click', function () {
-//             const likeCount = this.nextElementSibling;
-//             let count = parseInt(likeCount.innerText);
+//         button.addEventListener('click', function (event) {
+//              // Enregistre la position verticale du clic dans un tableau dans le sessionStorage
+//             // let positionClick = sessionStorage.getItem('positionClick');
+//             // if (positionClick) {
+//             //     positionClick = JSON.parse(positionClick);
+//             // } else {
+//             //     positionClick = [];
+//             // } 
+//             // // Ajoute la position verticale du clic
+//             // positionClick.push(event.pageY);
+//             sessionStorage.setItem('positionClick', window.scrollY);
 
-//             if (this.classList.contains('liked')) {
-//                 count--;
-//                 this.classList.remove('liked');
-//             } else {
-//                 count++;
-//                 this.classList.add('liked');
-//             }
-//             likeCount.innerText = count;
+//             // Ajoute une classe CSS pour l’animation
+//             this.classList.add('animate-like');
+            
+//             // Retire la classe après 0.5s (durée de l’animation)
+//             setTimeout(() => {
+//                 this.classList.remove('animate-like');
+//             }, 500);
+            
+//             // Laisse le formulaire se soumettre normalement
+//             // => la page va se recharger, et le nouveau compteur
+//             //    sera affiché via Twig
 //         });
 //     });
 // });
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Désactive la restauration automatique du scroll (optionnel)
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    // Sélectionne tous les formulaires de like par leur classe
+    const likeForms = document.querySelectorAll('.like-form');
+
+    // Pour chaque formulaire, on intercepte la soumission
+    likeForms.forEach(form => {
+        form.addEventListener('submit', function (event) {
+            // 1. Empêche le rechargement de la page
+            event.preventDefault();
+
+            // 2. (Optionnel) Enregistre la position du scroll pour la restaurer après coup
+            sessionStorage.setItem('positionClick', window.scrollY);
+
+            // 3. Récupère l'URL d'action (où on envoie la requête AJAX)
+            const actionUrl = form.getAttribute('action');
+
+            // 4. Envoie la requête AJAX en POST vers cette URL
+            fetch(actionUrl, {
+                method: 'POST',
+                headers: {
+                    // Pas forcément obligatoire, mais indique qu'on fait une requête AJAX
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+                // Ici, on n'envoie pas de body particulier (pas de JSON supplémentaire),
+                // mais tu peux ajouter un "body: JSON.stringify(...)" si besoin
+            })
+            .then(response => response.json()) // Convertit la réponse en JSON
+            .then(data => {
+                // 5. data contient la réponse JSON envoyée par le contrôleur
+                //    Par exemple : { success: true, action: "liked", likes: 5 }
+
+                console.log("Réponse JSON reçue :", data);
+
+                // 6. Mettre à jour le compteur de likes
+                //    On suppose que le <span class="like-count"> se trouve
+                //    dans le même conteneur parent que le formulaire
+                const likeCountElement = form.parentElement.querySelector('.like-count');
+                if (likeCountElement && data.likes !== undefined) {
+                    // Met à jour le texte avec la nouvelle valeur
+                    likeCountElement.textContent = data.likes;
+                }
+
+                // 7. Optionnel : animer le bouton
+                const likeButton = form.querySelector('.like-button');
+                if (likeButton) {
+                    likeButton.classList.add('animate-like');
+                    setTimeout(() => {
+                        likeButton.classList.remove('animate-like');
+                    }, 500);
+                }
+            })
+            .catch(error => {
+                // 8. En cas d'erreur AJAX, on l'affiche dans la console
+                console.error("Erreur AJAX :", error);
+            });
+        });
+    });
+
+    // 9. (Optionnel) Restaure la position du scroll si on l'a enregistrée précédemment
+    const savedPos = sessionStorage.getItem('positionClick');
+    if (savedPos !== null) {
+        window.scrollTo(0, parseInt(savedPos, 10));
+        sessionStorage.removeItem('positionClick');
+    }
+});
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     var fileInput = document.querySelector('input[type="file"]');
@@ -114,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     fileInput.addEventListener('change', function(event) {
         var file = event.target.files[0];
-        if (file && file.type.startsWith('/image/')) {
+        if (file && file.type.startsWith('image/')) {
             var reader = new FileReader();
             reader.onload = function(e) {
                 var img = document.createElement('img');

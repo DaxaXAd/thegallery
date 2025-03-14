@@ -31,18 +31,28 @@ main {
 }
 
 
+.like-button {
+    background: none;
+    border: none;
+    padding: 0;
+}
 
-.pixelarticons-heart {
-    background-image: url(/images/pixelarticons_heart.svg);
-    height: 24px;
+.heart-svg {
     width: 24px;
-    cursor: pointer;
+    height: 24px;
+  }
+  
+  .heart-svg path {
+    fill: #aaa; /* Couleur par défaut */
     transition: fill 0.3s;
-}
-
-.pixelarticons-heart.liked {
+  }
+  
+  /* Au survol ou au clic, tu peux changer la couleur */
+  .heart-svg:hover path {
     fill: #ff0000;
-}
+  }
+
+
 
 /* === home page === */
 
@@ -694,3 +704,6 @@ main .form_container {
 #post_addImage {
     background-color: var(--variable-collection-pers-green, #ffffff);
 }
+
+/* test */
+
