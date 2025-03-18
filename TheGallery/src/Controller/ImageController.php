@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Form\ImageType;
 use App\Entity\User;
+use App\Entity\Post;
 use App\Repository\UserRepository;
 use App\Repository\ImageRepository;
+use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -96,36 +98,21 @@ final class ImageController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    // public function new(Request $request, EntityManagerInterface $entityManager): Response
-    // {
-    //     $user = $this->getUser();
-    //     $image = new Image();
-    //     $form = $this->createForm(ImageType::class, $image);
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $entityManager->persist($image);
-    //         $entityManager->flush();
-
-    //         return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
-    //     }
-
-    //     return $this->render('image/new.html.twig', [
-    //         'image' => $image,
-    //         'form' => $form,
-    //     ]);
-    // }
-
-
 
 
 
 
     #[Route('/{id}', name: 'app_image_show', methods: ['GET'])]
-    public function show(Image $image): Response
+    public function show(Image $image, LikeRepository $likeRepository, Post $post): Response
     {
+        $likeCount = 0;
+        if ($post) {
+            // On récupère le nombre de likes du Post
+            $likeCount = $likeRepository->totalLike($post->getId());
+        }
         return $this->render('image/show.html.twig', [
             'image' => $image,
+            'likeCount' => $likeCount,
         ]);
     }
 
@@ -147,12 +134,19 @@ final class ImageController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/{id}', name: 'app_image_delete', methods: ['POST'])]
     public function delete(Request $request, Image $image, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->getPayload()->getString('_token'))) {
 
-            $imagePath = $this->getParameter('kernel.project_dir') . '/public' . $image->getPath();
+            // $imagePath = $this->getParameter('images_directory') . '/' . ltrim($image->getPath(), '/');
+            $imagePath = $this->getParameter('kernel.project_dir') . '/public/' . $image->getPath();
+            
+            dump("Chemin du fichier: ", $imagePath);
+
+
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }

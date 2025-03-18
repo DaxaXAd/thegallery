@@ -48,18 +48,51 @@
 		</div>
 
     </header>
+
 <main>
+    {% if app.user %}
+    <div class="form_container">
+        <h1>Create new Post</h1>
+
+        {# Inclut le formulaire principal du Post (le form widget contient déjà tous les champs du PostType) #}
+        {{ include('post/_form.html.twig', {'button_label': 'Save'}) }}
+
+        {# Zone pour la preview de l'image sélectionnée, et champ caché pour stocker l'ID de l'image #}
+        <input type="hidden" id="selectedImageId" name="selectedImageId" value="">
+        <div id="selectedImagePreview" style="margin:10px 0; display:none;">
+            <img id="previewImg" src="" alt="Selected image preview" style="max-width:200px;">
+        </div>
+
+        {# Grille des images appartenant à l'utilisateur #}
+        <h2>Select an image</h2>
+        <div class="image-grid">
+            {% for image in images %}
+                <img src="{{ asset(image.getPath()) }}" data-id="{{ image.getId() }}" alt="{{ image.getTitle() }}" class="selectable-image">
+            {% else %}
+                <p>No images available.</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+        <h1>Access Denied</h1>
+        <p>You must be logged in to create a new post.</p>
+        <a href="{{ path('app_login') }}">Login</a>
+    {% endif %}
+</main>
+
+
+
+
+{# <main>
 	{% if app.user %}
 	<div class="form_container">
 		<h1>Create new Post</h1>
-		{# <div class="post-button"> #}
 			{{ include('post/_form.html.twig') }}		
-		{# </div> #}
 	</div>
 	{% else %}
 		<h1>Access Denied</h1>
 		<p>You must be logged in to create a new post.</p>
 		<a href="{{ path('app_login') }}">Login</a>
 	{% endif %}
-</main>
+</main> #}
 {% endblock %}

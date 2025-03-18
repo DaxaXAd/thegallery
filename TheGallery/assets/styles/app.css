@@ -280,7 +280,7 @@ body .header_image {
     justify-content: center;
     align-items: center;
     border-radius: 23px;
-    background: #515fdc;
+    background: #a63b1e;
     /* typo */
     color: var(--Primary-dark, #ffffff);
     font-family: "Lexend-Bold", Helvetica;
@@ -553,11 +553,14 @@ body .header_image {
     text-transform: uppercase;
 } 
 
+/* ====== form ====== */
+/* 
 .form_container .form_group {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 90%;
 }
 
 .form_group .form_input {
@@ -570,7 +573,46 @@ body .header_image {
     margin-top: 20px;
 }
 
+.form_input label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+} */
 
+
+/* ====== end form ====== */
+
+/* ====== edit profile ====== */
+.pp-edit {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.pp-edit input {
+    margin-top: 10px;
+    width: 80%;
+    text-align: center;
+}
+
+.img-edit {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+}
+
+@media (max-width: 480px) {
+    .form_container {
+        width: 90%;
+    }
+}
+
+/* ====== end edit profile ====== */
 
 /*====== end login page ======*/
 
@@ -628,7 +670,7 @@ main .form_container {
     justify-content: center;
     align-items: center;
     gap: 50px;
-    width: 30%;
+    width: 50%;
     border-radius: 46px;
     border: 25px solid var(--variable-collection-primary-automn);
     background-color: var(--variable-collection-primary-dark);

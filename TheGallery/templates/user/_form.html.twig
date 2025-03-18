@@ -1,7 +1,6 @@
-{{ form_start(form, { 'attr': {'class': 'form-edit', 'enctype': 'multipart/form-data' }}) }}
+{{ form_start(form, { 'attr': {'class': 'form_container', 'enctype': 'multipart/form-data' }}) }}
 
-<div class="form-group">
-    <label for="profile_pic">
+<div class="form_group">
         <div class="pp-edit">
             <img id="profilePicturePreview" class="img-edit" src="{{ asset(user.profilePic) }}" alt="Photo de profil">
             {{ form_widget(form.profile_pic, {'attr': {'id': 'profilePictureFile', 'class': 'hidden-input'}}) }}
@@ -15,28 +14,35 @@
                 </svg>
             </label>
         </div>
-    </label>
 </div>
 
-<div class="form-group">
-    {{ form_widget(form.username, {'attr': {'class': 'input-edit', 'placeholder': ' '}}) }}
+<div class="form_input">
+    {{ form_label(form.username) }}
+    {{ form_widget(form.username, {'attr': {'class': 'input-edit', 'placeholder': ' ', 'aria-label': 'nom utilisateur'}}) }}
 </div>
 
-<div class="form-group">
-    {{ form_widget(form.email, {'attr': {'class': 'input-edit', 'placeholder': ' '}}) }}
+<div class="form_input">
+    {{ form_label(form.email) }}
+    {{ form_widget(form.email, {'attr': {'class': 'input-edit', 'placeholder': ' ', 'aria-label': 'adresse email'}}) }}
 </div>
 
-<div class="form-group">
-    {{ form_widget(form.bio, {'attr': {'class': 'input-edit', 'placeholder': ' '}}) }}
+<div class="form_input">
+    {{ form_label(form.bio) }}
+    {{ form_widget(form.bio, {'attr': {'class': 'input-edit', 'placeholder': ' ', 'aria-label': 'biographie'}}) }}
 </div>
 
-<div class="form-group">
-    {{ form_widget(form.password, {'attr': {'class': 'input-edit'}}) }}
+<div class="form_input">
+    {{ form_label(form.password) }}
+    {{ form_widget(form.password, {'attr': {'class': 'input-edit', 'aria-label': 'mot de passe'}}) }}
 </div>
 
-<button class="button-edit">
-    <svg class="edit-svg" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+<button class="button edit-btn">
+    Enregistrer
 </button>
+
+    <a href="{{ path('app_user_show' , {'slug': user.slug}) }}" class="backlist-btn">back to list</a>
+
+
+    {{ include('user/_delete_form.html.twig') }}
+
 {{ form_end(form) }}

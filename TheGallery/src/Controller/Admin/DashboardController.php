@@ -2,6 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
+use App\Entity\Post;
+use App\Entity\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -13,12 +16,12 @@ class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
     {
-        return parent::index();
+        // return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
         // 1.1) If you have enabled the "pretty URLs" feature:
-        // return $this->redirectToRoute('admin_user_index');
+        return $this->redirectToRoute('admin_user_index');
         //
         // 1.2) Same example but using the "ugly URLs" that were used in previous EasyAdmin versions:
         // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
@@ -46,5 +49,11 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class)
+            ->setController(UserCrudController::class);
+        yield MenuItem::linkToCrud('Posts', 'fas fa-user', Post::class)
+            ->setController(PostCrudController::class);
+        yield MenuItem::linkToCrud('Images', 'fas fa-user', Image::class)
+            ->setController(ImageCrudController::class);
     }
 }

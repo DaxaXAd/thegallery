@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Controller\SecurityController;
+use App\Repository\LikeRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -30,16 +31,28 @@ final class UserController extends AbstractController
         $this->doctrine = $doctrine;
     }
 
-    #[Route('/user/{id}', name: 'app_user_index', methods: ['GET'])]
-    public function index(int $id, UserRepository $userRepository): Response
+    #[Route('/user/{slug}', name: 'app_user_index', methods: ['GET'])]
+    public function index(int $id, UserRepository $userRepository, LikeRepository $likeRepository, string $slug): Response
     {
-        $user = $userRepository->find($id);
+        $user = $userRepository->findOneBy(['slug' => $slug]);
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
-        return $this->render('user/index.html.twig', [
-            'user' => $user
 
+        $posts = $user->getPosts();
+
+        $likeCount = [];
+        foreach ($posts as $post) {
+            // Appel à ta méthode custom (ou la méthode native count(['post' => $post]))
+            $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
+        }
+
+        $likeCount = $likeRepository->totalLike($user->getPosts());
+
+        return $this->render('user/index.html.twig', [
+            'user' => $user,
+            'posts' => $posts,
+            'likeCount' => $likeCount,
         ]);
     }
 
@@ -77,25 +90,33 @@ final class UserController extends AbstractController
 
 
     #[Route('/{slug}', name: 'app_user_show', methods: ['GET'])]
-    public function show(UserRepository $userRepository, string $slug): Response
+    public function show(UserRepository $userRepository, LikeRepository $likeRepository, string $slug): Response
     {
         $user = $userRepository->findOneBy(['slug' => $slug]);
         // $user = $userRepository->find($id);
-
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
 
+        $posts = $user->getPosts();
+
+        $likeCount = [];
+        foreach ($posts as $post) {
+            // Appel à ta méthode custom (ou la méthode native count(['post' => $post]))
+            $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
+        }
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'posts' => $user->getPosts(),
+            'posts' => $posts,
+            'likeCount' => $likeCount,
         ]);
     }
 
 
 
     #[Route('/{slug}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response
+    public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response
     {   
         $user = $userRepository->findOneBy(['slug' => $slug]);
         // $user = $userRepository->find($id);
@@ -135,7 +156,7 @@ final class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_user_show', ['id' => $user->getSlug()]);
+            return $this->redirectToRoute('app_user_show', ['slug' => $user->getSlug()]);
         }
 
         return $this->render('user/edit.html.twig', [

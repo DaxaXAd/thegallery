@@ -48,49 +48,49 @@ final class PostController extends AbstractController
     #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, ImageRepository $imageRepository, UserRepository $userRepository): Response
     {
-        $image = new Image();
-        $post = new Post();
-        $imageId = $request->query->get('imageId');
-        $title = $request->query->get('title');
+        $user = $this->getUser();
+        if ($user) {
+            $image = new Image();
+            $post = new Post();
+            $imageId = $request->query->get('imageId');
+            $title = $request->query->get('title');
 
-        if ($imageId) {
-            $image = $imageRepository->find($imageId);
-            if ($image) {
-                $post->setIdImg($image);
+            if ($imageId) {
+                $image = $imageRepository->find($imageId);
+                if ($image) {
+                    $post->setIdImg($image);
+                }
             }
-        }
 
-        if ($title) {
-            $post->setTitle($title);
-        }
+            if ($title) {
+                $post->setTitle($title);
+            }
 
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
+            $form = $this->createForm(PostType::class, $post);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->getUser();
-            $post->setCreatedAt(new \DateTimeImmutable());
-            if ($user) {
-                
-    
+            if ($form->isSubmitted() && $form->isValid()) {
                 $post->setIdUser($user);
-                
-            } else {
-                throw new \Exception('User not found or not authenticated.');
+                $post->setCreatedAt(new \DateTimeImmutable());
+
+                $entityManager->persist($post);
+                $entityManager->flush();
+
+
+
+                return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
             }
 
-            $entityManager->persist($post);
-            $entityManager->flush();
+            $images = $imageRepository->findBy(['id_user' => $user]);
 
-            
-
-            return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('post/new.html.twig', [
+                'post' => $post,
+                'form' => $form->createView(),
+                'images' => $images,
+            ]);
+        } else {
+            throw new \Exception('User not found or not authenticated.');
         }
-
-        return $this->render('post/new.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
     }
 
 
@@ -102,7 +102,7 @@ final class PostController extends AbstractController
     public function show(Post $post, LikeRepository $likeRepository): Response
     {
         $user = $this->getUser();
-        $likeCount = $likeRepository->countLike($post->getId());
+        $likeCount = $likeRepository->totalLike($post->getId());
 
         return $this->render('post/show.html.twig', [
             'likeCount' => $likeCount,
