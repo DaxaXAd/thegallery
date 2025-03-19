@@ -142,27 +142,27 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const selectableImages = document.querySelectorAll('.selectable-image');
+    const selectedImageIdInput = document.getElementById('selectedImageId');
+    const previewContainer = document.getElementById('selectedImagePreview');
+    const previewImg = document.getElementById('previewImg');
 
+    selectableImages.forEach(img => {
+        img.addEventListener('click', function () {
+            const imgId = this.getAttribute('data-id');
+            const imgSrc = this.getAttribute('src');
 
-document.addEventListener('DOMContentLoaded', function() {
-    var fileInput = document.querySelector('input[type="file"]');
-    var imagePreview = document.getElementById('image-preview');
+            // Mettre à jour le champ caché avec l'ID de l'image sélectionnée
+            selectedImageIdInput.value = imgId;
 
-    fileInput.addEventListener('change', function(event) {
-        var file = event.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.maxWidth = '100%';
-                img.style.height = 'auto';
-                imagePreview.innerHTML = '';
-                imagePreview.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        } else {
-            imagePreview.innerHTML = 'Please select a valid image file.';
-        }
+            // Afficher la preview en mettant à jour l'attribut src de l'image de preview
+            previewImg.src = imgSrc;
+            previewContainer.style.display = 'block';
+
+            // Marquer visuellement l'image sélectionnée
+            selectableImages.forEach(i => i.classList.remove('selected'));
+            this.classList.add('selected');
+        });
     });
 });

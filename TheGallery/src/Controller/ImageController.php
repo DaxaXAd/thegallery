@@ -24,14 +24,23 @@ final class ImageController extends AbstractController
 
     // version using filename
     #[Route('/' ,name: 'app_image_index', methods: ['GET'])]
-    public function index(ImageRepository $imageRepository): Response
+    public function index(ImageRepository $imageRepository, LikeRepository $likeRepository): Response
     {
         // $imagesDirectory = $this->getParameter('images_directory'); 
 
         $images = $imageRepository->findBy([], ['created_at' => 'DESC']);
 
+        foreach ($images as $image) {
+            $post = $image->getPost(); 
+            if ($post) {
+                // On utilise la même méthode que pour compter les likes d’un post
+                $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
+            }
+        }
+
         return $this->render('image/index.html.twig', [
             'images' => $images,
+            'likeCount' => $likeCount,
         ]);
     }
 
@@ -105,6 +114,7 @@ final class ImageController extends AbstractController
     #[Route('/{id}', name: 'app_image_show', methods: ['GET'])]
     public function show(Image $image, LikeRepository $likeRepository, Post $post): Response
     {
+        $post = $image->getPost();
         $likeCount = 0;
         if ($post) {
             // On récupère le nombre de likes du Post
