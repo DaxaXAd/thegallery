@@ -467,7 +467,7 @@ main {
 
 .header_image .post-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 20px;
     width: 20%;
@@ -517,4 +517,34 @@ main .form_container {
     background-color: var(--variable-collection-primary-dark);
     padding: 120px 0;
     margin: 0 auto;
+}
+
+
+
+
+/* prévisualisation d'images présente pour les posts */
+
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;   /* Passe à la ligne si plus de place */
+    gap: 10px;         /* Espace entre les images */
+    justify-content: center;
+  }
+  
+  .selectable-image {
+    max-width: 120px;  /* Limite la largeur */
+    height: auto;
+    object-fit: cover; /* Coupe l'image si besoin, sinon 'contain' pour la garder entière */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .selectable-image:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Pour mettre en évidence l'image cliquée */
+  .selectable-image.selected {
+    border: 3px solid #DF8E01;
+    transform: scale(1.1);
 }

@@ -3,25 +3,19 @@
 {% block title %}Image{% endblock %}
 
 {% block body %}
+<main>
     <h1>Image</h1>
 
-    <table class="table">
-        <tbody>
-            
-            <tr>
-                <th>Title</th>
-                <td>{{ image.title }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ image.path }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="post-image">
+                {% if image.id %}            
+                        <img src="{{ asset(image.path) }}" alt="{{ image.title }}">                
+                {% endif %}
+            </div>
 
     <a href="{{ path('app_image_index') }}">back to list</a>
 
     <a href="{{ path('app_image_edit', {'id': image.id}) }}">edit</a>
 
     {{ include('image/_delete_form.html.twig') }}
+</main>
 {% endblock %}

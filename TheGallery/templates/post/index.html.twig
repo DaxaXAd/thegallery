@@ -26,7 +26,7 @@
                             <a href="{{ path('app_post_new') }}" class="button-global" aria-label="create a post">create</a>
                             <a href="{{ path('app_user_show', {'slug': app.user.slug}) }}" class="button-global" aria-label="go to account">account</a>
                         {% endif %}
-							<a href="{#{{ path('app_contact') #}}}" class="button-global" aria-label="contact">Contact</a>
+							<a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
 							<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
 						</div>
 					</div>
@@ -43,8 +43,7 @@
 						<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
 					</svg>
 				</div>
-				<h1 class="post-h1">Posts List</h1>
-				<p class="post-msg">Take a look to other's post or add your own post</p>
+				<h1 class="post-h1">Posts</h1>
 			</div>
 		</div>
 

@@ -19,7 +19,7 @@
 								</a>
 							</div>
 							<div class="top-bar_menu">
-                                <a href="{#{{ path('app_contact') #}}}" class="contact-btn" aria-label="contact">Contact</a>
+                                <a href="{{ path('app_contact_new')}}" class="contact-btn" aria-label="contact">Contact</a>
                                 <a href="{{ path('app_post_index') }}" class="login-btn button" aria-label="home">Home</a>
 							</div>
 						</div>
@@ -42,20 +42,15 @@
 			
 	</header>
 <main>
-	<h2>Images</h2>
 	<div class="container">
 			<div class="row">
 				{% for image in images %}
-					{# <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"> #}
+				
 					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
 						<div class="posts-lists">
 							<div class="container-card gapper">
 								<div class="card-author">
-									{# <div class="author"> #}
-										{# <h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a></h2> #}
-										{# <h3> by <a href="{{ path('app_user_show', {'slug': post.idUser.slug}) }}">{{ post.idUser.username }}</a></h3> #}
-										{# <img class="underline" src=""/> #}
-									{# </div> #}
+									
 									
 									{% if image.id %}
 										<div class="preview-img">
@@ -69,6 +64,8 @@
 											<div class="text-wrapper">tag#1</div>
 										</div>
 									</div>
+							
+									{% if image.post %}
 									<form action="{{ path('app_like', { 'id': image.post.id }) }}" method="POST" class="like-form" style="display: inline-block;">
 									<!-- Le bouton est l'icône, stylisée comme tu veux -->
 										<button type="submit" class="like-button pixelarticons-heart like stop-scroll" post-like="{{ image.id }}">
@@ -76,17 +73,16 @@
 											<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
 											</svg>
 										</button>
-										<span class="like-count">{{ likeCount[image.post.id] }}</span>
+										<span class="like-count">{{ likeCount }}</span>
 									</form>
-									{# <img aria-label="button like" class="pixelarticons-heart like"/> #}
-									{# <img aria-label="button like" class="pixelarticons-heart like like-button" post-like="{{ post.id }}" /> #}
+									{% endif %}
 									
 									<div>
 									{% if app.user == image.idUser %}
 										<a href="{{ path('app_image_edit', {'id': image.id}) }}" class="edit-btn">Edit</a>
 										{{ include('image/_delete_form.html.twig', {'image': image}) }}
 									{% endif %}
-									{# </div> #}
+									
 								</div>
 							</div>
 						</div>
@@ -96,41 +92,6 @@
 				{% endfor %}
 			</div> {# close row #}
 		</div> {# close container #}
-	{# {% for image in images %}
-		<div class="container-card gapper">
-			<div class="card-author">
-				<div class="author">
-					<p>{{ image.getTitle() }}</p>
-				</div>
-				<img class="underline" src=""/>
-				<div class="preview-img">
-					<img src="{{ asset('' ~ image.path) }}" alt="{{ image.title }}" style="max-width: 100px;">
-				</div>
-				<div class="tag-input-select">
-					<div class="overlap-group">
-						<div class="text-wrapper">tag#1</div>
-					</div>
-				</div>
-				<img aria-label="button like" class="pixelarticons-heart"/>
-				<span class="like-count">0</span>
-				<div class="post-actions">
-                {% if app.user == image.idUser %}
-                    <a href="{{ path('app_image_edit', {'id': image.id}) }}" class="edit-btn">Edit</a>
-                    {{ include('image/_delete_form.html.twig', {'image': image}) }}
-                {% endif %}
-                </div>
-			</div>
-			
-		</div> #}
-		{# {% if app.user == image.idUser %}
-		<div class="gallery-overlay">
-			<div class="gallery-text">
-				<a href="{{ path('app_image_edit', {'id': image.id}) }}">Edit</a>
-				<a href="{{ path('app_image_delete', {'id': image.id}) }}" onclick="return confirm('Are you sure?')">Delete</a>
-			</div>
-		</div>
-		{% endif %} #}
-	{# {% endfor %} #}
 	<a href="{{ path('app_image_new') }}" class="create-new-link">Create new</a>
 </main>
 

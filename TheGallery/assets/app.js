@@ -12,9 +12,9 @@ import './styles/app.css';
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 document.addEventListener('DOMContentLoaded', function () {
-    const fileInput = document.getElementById('user_profilePicture'); 
-    const previewImage = document.getElementById('profilePicturePreview'); 
-  
+    const fileInput = document.getElementById('user_profilePicture');
+    const previewImage = document.getElementById('profilePicturePreview');
+
     fileInput.addEventListener('change', function (event) {
         const file = event.target.files[0];
         if (file) {
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
             reader.readAsDataURL(file);
         }
     });
-  });
+});
 
 
 //   document.addEventListener('DOMContentLoaded', function () {
@@ -58,12 +58,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //             // Ajoute une classe CSS pour l’animation
 //             this.classList.add('animate-like');
-            
+
 //             // Retire la classe après 0.5s (durée de l’animation)
 //             setTimeout(() => {
 //                 this.classList.remove('animate-like');
 //             }, 500);
-            
+
 //             // Laisse le formulaire se soumettre normalement
 //             // => la page va se recharger, et le nouveau compteur
 //             //    sera affiché via Twig
@@ -102,35 +102,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Ici, on n'envoie pas de body particulier (pas de JSON supplémentaire),
                 // mais tu peux ajouter un "body: JSON.stringify(...)" si besoin
             })
-            .then(response => response.json()) // Convertit la réponse en JSON
-            .then(data => {
-                // 5. data contient la réponse JSON envoyée par le contrôleur
-                //    Par exemple : { success: true, action: "liked", likes: 5 }
+                .then(response => response.json()) // Convertit la réponse en JSON
+                .then(data => {
+                    // 5. data contient la réponse JSON envoyée par le contrôleur
+                    //    Par exemple : { success: true, action: "liked", likes: 5 }
 
-                console.log("Réponse JSON reçue :", data);
+                    console.log("Réponse JSON reçue :", data);
 
-                // 6. Mettre à jour le compteur de likes
-                //    On suppose que le <span class="like-count"> se trouve
-                //    dans le même conteneur parent que le formulaire
-                const likeCountElement = form.parentElement.querySelector('.like-count');
-                if (likeCountElement && data.likes !== undefined) {
-                    // Met à jour le texte avec la nouvelle valeur
-                    likeCountElement.textContent = data.likes;
-                }
+                    // 6. Mettre à jour le compteur de likes
+                    //    On suppose que le <span class="like-count"> se trouve
+                    //    dans le même conteneur parent que le formulaire
+                    const likeCountElement = form.parentElement.querySelector('.like-count');
+                    if (likeCountElement && data.likes !== undefined) {
+                        // Met à jour le texte avec la nouvelle valeur
+                        likeCountElement.textContent = data.likes;
+                    }
 
-                // 7. Optionnel : animer le bouton
-                const likeButton = form.querySelector('.like-button');
-                if (likeButton) {
-                    likeButton.classList.add('animate-like');
-                    setTimeout(() => {
-                        likeButton.classList.remove('animate-like');
-                    }, 500);
-                }
-            })
-            .catch(error => {
-                // 8. En cas d'erreur AJAX, on l'affiche dans la console
-                console.error("Erreur AJAX :", error);
-            });
+                    // 7. Optionnel : animer le bouton
+                    const likeButton = form.querySelector('.like-button');
+                    if (likeButton) {
+                        likeButton.classList.add('animate-like');
+                        setTimeout(() => {
+                            likeButton.classList.remove('animate-like');
+                        }, 500);
+                    }
+                })
+                .catch(error => {
+                    // 8. En cas d'erreur AJAX, on l'affiche dans la console
+                    console.error("Erreur AJAX :", error);
+                });
         });
     });
 
@@ -142,6 +142,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+
+/* select/déselect pre-image */
+
 document.addEventListener('DOMContentLoaded', function () {
     const selectableImages = document.querySelectorAll('.selectable-image');
     const selectedImageIdInput = document.getElementById('selectedImageId');
@@ -150,19 +154,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
     selectableImages.forEach(img => {
         img.addEventListener('click', function () {
-            const imgId = this.getAttribute('data-id');
-            const imgSrc = this.getAttribute('src');
+            // Si on clique sur une image déjà sélectionnée,
+            // on la désélectionne (toggle)
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+                selectedImageIdInput.value = '';
+                previewImg.src = '';
+                previewContainer.style.display = 'none';
+            } else {
+                // Sinon, on enlève la sélection sur les autres images
+                selectableImages.forEach((i) => i.classList.remove('selected'));
 
-            // Mettre à jour le champ caché avec l'ID de l'image sélectionnée
-            selectedImageIdInput.value = imgId;
-
-            // Afficher la preview en mettant à jour l'attribut src de l'image de preview
-            previewImg.src = imgSrc;
-            previewContainer.style.display = 'block';
-
-            // Marquer visuellement l'image sélectionnée
-            selectableImages.forEach(i => i.classList.remove('selected'));
-            this.classList.add('selected');
+                // Puis on sélectionne celle-ci
+                this.classList.add('selected');
+                const imgId = this.getAttribute('data-id');
+                const imgSrc = this.getAttribute('src');
+                selectedImageIdInput.value = imgId;
+                previewImg.src = imgSrc;
+                previewContainer.style.display = 'block';
+            }
         });
     });
 });

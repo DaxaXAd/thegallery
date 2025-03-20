@@ -30,11 +30,13 @@ final class ImageController extends AbstractController
 
         $images = $imageRepository->findBy([], ['created_at' => 'DESC']);
 
+        $likeCount = 0;
+
         foreach ($images as $image) {
             $post = $image->getPost(); 
             if ($post) {
                 // On utilise la même méthode que pour compter les likes d’un post
-                $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
+                $likeCount = $likeRepository->totalLike($post->getId());
             }
         }
 
@@ -112,8 +114,9 @@ final class ImageController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_image_show', methods: ['GET'])]
-    public function show(Image $image, LikeRepository $likeRepository, Post $post): Response
+    public function show(Image $image, LikeRepository $likeRepository): Response
     {
+        
         $post = $image->getPost();
         $likeCount = 0;
         if ($post) {

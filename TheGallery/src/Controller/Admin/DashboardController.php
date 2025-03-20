@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Image;
+use App\Entity\Contact;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -51,9 +52,11 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class)
             ->setController(UserCrudController::class);
-        yield MenuItem::linkToCrud('Posts', 'fas fa-user', Post::class)
+        yield MenuItem::linkToCrud('Posts', 'fa fa-newspaper', Post::class)
             ->setController(PostCrudController::class);
-        yield MenuItem::linkToCrud('Images', 'fas fa-user', Image::class)
+        yield MenuItem::linkToCrud('Images', 'fa fa-image', Image::class)
             ->setController(ImageCrudController::class);
+        yield MenuItem::linkToCrud('Contacts', 'fa fa-envelope', Contact::class)
+            ->setController(ContactCrudController::class);
     }
 }

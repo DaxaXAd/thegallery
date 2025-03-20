@@ -25,7 +25,7 @@
                         {% if app.user == post.idUser %}
                             <a href="{{ path('app_user_index') }}" class="button-global" aria-label="create a post">account</a>
                         {% endif %}
-							<a href="{#{{ path('app_contact') #}}}" class="button-global" aria-label="contact">Contact</a>
+							<a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
 							<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
 						</div>
 					</div>
@@ -43,7 +43,6 @@
 					</svg>
 				</div>
 				<h1 class="post-h1">New Post</h1>
-				<p class="post-msg">Add your creativity starting here.</p>
 			</div>
 		</div>
 
