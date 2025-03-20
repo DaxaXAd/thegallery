@@ -246,6 +246,7 @@ main {
     position: relative;
     background-color: var(--variable-collection-primary-dark);
     border: 1px solid var(--variable-collection-white);
+    border-radius: 15px;
 }
 
 .card-author .author {
@@ -530,6 +531,81 @@ main .form_container {
     margin: 0 auto;
 }
 
+/* Styles pour la section commentaires */
+.comment-section {
+    background-color: #f8f9fa;  /* Couleur de fond claire pour contraster avec le reste */
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 30px;
+  }
+  
+  .comment-section h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 20px;
+  }
+  
+  .comment-list {
+    margin-bottom: 20px;
+  }
+  
+  .single-comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .comment-header strong {
+    font-size: 16px;
+    color: #007bff;
+  }
+  
+  .comment-date {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .comment-content {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+  }
+  
+  .comment-form {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+  }
+  
+  .comment-form textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  .btn-comment-submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-comment-submit:hover {
+    background-color: #0056b3;
+  }
 
 
 

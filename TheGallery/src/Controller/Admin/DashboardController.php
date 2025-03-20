@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Image;
 use App\Entity\Contact;
+use App\Entity\Comment;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -58,5 +59,7 @@ class DashboardController extends AbstractDashboardController
             ->setController(ImageCrudController::class);
         yield MenuItem::linkToCrud('Contacts', 'fa fa-envelope', Contact::class)
             ->setController(ContactCrudController::class);
+        yield MenuItem::linkToCrud('Comments', 'fa fa-envelope', Comment::class)
+            ->setController(CommentCrudController::class);
     }
 }

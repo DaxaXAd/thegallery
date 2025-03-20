@@ -20,10 +20,14 @@
                     </a>
                 </div>
                 <div class="top-bar_menu">
-                    {% if app.user %}
-                        <a href="{{ path('app_post_new') }}" class="button-global" aria-label="create a post">new post</a>
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                        <a href="{{ path('admin') }}">Dashboard Admin</a>
                     {% endif %}
-                    <a href="#" class="button-global" aria-label="contact">Contact</a>
+                    {% if app.user %}
+                        <a href="{{ path('app_post_new') }}" class="button-global" aria-label="créer un nouveau post">nouveau</a>
+                        <a href="{{ path('app_image_index') }}" class="button-global" aria-label="la gallerie aux images">gallerie</a>
+                    {% endif %}
+                    <a href="#" class="button-global" aria-label="button-global">Contact</a>
                     <a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
                 </div>
             </div>

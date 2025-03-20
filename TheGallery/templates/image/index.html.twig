@@ -16,10 +16,12 @@
 										<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
 										<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
 									</svg>
+									<span>The Gallery</span>
 								</a>
+								
 							</div>
 							<div class="top-bar_menu">
-                                <a href="{{ path('app_contact_new')}}" class="contact-btn" aria-label="contact">Contact</a>
+                                <a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
                                 <a href="{{ path('app_post_index') }}" class="login-btn button" aria-label="home">Home</a>
 								<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
 							</div>
@@ -51,7 +53,7 @@
 						<div class="posts-lists">
 							<div class="container-card gapper">
 								<div class="card-author">
-									
+									<h2><a href="{{ path('app_image_show', {'id': image.id}) }}">{{ image.title }}</a></h2>
 									
 									{% if image.id %}
 										<div class="preview-img">
@@ -62,7 +64,11 @@
 									{% endif %}
 									<div class="tag-input-select">
 										<div class="overlap-group">
-											<div class="text-wrapper">tag#1</div>
+											{% if image.idTag %}
+												
+													<span class="tag-label badge bg-info text-dark">{{ image.idTag.nameTag }}</span>
+												
+											{% endif %}
 										</div>
 									</div>
 							

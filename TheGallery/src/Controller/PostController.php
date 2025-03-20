@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\Image;
+use App\Entity\Comment;
 use App\Form\PostType;
 use App\Form\ImageType;
+use App\Form\CommentType;
 use App\Repository\PostRepository;
 use App\Repository\ImageRepository;
 use App\Repository\LikeRepository;
@@ -98,16 +100,45 @@ final class PostController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
-    public function show(Post $post, LikeRepository $likeRepository): Response
+    #[Route('/{id}', name: 'app_post_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Post $post, LikeRepository $likeRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $likeCount = $likeRepository->totalLike($post->getId());
+
+        // 1) Créer un nouvel objet Comment
+        $comment = new Comment();
+
+        // 2) On pré-remplit le post et l'user
+        $comment->setPost($post);
+        $comment->setIdUser($this->getUser()); // si l'utilisateur est connecté
+        $comment->setCreatedAt(new \DateTimeImmutable());
+
+        // 3) Créer le formulaire
+        $form = $this->createForm(CommentType::class, $comment);
+
+        // 4) Gérer la soumission
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Sauvegarder le commentaire
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            // Rediriger pour éviter la resoumission
+            return $this->redirectToRoute('app_post_show', ['id' => $post->getId()]);
+        }
+
+        // Récupérer la liste des commentaires
+        // (ou tu peux directement faire $post->getIdComment() selon ton entité)
+        $comments = $post->getIdComment(); // c'est un Collection
+
 
         return $this->render('post/show.html.twig', [
             'likeCount' => $likeCount,
             'user' => $user,
             'post' => $post,
+            'comments' => $comments,
+            'form' => $form->createView(),
         ]);
     }
 
