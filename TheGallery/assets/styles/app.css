@@ -160,6 +160,17 @@ main {
     fill: #ff0000;
 }
 
+/* ----- tags ------ */
+.tag-label {
+    display: inline-block;   /* Pour que le label prenne juste la place du texte */
+    padding: 4px 8px;        /* Un peu d'espace autour */
+    border-radius: 6px;      /* Angles arrondis */
+    background-color: #00BFFF; /* Bleu clair, choisis la couleur que tu veux */
+    color: #000;             /* Couleur du texte */
+    margin-right: 5px;       /* Espacement à droite pour séparer les badges */
+    font-weight: bold;       /* Texte en gras (optionnel) */
+    text-decoration: none;   /* Pour éviter les soulignements si c'est un lien */
+}
 
 
 /* ----- Header & top-bar ----- */
@@ -291,7 +302,7 @@ main {
     position: relative;
     width: 105px;
     height: 24px;
-    background-color: #d9d9d9;
+    background-color: transparent;
 }
 .card-author .text-wrapper {
     position: absolute;

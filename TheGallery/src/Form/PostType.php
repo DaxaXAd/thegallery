@@ -40,9 +40,10 @@ class PostType extends AbstractType
         ])
         ->add('tags', EntityType::class, [
             'class' => Tag::class,
-            'choice_label' => 'nameTag', // Affiche la propriété "nameTag" de l'entité Tag
-            'label' => 'Tag',
-            'placeholder' => 'Sélectionnez un tag',
+            'choice_label' => 'nameTag',
+            'multiple' => true,       // Permet de sélectionner plusieurs tags
+            'expanded' => false,      // false => liste déroulante multiple, true => cases à cocher
+            'by_reference' => false,  // Important pour ManyToMany
         ]);
     }
 
