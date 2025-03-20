@@ -200,21 +200,16 @@ final class UserController extends AbstractController
     public function profile(string $slug, UserRepository $userRepository, ImageRepository $imageRepository, ManagerRegistry $doctrine): Response
     {
         $user = $userRepository->findOneBy(['slug' => $slug]);
-        // Fetch the user by id
-        
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
-
-        // Fetch the images related to the user.
-        // Option 1: If your User entity has a OneToMany relation named "images", then:
+    
+        // Récupération des images via la relation OneToMany
         $images = $user->getImages();
-        //
-        // Option 2: Otherwise, query the Image repository:
-        $images = $this->doctrine->getRepository(Image::class)->findBy(['user' => $user]);
-        $posts = $this->doctrine->getRepository(Post::class)->findBy(['slug' => $slug]);
-
-        // Render a Twig template with the user and images
+    
+        // Récupération des posts via la relation OneToMany
+        $posts = $user->getPosts();
+    
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'posts' => $posts,

@@ -23,10 +23,10 @@
 							</a>
 						</div>
 						<div class="top-bar_menu">
-                        {% if app.user %}
+                        {# {% if app.user %}
                             <a href="{{ path('app_post_new') }}" class="button-global" aria-label="create a post">+</a>
                             <a href="{{ path('app_user_show', {'slug': app.user.slug}) }}" class="button-global" aria-label="acceder au compte">compte</a>
-                        {% endif %}
+                        {% endif %} #}
 							<a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
 							<a href="{{ path('app_register') }}" class="register-btn button" aria-label="inscription">Inscription</a>
 							<a href="{{ path('app_logout') }}" class="login-btn button" aria-label="connexion">connexion</a>

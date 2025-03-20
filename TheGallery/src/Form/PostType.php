@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Post;
 use App\Entity\User;
+use App\Entity\Tag;
 use App\Entity\Image;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -32,11 +33,16 @@ class PostType extends AbstractType
         ->add('addImage', ButtonType::class, [
             'label' => 'Add Image',
             'attr' => ['onclick' => 'window.location.href="' . $options['image_add_url'] . '"']
-        ])
-        
+        ])        
         ->add('title', TextType::class, [
             'label' => 'Title',
             'required' => true,
+        ])
+        ->add('tags', EntityType::class, [
+            'class' => Tag::class,
+            'choice_label' => 'nameTag', // Affiche la propriété "nameTag" de l'entité Tag
+            'label' => 'Tag',
+            'placeholder' => 'Sélectionnez un tag',
         ]);
     }
 

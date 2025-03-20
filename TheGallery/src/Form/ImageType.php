@@ -28,10 +28,12 @@ class ImageType extends AbstractType
                 'mapped' => false,                 
                 'required' => true,
             ])
-            // ->add('id_tag', EntityType::class, [
-            //     'class' => Tag::class,
-            //     'choice_label' => 'name',
-            // ])
+            ->add('id_tag', EntityType::class, [
+                'class' => Tag::class,
+                'choice_label' => 'nameTag', // Affiche la propriété "nameTag" de l'entité Tag
+                'label' => 'Tag',
+                'placeholder' => 'Sélectionnez un tag',
+            ]);
             // ->add('post', EntityType::class, [
             //     'class' => Post::class,
             //     'choice_label' => 'title',

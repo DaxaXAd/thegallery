@@ -24,9 +24,16 @@ class Tag
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'id_tag')]
     private Collection $images;
 
+    /**
+     * @var Collection<int, Post>
+     */
+    #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'tags')]
+    private Collection $posts;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,6 +78,33 @@ class Tag
             if ($image->getIdTag() === $this) {
                 $image->setIdTag(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): static
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts->add($post);
+            $post->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): static
+    {
+        if ($this->posts->removeElement($post)) {
+            $post->removeTag($this);
         }
 
         return $this;
