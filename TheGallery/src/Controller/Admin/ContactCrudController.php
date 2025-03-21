@@ -26,7 +26,7 @@ class ContactCrudController extends AbstractCrudController
             TextField::new('email'),
             TextField::new('subject'),
             TextareaField::new('content'),
-            DateTimeField::new('createdAt')->hideOnForm(),
+            DateTimeField::new('createdAt'),
         ];
     }
     

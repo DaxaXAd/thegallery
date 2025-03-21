@@ -30,11 +30,6 @@ class ContactType extends AbstractType
                 'label' => 'contenu message',
                 'required' => true,
             ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'username',
-                'required' => false,
-            ])
         ;
     }
 

@@ -635,3 +635,97 @@ main .form_container {
     border: 3px solid #DF8E01;
     transform: scale(1.1);
 }
+
+
+/*------ formulaire global style --------*/
+
+.form-wrapper {
+    width: 90%;        /* Sur mobile, on prend presque toute la largeur */
+  max-width: 400px;  /* Largeur max sur mobile */
+  margin: 20px auto;
+    background-color: #0D1117;    /* Fond sombre */
+    border: 5px solid #A5380A;    /* Bordure colorée (orange/brun) */
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .form-wrapper {
+      max-width: 800px; /* Sur desktop, on agrandit */
+      margin: 40px auto;
+    }
+  }
+  
+  .form-wrapper h1 {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .register-form {
+    /* Par exemple, on peut fixer une largeur maximale et centrer le formulaire */
+    max-width: 400px;
+    margin: 0 auto;        /* Centre le formulaire horizontalement */
+    padding: 20px;         /* Espacement interne */
+    background-color: #0D1117; /* Fond sombre */
+    border: 2px solid #A5380A; /* Bordure automnale */
+    border-radius: 10px;
+  }
+
+  @media (min-width: 768px) {
+    .register-form {
+        padding: 20px;
+    }
+  }
+
+
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;             /* Le label et le champ sont alignés à gauche */
+  }
+  
+  .form-group label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #222;       /* Champ input sombre */
+    color: #fff;                  /* Couleur de texte blanche */
+    font-size: 14px;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #A5380A;        /* Couleur de focus */
+  }
+  
+  .form-check {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-check-input {
+    margin-right: 8px;
+    accent-color: #A5380A;        /* Pour colorer la case à cocher (selon le navigateur) */
+  }
+  
+  .btn-submit {
+    background-color: #A5380A;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .btn-submit:hover {
+    background-color: #8e3008;    /* Teinte un peu plus sombre au survol */
+  }
+  

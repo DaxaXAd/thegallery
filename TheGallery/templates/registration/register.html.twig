@@ -45,16 +45,68 @@
 			
 	</header>
 	<main>
-		<a href="{{path('home')}}">
+
+	
+<div class="form-wrapper">
+    <h1>Create your own account!</h1>
+
+    
+</div>
+
+		{{ form_start(registrationForm, { 'attr': { 'class': 'register-form' } }) }}
+
+        <div class="form-group">
+            {{ form_label(registrationForm.username) }}
+            {{ form_widget(registrationForm.username, { 'attr': { 'class': 'form-control' } }) }}
+            {{ form_errors(registrationForm.username) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, { 'attr': { 'class': 'form-control' } }) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword) }}
+            {{ form_widget(registrationForm.plainPassword, { 'attr': { 'class': 'form-control' } }) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.bio) }}
+            {{ form_widget(registrationForm.bio, { 'attr': { 'class': 'form-control' } }) }}
+            {{ form_errors(registrationForm.bio) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.location) }}
+            {{ form_widget(registrationForm.location, { 'attr': { 'class': 'form-control' } }) }}
+            {{ form_errors(registrationForm.location) }}
+        </div>
+
+        <div class="form-group form-check">
+            {{ form_widget(registrationForm.agreeTerms, { 'attr': { 'class': 'form-check-input' } }) }}
+            {{ form_label(registrationForm.agreeTerms) }}
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-submit">
+                {{ button_label|default('Sign up') }}
+            </button>
+        </div>
+
+    {{ form_end(registrationForm) }}
+
+		{# <a href="{{path('home')}}">
 					<svg class="goback-sign" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
 						<polygon points="7.293 4.707 14.586 12 7.293 19.293 8.707 20.707 17.414 12 8.707 3.293 7.293 4.707"/>
 					</svg>
 				</a>
-	{# <div class="register-container"> #}
+	
 		<div class="register-page">
-			{# <div class="box-logo">
-							<img src="{{ asset('images/star_blue.svg') }}" class="logo logo-register" alt="Logo TheGallery">
-						</div> #}
+			
 
 			<h1 class="h1-register">Create your own account !</h1>
 
@@ -64,39 +116,39 @@
 
 
 			<div class="form-group">
-				{{ form_label(registrationForm.username, 'Username', {'label_attr': {'class': 'label-register'}}) }}
-				{{ form_widget(registrationForm.username, {'attr': {'class': 'input-register', 'placeholder': 'Username'}}) }}
+				{{ form_label(registrationregistrationForm.username, 'Username', {'label_attr': {'class': 'label-register'}}) }}
+				{{ form_widget(registrationregistrationForm.username, {'attr': {'class': 'input-register', 'placeholder': 'Username'}}) }}
 				
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'label-register'}}) }}
-				{{ form_widget(registrationForm.email, {'attr': {'class': 'input-register', 'placeholder': 'ex: email@mail.com'}}) }}
+				{{ form_label(registrationregistrationForm.email, 'Email', {'label_attr': {'class': 'label-register'}}) }}
+				{{ form_widget(registrationregistrationForm.email, {'attr': {'class': 'input-register', 'placeholder': 'ex: email@mail.com'}}) }}
 				
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'label-register'}}) }}
-				{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'input-register', 'placeholder': 'more than 8 characters'}}) }}
+				{{ form_label(registrationregistrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'label-register'}}) }}
+				{{ form_widget(registrationregistrationForm.plainPassword, {'attr': {'class': 'input-register', 'placeholder': 'more than 8 characters'}}) }}
 				
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.bio, 'biographie', {'label_attr': {'class': 'label-register'}}) }}
-				{{ form_widget(registrationForm.bio, {'attr': {'class': 'input-register', 'placeholder': "Hello, it's bio about me"}}) }}
+				{{ form_label(registrationregistrationForm.bio, 'biographie', {'label_attr': {'class': 'label-register'}}) }}
+				{{ form_widget(registrationregistrationForm.bio, {'attr': {'class': 'input-register', 'placeholder': "Hello, it's bio about me"}}) }}
 				
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.location, 'Localisation', {'label_attr': {'class': 'label-register'}}) }}
-				{{ form_widget(registrationForm.location, {'attr': {'class': 'input-register', 'placeholder': 'ex: France' }}) }}
+				{{ form_label(registrationregistrationForm.location, 'Localisation', {'label_attr': {'class': 'label-register'}}) }}
+				{{ form_widget(registrationregistrationForm.location, {'attr': {'class': 'input-register', 'placeholder': 'ex: France' }}) }}
 				
 			</div>
 
 
 			<div class="form-group agree-terms">
-				{{ form_label(registrationForm.agreeTerms, 'I accept the conditions', {'label_attr': {'class': 'label-agree-terms'}}) }}
-				{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'checkbox-register'}}) }}
+				{{ form_label(registrationregistrationForm.agreeTerms, 'I accept the conditions', {'label_attr': {'class': 'label-agree-terms'}}) }}
+				{{ form_widget(registrationregistrationForm.agreeTerms, {'attr': {'class': 'checkbox-register'}}) }}
 				
 			</div>
 
@@ -109,8 +161,8 @@
 			</div>
 
 			{{ form_end(registrationForm) }}
-		</div>
-	{# </div> #}
+		</div> #}
+	
 	</main>
 
 	<footer>&copy; Copyright 2025 - TheGallery</footer>

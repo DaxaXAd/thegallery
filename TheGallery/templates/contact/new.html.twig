@@ -3,9 +3,13 @@
 {% block title %}Nouveau Contact{% endblock %}
 
 {% block body %}
+<main>
     <h1>Contact</h1>
+    
 
-    {{ include('contact/_form.html.twig') }}
+        {{ include('contact/_form.html.twig') }}
 
-    <a href="{{ path('app_post_index') }}">accueil</a>
+        <a href="{{ path('app_post_index') }}">accueil</a>
+
+</main>
 {% endblock %}
