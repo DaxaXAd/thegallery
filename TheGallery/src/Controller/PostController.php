@@ -73,6 +73,13 @@ final class PostController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $post->setIdUser($user);
+                $selectedImageId = $request->request->get('selectedImageId');
+                if ($selectedImageId) {
+                    $image = $imageRepository->find($selectedImageId);
+                    if ($image) {
+                        $post->setIdImg($image);
+                    }
+                }
                 $post->setCreatedAt(new \DateTimeImmutable());
 
                 $entityManager->persist($post);

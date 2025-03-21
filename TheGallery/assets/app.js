@@ -146,31 +146,83 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* select/déselect pre-image */
 
-document.addEventListener('DOMContentLoaded', function () {
-    const selectableImages = document.querySelectorAll('.selectable-image');
-    const selectedImageIdInput = document.getElementById('selectedImageId');
-    const previewContainer = document.getElementById('selectedImagePreview');
-    const previewImg = document.getElementById('previewImg');
+// document.addEventListener('DOMContentLoaded', function () {
+//     const selectableImages = document.querySelectorAll('.selectable-image');
+//     const selectedImageIdInput = document.getElementById('selectedImageId');
+//     const previewContainer = document.getElementById('selectedImagePreview');
+//     const previewImg = document.getElementById('previewImg');
 
-    selectableImages.forEach(img => {
-        img.addEventListener('click', function () {
+//     selectableImages.forEach(img => {
+//         img.addEventListener('click', function () {
             // Si on clique sur une image déjà sélectionnée,
             // on la désélectionne (toggle)
-            if (this.classList.contains('selected')) {
-                this.classList.remove('selected');
-                selectedImageIdInput.value = '';
-                previewImg.src = '';
-                previewContainer.style.display = 'none';
-            } else {
+            // if (this.classList.contains('selected')) {
+            //     this.classList.remove('selected');
+            //     selectedImageIdInput.value = '';
+            //     previewImg.src = '';
+            //     previewContainer.style.display = 'none';
+            // } else {
                 // Sinon, on enlève la sélection sur les autres images
-                selectableImages.forEach((i) => i.classList.remove('selected'));
+                // selectableImages.forEach((i) => i.classList.remove('selected'));
 
                 // Puis on sélectionne celle-ci
+                // this.classList.add('selected');
+                // const imgId = this.getAttribute('data-id');
+                // const imgSrc = this.getAttribute('src');
+                // selectedImageIdInput.value = imgId;
+                // previewImg.src = imgSrc;
+                // previewContainer.style.display = 'block';
+                
+
+                //test
+                // const imgId = this.getAttribute('data-id');
+                // selectedImageIdInput.value = imgId;
+                // previewImg.src = this.src;
+                // previewContainer.style.display = 'block';
+                // end test
+//             }
+//         });
+//     });
+// });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Sélectionne tous les éléments ayant la classe "selectable-image"
+    const selectableImages = document.querySelectorAll('.selectable-image');
+    // Récupère l'élément input caché qui stockera l'ID de l'image sélectionnée
+    const selectedImageIdInput = document.getElementById('selectedImageId');
+    // Récupère le conteneur qui affichera la prévisualisation de l'image
+    const previewContainer = document.getElementById('selectedImagePreview');
+    // Récupère l'élément <img> qui affichera la prévisualisation
+    const previewImg = document.getElementById('previewImg');
+
+    // Pour chaque image cliquable, on attache un écouteur d'événement sur le clic
+    selectableImages.forEach(img => {
+        img.addEventListener('click', function () {
+            // Si l'image cliquée est déjà sélectionnée, on la désélectionne
+            if (this.classList.contains('selected')) {
+                // Retirer la classe "selected" pour indiquer la désélection
+                this.classList.remove('selected');
+                // Vider le champ caché (aucune image sélectionnée)
+                selectedImageIdInput.value = '';
+                // Vider l'aperçu en retirant la source de l'image
+                previewImg.src = '';
+                // Masquer le conteneur de prévisualisation
+                previewContainer.style.display = 'none';
+            } else {
+                // Sinon, d'abord désélectionner toutes les images
+                selectableImages.forEach(i => i.classList.remove('selected'));
+                // Ajouter la classe "selected" à l'image cliquée pour un feedback visuel
                 this.classList.add('selected');
+
+                // Récupérer l'ID de l'image depuis l'attribut data-id
                 const imgId = this.getAttribute('data-id');
-                const imgSrc = this.getAttribute('src');
+                // Mettre à jour le champ caché avec l'ID de l'image sélectionnée
                 selectedImageIdInput.value = imgId;
-                previewImg.src = imgSrc;
+
+                // Mettre à jour l'image de prévisualisation avec la source de l'image cliquée
+                previewImg.src = this.getAttribute('src');
+                // Afficher le conteneur de prévisualisation
                 previewContainer.style.display = 'block';
             }
         });

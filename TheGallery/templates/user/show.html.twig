@@ -21,11 +21,11 @@
                 </div>
                 <div class="top-bar_menu">
                     {% if 'ROLE_ADMIN' in app.user.roles %}
-                        <a href="{{ path('admin') }}">Dashboard Admin</a>
+                        <a href="{{ path('admin') }}" class="btn btn-danger" aria-label="accès administrateur">Admin</a>
                     {% endif %}
                     {% if app.user %}
-                        <a href="{{ path('app_post_new') }}" class="button-global" aria-label="créer un nouveau post">nouveau</a>
-                        <a href="{{ path('app_image_index') }}" class="button-global" aria-label="la gallerie aux images">gallerie</a>
+                        <a href="{{ path('app_post_new') }}" class="button-global" aria-label="créer un nouveau post">Nouveau</a>
+                        <a href="{{ path('app_image_index') }}" class="button-global" aria-label="la gallerie aux images">Gallerie</a>
                     {% endif %}
                     <a href="#" class="button-global" aria-label="button-global">Contact</a>
                     <a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>

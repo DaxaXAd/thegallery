@@ -47,23 +47,133 @@
 		</div>
 
     </header>
-
-<main>
+{# test-BS+JS #}
+<main class="container mt-5">
     {% if app.user %}
+        <div class="form_container" style="border: 25px solid #A5380A; background-color: #000; padding: 30px; border-radius: 10px;">
+            <h1>Create new Post</h1>
+
+            <!-- Le formulaire principal (PostType) -->
+            {{ form_start(form, { 'attr': {'class': 'post-form'} }) }}
+                <div class="mb-3">
+                    {{ form_label(form.title) }}
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.title) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.tags) }}
+                    {{ form_widget(form.tags, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.tags) }}
+                </div>
+
+                <!-- Champ caché pour stocker l'ID de l'image sélectionnée -->
+                <input type="hidden" id="selectedImageId" name="selectedImageId" value="">
+
+                <!-- Preview -->
+                <div class="mb-3">
+                    <label class="form-label">Selected Image Preview</label>
+                    <div id="selectedImagePreview" style="margin:10px 0; display:none;">
+                        <img id="previewImg" src="" alt="Selected image preview" style="max-width:200px;">
+                    </div>
+                    <!-- Bouton pour ouvrir la modale Bootstrap -->
+                    <button type="button" class="btn-submit" data-bs-toggle="modal" data-bs-target="#imageModal">
+                        Select Image
+                    </button>
+                </div>
+
+                <!-- Bouton "Add Image" du PostType -->
+                {{ form_row(form.addImage) }}
+
+                <div class="mt-4">
+                    <button type="submit" class="btn-submit">Save</button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    {% else %}
+        <h1>Access Denied</h1>
+        <p>You must be logged in to create a new post.</p>
+        <a href="{{ path('app_login') }}">Login</a>
+    {% endif %}
+</main>
+
+<!-- La modale Bootstrap pour sélectionner l'image -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background-color: #222; color: #fff;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Select an image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="image-grid">
+            {% for image in images %}
+                <img src="{{ asset(image.path) }}"
+                     data-id="{{ image.id }}"
+                     alt="{{ image.title }}"
+                     class="selectable-image">
+            {% else %}
+                <p>No images available.</p>
+            {% endfor %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-submit" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# end test part #}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{# <main> #}
+
+    {# {% if app.user %}
     <div class="form_container">
-        <h1>Create new Post</h1>
+        <h1>Create new Post</h1> #}
 
         {# Inclut le formulaire principal du Post (le form widget contient déjà tous les champs du PostType) #}
-        {{ include('post/_form.html.twig', {'button_label': 'Save'}) }}
+        {# {{ include('post/_form.html.twig', {'button_label': 'Save'}) }} #}
 
         {# Zone pour la preview de l'image sélectionnée, et champ caché pour stocker l'ID de l'image #}
-        <input type="hidden" id="selectedImageId" name="selectedImageId" value="">
+        {# <input type="hidden" id="selectedImageId" name="selectedImageId" value="">
         <div id="selectedImagePreview" style="margin:10px 0; display:none;">
             <img id="previewImg" src="" alt="Selected image preview" style="max-width:200px;">
-        </div>
+        </div> #}
 
         {# Grille des images appartenant à l'utilisateur #}
-        <h2>Select an image</h2>
+        {# <h2>Select an image</h2>
         <div class="image-grid">
             {% for image in images %}
                 <img src="{{ asset(image.getPath()) }}" data-id="{{ image.getId() }}" alt="{{ image.getTitle() }}" class="selectable-image">
@@ -77,21 +187,6 @@
         <p>You must be logged in to create a new post.</p>
         <a href="{{ path('app_login') }}">Login</a>
     {% endif %}
-</main>
-
-
-
-
-{# <main>
-	{% if app.user %}
-	<div class="form_container">
-		<h1>Create new Post</h1>
-			{{ include('post/_form.html.twig') }}		
-	</div>
-	{% else %}
-		<h1>Access Denied</h1>
-		<p>You must be logged in to create a new post.</p>
-		<a href="{{ path('app_login') }}">Login</a>
-	{% endif %}
 </main> #}
+
 {% endblock %}

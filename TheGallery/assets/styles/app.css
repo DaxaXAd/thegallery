@@ -59,7 +59,7 @@ main {
 }
 
 
-/* ----- Boutons génériques ----- */
+/* Boutons génériques */
 .button-global,
 .sign-in,
 .register-btn,
@@ -71,11 +71,11 @@ main {
 .backlist-btn,
 .logout-btn {
     display: flex;
-    width: 113px;
-    padding: 4px 24px;
+    /* width: 113px;  <-- supprimé */
+    padding: 4px 12px;          /* réduit */
     justify-content: center;
     align-items: center;
-    border-radius: 23px;
+    border-radius: 8px;         /* moins arrondi */
     font-family: "Lexend-Bold", Helvetica, sans-serif;
     font-size: 16px;
     font-weight: 700;
@@ -84,16 +84,7 @@ main {
     transition: transform 0.2s ease-out;
 }
 
-/* Exemple : .button-global => fond automne, texte noir */
-.button-global,
-.sign-in,
-.register-btn,
-.login-btn,
-.save-btn {
-    background: var(--variable-collection-primary-automn);
-    color: var(--variable-collection-primary-dark);
-}
-
+/* Survol (exemple) */
 .button-global:hover,
 .sign-in:hover,
 .register-btn:hover,
@@ -101,7 +92,7 @@ main {
 .save-btn:hover {
     background-color: var(--variable-collection-white);
     color: var(--variable-collection-primary-dark);
-    transform: scale(1.1);
+    transform: scale(1.05); /* moins d'agrandissement */
 }
 
 /* Bouton "edit" */
@@ -109,14 +100,12 @@ main {
     background: #515fdc;
     color: #fff;
 }
-
-/* Bouton "edit" au survol */
 .edit-btn:hover {
     background: #3f48b1;
-    transform: scale(1.1);
+    transform: scale(1.05); 
 }
 
-/* Bouton "danger" (ex: delete) */
+/* Bouton "danger" (delete) */
 .btn-danger {
     background: #ff5050;
     color: #000;
@@ -133,11 +122,10 @@ main {
     background: #ff0000;
     color: #000;
 }
-
-/* Survol du logout */
 .logout-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
+
 
 /* Bouton "like" */
 .like-button {
@@ -175,7 +163,10 @@ main {
 
 /* ----- Header & top-bar ----- */
 .header_image {
-    background-image: url("images/header_automn.png");
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.45), 
+        rgba(0, 0, 0, 0.45)
+        ),url("images/header_automn.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -194,7 +185,7 @@ main {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    background: rgba(0, 0, 0, 0.80);
+    background: rgba(0, 0, 0, 0.92);
     width: 100%;
     z-index: 999; /* Pour que la barre soit au-dessus du contenu */
 }

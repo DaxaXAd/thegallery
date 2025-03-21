@@ -155,7 +155,7 @@ final class ImageController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->getPayload()->getString('_token'))) {
 
             // $imagePath = $this->getParameter('images_directory') . '/' . ltrim($image->getPath(), '/');
-            $imagePath = $this->getParameter('kernel.project_dir') . '/public/' . $image->getPath();
+            $imagePath = $this->getParameter('kernel.project_dir') . '/public/' . ltrim($image->getPath(), '/');
             
             dump("Chemin du fichier: ", $imagePath);
 
