@@ -2,30 +2,21 @@
 // main.scss
 
 // // 1) On utilise le dossier abstracts
-// @use 'abstracts/index' as abstracts; 
+@use 'abstracts/index' as abstracts; 
 // //   => On peut écrire abstracts.$primary-dark 
 // //      ou importer directement as * pour l’utiliser sans préfixe
 
 // // 2) Base
-// @use 'base/index' as base;
+@use 'base/index' as base;
 
 // // 3) Components
-// @use 'components/index' as comp;
+@use 'components/index' as comp;
 
 // // 4) Layout
-// @use 'layout/index' as layout;
+@use 'layout/index' as layout;
 
-// // 5) Pages
-// @use 'pages/index' as pages;
-
-
-
-
-
-
-
-
-
+// 5) Pages
+@use 'pages/index' as pages;
 
 
 
@@ -55,6 +46,7 @@
 // @import "components/buttons";
 // @import "components/cards";
 // @import "components/forms";
+// @import "components/tags";
 
 // @import "layout/header";
 // @import "layout/footer";
