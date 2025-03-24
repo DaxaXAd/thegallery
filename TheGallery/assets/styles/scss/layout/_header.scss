@@ -1,0 +1,45 @@
+.header_image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("images/header_automn.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.92);
+    width: 100%;
+    z-index: 999;
+}
+
+.top-bar_item {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    padding: 0 128px;
+    justify-content: space-between;
+    align-items: center;
+
+    .top-bar_menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 100px;
+    }
+}
+
+.welcome-logo {
+    width: 64px;
+    height: 64px;
+}

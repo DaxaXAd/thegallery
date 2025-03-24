@@ -1,6 +1,26 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="button-global">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }} 
 
+    <h1>Contactez nous</h1>
+    {{ form_start(form, { 'attr': {'class': 'register-form'} }) }}
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.subject) }}
+            {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.subject) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.content) }}
+            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.content) }}
+        </div>
+
+        <button type="submit" class="btn-submit">
+            {{ button_label|default('Envoyer') }}
+        </button>
+    {{ form_end(form) }}
 

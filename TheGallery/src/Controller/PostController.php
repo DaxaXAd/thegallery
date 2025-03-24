@@ -80,6 +80,7 @@ final class PostController extends AbstractController
                         $post->setIdImg($image);
                     }
                 }
+                
                 $post->setCreatedAt(new \DateTimeImmutable());
 
                 $entityManager->persist($post);

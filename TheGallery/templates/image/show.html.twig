@@ -21,7 +21,7 @@
 								</a>
 							</div>
 							<div class="top-bar_menu">
-                                <a href="{{ path('app_contact_new')}}" class="contact-btn" aria-label="contact">Contact</a>
+                                <a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
                                 <a href="{{ path('app_post_index') }}" class="login-btn button" aria-label="home">Home</a>
 								<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
 							</div>
@@ -53,10 +53,11 @@
                 {% endif %}
             </div>
 
-    <a href="{{ path('app_image_index') }}">back to list</a>
+    <a href="{{ path('app_image_index') }}" class="backlist-btn">back to list</a>
+	{% if app.user and (app.user == image.idUser or is_granted('ROLE_ADMIN')) %}
+    	<a href="{{ path('app_image_edit', {'id': image.id}) }}" class="edit-btn">Edit</a>
 
-    <a href="{{ path('app_image_edit', {'id': image.id}) }}">edit</a>
-
-    {{ include('image/_delete_form.html.twig') }}
+    	{{ include('image/_delete_form.html.twig') }}
+	{% endif %}
 </main>
 {% endblock %}

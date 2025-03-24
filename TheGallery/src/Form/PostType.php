@@ -32,7 +32,15 @@ class PostType extends AbstractType
         
         ->add('addImage', ButtonType::class, [
             'label' => 'Add Image',
-            'attr' => ['onclick' => 'window.location.href="' . $options['image_add_url'] . '"']
+            'attr' => [
+            // On va récupérer la valeur du champ #post_title en JS et l’ajouter en param
+            'onclick' => "
+                const titleInput = document.getElementById('post_title');
+                const titleVal = titleInput ? encodeURIComponent(titleInput.value) : '';
+                window.location.href = '".$options['image_add_url']."?title=' + titleVal;
+            "
+            ],
+            // 'attr' => ['onclick' => 'window.location.href="' . $options['image_add_url'] . '"']
         ])        
         ->add('title', TextType::class, [
             'label' => 'Title',

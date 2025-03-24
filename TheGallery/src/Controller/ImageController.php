@@ -60,6 +60,9 @@ final class ImageController extends AbstractController
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
+
+        $titlePost = $request->query->get('title');
+
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('path')->getData();
 
@@ -98,7 +101,7 @@ final class ImageController extends AbstractController
 
                 // return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
                 // Rediriger vers la création de post avec l'ID de l'image
-                return $this->redirectToRoute('app_post_new', ['imageId' => $image->getId(), 'title' => $request->query->get('title')], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_post_new', ['imageId' => $image->getId(), 'title' => $titlePost,], Response::HTTP_SEE_OTHER);
             } else {
                 $this->addFlash('error', 'Invalid file upload.');
             }

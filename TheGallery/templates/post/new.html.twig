@@ -1,108 +1,101 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Post
-{% endblock %}
+{% block title %}New Post{% endblock %}
 
 {% block body %}
 <header>
+    <div class="header_image">
+        <nav class="top-bar">
+            <div class="top-bar_item">
+                <div class="logo-gallery">
+                    <a href="{{ path('app_post_index') }}" aria-label="home">
+                        <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                            <path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                            <path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                            <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="top-bar_menu">
+                    {% if app.user == post.idUser %}
+                        <a href="{{ path('app_user_index') }}" class="button-global" aria-label="account">account</a>
+                    {% endif %}
+                    <a href="{{ path('app_contact_new') }}" class="button-global" aria-label="contact">Contact</a>
+                    <a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="post-container">
+            <div>
+                <svg class="post-logo" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                    <path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                    <path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                    <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                </svg>
+            </div>
+            <h1 class="post-h1">New Post</h1>
+        </div>
+    </div>
+</header>
 
-			<div class="header_image">
-
-				<nav class="top-bar">
-
-					<div class="top-bar_item">
-						<div class="logo-gallery">
-							<a href="{{ path('app_post_index') }}" aria-label="home">
-								<svg width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-									<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-									<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-									<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-								</svg>
-							</a>
-						</div>
-						<div class="top-bar_menu">
-                        {% if app.user == post.idUser %}
-                            <a href="{{ path('app_user_index') }}" class="button-global" aria-label="create a post">account</a>
-                        {% endif %}
-							<a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
-							<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
-						</div>
-					</div>
-
-				</nav>
-
-			
-			<div class="post-container">
-				<div>
-					<svg class="post-logo" width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-						<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-						<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-						<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-					</svg>
-				</div>
-				<h1 class="post-h1">New Post</h1>
-			</div>
-		</div>
-
-    </header>
-{# test-BS+JS #}
 <main class="container mt-5">
     {% if app.user %}
-        <div class="form_container" style="border: 25px solid #A5380A; background-color: #000; padding: 30px; border-radius: 10px;">
+        <div class="form_container">
             <h1>Create new Post</h1>
 
-            <!-- Le formulaire principal (PostType) -->
+            <!-- Instructions pour guider l'utilisateur -->
+            <div class="instructions">
+                <p><strong>Étape 1 :</strong> Ajoutez une image en cliquant sur "Add Image".</p>
+                <p><strong>Étape 2 :</strong> Sélectionnez une image existante ou ajoutez-en une nouvelle.</p>
+                <p><strong>Étape 3 :</strong> Remplissez le titre et sélectionnez des tags.</p>
+            </div>
+
             {{ form_start(form, { 'attr': {'class': 'post-form'} }) }}
-                <div class="mb-3">
-                    {{ form_label(form.title) }}
-                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.title) }}
-                </div>
 
-                <div class="mb-3">
-                    {{ form_label(form.tags) }}
-                    {{ form_widget(form.tags, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.tags) }}
-                </div>
+                {# Bouton "Add Image" généré par le PostType #}
+                {{ form_row(form.addImage) }}
 
-                <!-- Champ caché pour stocker l'ID de l'image sélectionnée -->
-                <input type="hidden" id="selectedImageId" name="selectedImageId" value="">
-
-                <!-- Preview -->
+                {# Section de sélection d'image via modale et preview #}
                 <div class="mb-3">
-                    <label class="form-label">Selected Image Preview</label>
-                    <div id="selectedImagePreview" style="margin:10px 0; display:none;">
-                        <img id="previewImg" src="" alt="Selected image preview" style="max-width:200px;">
+                    <label class="form-label">Votre image</label>
+                    <div id="selectedImagePreview" class="selected-image-preview">
+                        <img id="previewImg" alt="Selected image preview" class="preview-img">
                     </div>
-                    <!-- Bouton pour ouvrir la modale Bootstrap -->
                     <button type="button" class="btn-submit" data-bs-toggle="modal" data-bs-target="#imageModal">
-                        Select Image
+                        Choisir une image
                     </button>
                 </div>
 
-                <!-- Bouton "Add Image" du PostType -->
-                {{ form_row(form.addImage) }}
-
-                <div class="mt-4">
-                    <button type="submit" class="btn-submit">Save</button>
+                {# Champ Titre #}
+                <div class="mb-3">
+                    {{ form_row(form.title, {'attr': {'class': 'form-control', 'id': 'post_title'}}) }}
                 </div>
+
+                {# Champ Tags #}
+                <div class="mb-3">
+                    {{ form_row(form.tags, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                {# Champ caché pour l'ID de l'image sélectionnée #}
+                <input type="hidden" id="selectedImageId" name="selectedImageId" value="">
+
+                <button type="submit" class="btn-submit">Save</button>
             {{ form_end(form) }}
         </div>
     {% else %}
         <h1>Access Denied</h1>
         <p>You must be logged in to create a new post.</p>
-        <a href="{{ path('app_login') }}">Login</a>
     {% endif %}
 </main>
 
-<!-- La modale Bootstrap pour sélectionner l'image -->
+{# Modale Bootstrap pour sélectionner une image #}
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-    <div class="modal-content" style="background-color: #222; color: #fff;">
+    <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="imageModalLabel">Select an image</h5>
+        <h5 class="modal-title" id="imageModalLabel">Select an Image</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -123,6 +116,8 @@
     </div>
   </div>
 </div>
+
+
 
 {# end test part #}
 

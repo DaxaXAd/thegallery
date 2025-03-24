@@ -1,0 +1,15 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: $primary-autumn;
+    padding: 10px;
+}
+
+.footer_copyright {
+    font-family: $font-primary;
+    font-size: 14px;
+    color: $primary-dark;
+}

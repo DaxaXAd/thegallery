@@ -1,0 +1,68 @@
+.button-global, .sign-in, .register-btn, .login-btn, .signup-btn, .edit-btn, .btn-danger, .save-btn, .backlist-btn, .logout-btn {
+    display: flex;
+    padding: 4px 12px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-family: $font-primary;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+}
+
+.button-global, .sign-in, .register-btn, .login-btn, .save-btn {
+    background: $primary-autumn;
+    color: $primary-dark;
+}
+
+.button-global:hover, .sign-in:hover, .register-btn:hover, .login-btn:hover, .save-btn:hover {
+    background-color: $white;
+    color: $primary-dark;
+    transform: scale(1.05);
+}
+
+.edit-btn {
+    background: #515fdc;
+    color: $white;
+}
+
+.edit-btn:hover {
+    background: #3f48b1;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background: #ff5050;
+    color: $primary-dark;
+}
+
+.backlist-btn, .logout-btn {
+    background: #ff0000;
+    color: $primary-dark;
+}
+
+.logout-btn:hover {
+    transform: scale(1.05);
+}
+
+.like-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.heart-svg {
+    width: 24px;
+    height: 24px;
+    path {
+        fill: #aaa;
+        transition: fill 0.3s;
+    }
+
+    &:hover path {
+        fill: #ff0000;
+    }
+}

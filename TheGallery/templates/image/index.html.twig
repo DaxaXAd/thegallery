@@ -1,107 +1,134 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<header>
-			
-				<div class="header_image">
-				
-					<nav class="top-bar">
+	<header>
 
-						<div class="top-bar_item">
-							<div class="logo-gallery">
-								<a href="{{ path('app_post_index') }}" aria-label="home">
-									<svg width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-										<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-										<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-										<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-									</svg>
-									<span>The Gallery</span>
-								</a>
-								
-							</div>
-							<div class="top-bar_menu">
-                                <a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
-                                <a href="{{ path('app_post_index') }}" class="login-btn button" aria-label="home">Home</a>
-								<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
-							</div>
-						</div>
+		<div class="header_image">
 
-					</nav>
-					<div class="login-container">	
-					<div>
-								<svg class="login-logo" width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-									<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-									<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-									<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-								</svg>
-							</div>
-						<h1 class="login-h1">Gallery</h1>
-						
+			<nav class="top-bar">
+
+				<div class="top-bar_item">
+					<div class="logo-gallery">
+						<a href="{{ path('app_post_index') }}" aria-label="home">
+							<svg width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+								<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+								<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+								<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+							</svg>
+						</a>
+
+					</div>
+					<div class="top-bar_menu">
+						<a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
+						<a href="{{ path('app_post_index') }}" class="login-btn button" aria-label="home">Home</a>
+						<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
 					</div>
 				</div>
-				
-			
+
+			</nav>
+			<div class="login-container">
+				<div>
+					<svg class="login-logo" width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+						<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+						<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+						<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+					</svg>
+				</div>
+				<h1 class="login-h1">Gallery</h1>
+
+			</div>
+		</div>
+
+
 	</header>
-<main>
-	<div class="container">
+	<main>
+		<div class="container">
 			<div class="row">
 				{% for image in images %}
-				
 					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
 						<div class="posts-lists">
 							<div class="container-card gapper">
-								<div class="card-author">
-									<h2><a href="{{ path('app_image_show', {'id': image.id}) }}">{{ image.title }}</a></h2>
-									
-									{% if image.id %}
+								<div
+									class="card-author">
+									<div class="author">
+									<!-- Titre de l'image -->
+										<h2>
+											<a href="{{ path('app_image_show', {'id': image.id}) }}">
+												{{ image.title }}
+											</a>
+										</h2>
+									</div>
+									<!-- Aperçu si image.path existe -->
+									{% if image.path %}
 										<div class="preview-img">
 											<a href="{{ path('app_image_show', {'id': image.id}) }}">
 												<img src="{{ asset(image.path) }}" alt="{{ image.title }}">
 											</a>
 										</div>
 									{% endif %}
+
+									<!-- Tag éventuel (idTag) -->
 									<div class="tag-input-select">
 										<div class="overlap-group">
 											{% if image.idTag %}
-												
-													<span class="tag-label badge bg-info text-dark">{{ image.idTag.nameTag }}</span>
-												
+												<span class="tag-label badge bg-info text-dark">
+													{{ image.idTag.nameTag }}
+												</span>
 											{% endif %}
 										</div>
 									</div>
-							
-									{% if image.post %}
-									<form action="{{ path('app_like', { 'id': image.post.id }) }}" method="POST" class="like-form" style="display: inline-block;">
-									<!-- Le bouton est l'icône, stylisée comme tu veux -->
-										<button type="submit" class="like-button pixelarticons-heart like stop-scroll" post-like="{{ image.id }}">
-											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="heart-svg">
-											<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-											</svg>
-										</button>
-										<span class="like-count">{{ likeCount }}</span>
-									</form>
-									{% endif %}
-									
-									<div>
-									{% if app.user == image.idUser %}
-										<a href="{{ path('app_image_edit', {'id': image.id}) }}" class="edit-btn">Edit</a>
-										{{ include('image/_delete_form.html.twig', {'image': image}) }}
-									{% endif %}
-									
-								</div>
-							</div>
-						</div>
-					</div>
-				{% else %}
-					<p>No posts found.</p>
-				{% endfor %}
-			</div> {# close row #}
-		</div> {# close container #}
-	<a href="{{ path('app_image_new') }}" class="create-new-link">Create new</a>
-</main>
 
+									<!-- Si l'image est liée à un post, on affiche le bouton "like" -->
+									{% if image.post %}
+										<form action="{{ path('app_like', { 'id': image.post.id }) }}" method="POST" class="like-form" style="display: inline-block;">
+											<button type="submit" class="like-button pixelarticons-heart like stop-scroll" aria-label="like this image">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="heart-svg">
+													<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5
+													                                                         -1.935 0-3.597 1.126-4.312 2.733
+													                                                         -.715-1.607-2.377-2.733-4.313-2.733
+													                                                         C5.1 3.75 3 5.765 3 8.25
+													                                                         c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+												</svg>
+											</button>
+											<!-- likeCount peut être un simple entier si tu n'as pas un tableau par ID -->
+											<span class="like-count">{{ likeCount }}</span>
+										</form>
+									{% endif %}
+
+									<!-- Actions (Edit, Delete) si l'utilisateur connecté est le propriétaire de l'image -->
+									<div class="post-actions">
+										{% if app.user == image.idUser %}
+											<a href="{{ path('app_image_edit', {'id': image.id}) }}" class="edit-btn">
+												Edit
+											</a>
+											{{ include('image/_delete_form.html.twig', {'image': image}) }}
+										{% endif %}
+									</div>
+								</div>
+								<!-- /card-author -->
+							</div>
+							<!-- /container-card -->
+						</div>
+						<!-- /posts-lists -->
+					</div>
+					<!-- /col -->
+				{% else %}
+					<p>No images found.</p>
+				{% endfor %}
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+
+		<!-- Bouton pour ajouter une nouvelle image -->
+		<div class="text-center mt-4">
+			<a href="{{ path('app_image_new') }}" class="create-new-link btn-submit">
+				Create new
+			</a>
+		</div>
+	</main>
 
 
 {% endblock %}
