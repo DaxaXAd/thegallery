@@ -11,7 +11,7 @@ class TagFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // Liste des tags que tu souhaites précharger
-        $tagNames = ['Fantaisie', 'ScienceFiction', 'Portrait', 'Abstrait', 'Médieval', 'Illustration', 'Dessin', 'ConceptArt', 'Aquarelle', 'Graphisme', 'Sketch', 'Horreur', 'Design', 'BD', 'Graphite', 'Calligraphie', 'Peinture', 'Photographie', 'PixelArt', 'FanArt', '3D', 'ComicBookArt', 'Manga'];
+        $tagNames = ['Fantaisie', 'ScienceFiction', 'Portrait', 'Abstrait', 'Médieval', 'Illustration', 'Dessin', 'ConceptArt', 'Aquarelle', 'Graphisme', 'Sketch', 'Horreur', 'Design', 'BD', 'Graphite', 'Calligraphie', 'Peinture', 'Photographie', 'PixelArt', 'FanArt', '3D', 'ComicBookArt', 'Manga', 'WebDesign', 'Nature'];
 
         foreach ($tagNames as $name) {
             $tag = new Tag();

@@ -173,7 +173,7 @@ final class UserController extends AbstractController
     public function delete(Request $request, string $slug, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $userRepository->findOneBy(['slug' => $slug]);
-        if (!$this->isCsrfTokenValid('delete' . $user->getSlug(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getSlug(), $request->getPayload()->getString('_token'))) {
 
 
             if ($user->getProfilePic()) {
@@ -192,7 +192,7 @@ final class UserController extends AbstractController
             return $this->redirectToRoute('app_logout');
         }
 
-        return $this->redirectToRoute('home_page', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
     }
 
 
