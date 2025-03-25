@@ -36,24 +36,42 @@
 
     </header>
 <main>
-    <h1>{{ user.username }}'s Posts</h1>
+    <div class="profile-container">
+            <h1 class="profile-title">{{ user.username }}'s Profile</h1>
 
-    <div class="posts-list">
-        {% for post in posts %}
-        <div class="container-card gapper">
-            <div class="card-author">
-                <div class="author">
-                    <h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a></h2>
-                    <img class="underline" src=""/>
+            <div class="profile-card">
+                <img class="profile-pic" src="{{ asset(user.profilePic) }}" alt="Photo de profil de {{ user.username }}">
+
+                <div class="profile-info">
+                    {% if user.bio %}
+                        <p><strong>Bio:</strong> {{ user.bio }}</p>
+                    {% endif %}
+
+                    {% if user.location %}
+                        <p><strong>Location:</strong> {{ user.location }}</p>
+                    {% endif %}
                 </div>
-                {% if post.idImg %}
-                    <div class="preview-img">
-                        <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
-                    </div>
-                {% endif %}
             </div>
-        </div>
-        {% endfor %}
+
+            <h2 class="profile-subtitle">{{ user.username }}'s Posts</h2>
+
+            <div class="posts-list">
+                {% for post in posts %}
+                <div class="container-card gapper">
+                    <div class="card-author">
+                        <div class="author">
+                            <h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a></h2>
+                            <img class="underline" src=""/>
+                        </div>
+                        {% if post.idImg %}
+                            <div class="preview-img">
+                                <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
     </div>
-    </main>
+</main>
 {% endblock %}

@@ -23,8 +23,8 @@ class UserCrudController extends AbstractCrudController
             TextField::new('username', "nom utilisateur"),
             TextField::new('email'),
             // Par exemple, un champ pour la bio
-            TextEditorField::new('bio')->hideOnIndex(),
-            TextEditorField::new('location')->hideOnIndex(),
+            TextField::new('bio')->hideOnIndex(),
+            TextField::new('location')->hideOnIndex(),
         ];
     }
     

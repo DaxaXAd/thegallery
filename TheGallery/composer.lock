@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "521cc56f9b88e1eba8b88f58b09a4321",
+    "content-hash": "5fceb39fb09a4a453d303f1dd8141988",
     "packages": [
         {
             "name": "antiseptikk/wordpress-encore",

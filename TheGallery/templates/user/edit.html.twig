@@ -7,13 +7,8 @@
     {% if app.user == user %}
         <h1>Edit User</h1>
 
-        {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('user/_form.html.twig') }}
 
-        {# <a href="{{ path('app_user_show' , {'slug': user.slug}) }}" class="backlist-btn">back to list</a>
-
-        {{ include('user/_delete_form.html.twig') }} #}
-    {% else %}
-        <h1>Access Denied</h1>
     {% endif %}
 </main>
 {% endblock %}

@@ -73,7 +73,7 @@ final class ImageControllerTest extends WebTestCase
         $this->manager->persist($fixture);
         $this->manager->flush();
 
-        $this->client->request('GET', sprintf('%s%s', $this->path, $fixture->getId()));
+        $this->client->request('GET', sprintf('%s/%s', $this->path, $fixture->getId()));
 
         self::assertResponseStatusCodeSame(200);
         self::assertPageTitleContains('Image');

@@ -1,10 +1,4 @@
-
-{% extends 'base.html.twig' %}
-
-{% block title %}Posts List{% endblock %}
-
-{% block body %}
-    <header>
+<header>
         <div class="header_image">
             <nav class="top-bar navbar navbar-expand-lg">
                 <div class="top-bar_item container-fluid">
@@ -46,64 +40,7 @@
                         <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
                     </svg>
                 </div>
-                <h1 class="post-h1">Posts</h1>
+                <h1 class="post-h1">New Post</h1>
             </div>
         </div>    
 </header>
-<main>
-		<div class="container">
-			<div class="row">
-				{% for post in posts %}
-					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-						<div class="posts-lists">
-							<div class="container-card gapper">
-								<div class="card-author">
-									<div class="author">
-										<h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a></h2>
-										<h3> by <a href="{{ path('app_user_profile', {'slug': post.idUser.slug}) }}">{{ post.idUser.username }}</a></h3>
-										<img class="underline" alt="" src=""/>
-									</div>
-									
-									{% if post.idImg %}
-										<div class="preview-img">
-											<a href="{{ path('app_post_show', {'id': post.id}) }}">
-												<img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }} by {{ post.idUser.username }}">
-											</a>
-										</div>
-									{% endif %}
-									<div class="tag-input-select">
-										<div class="overlap-group">
-											{% if post.tags is not empty %}
-												{% for tag in post.tags %}
-													<span class="tag-label badge bg-info text-dark">{{ tag.nameTag }}</span>
-												{% endfor %}
-											{% endif %}
-										</div>
-									</div>
-									<form action="{{ path('app_like', { 'id': post.id }) }}" method="POST" class="like-form" style="display: inline-block;">
-									<!-- Le bouton est l'icône, stylisée comme tu veux -->
-										<button type="submit" class="like-button pixelarticons-heart like stop-scroll" post-like="{{ post.id }} alt="Aimer le post">
-											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="heart-svg">
-											<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-											</svg>
-										</button>
-										<span class="like-count">{{ likeCount[post.id] }}</span>
-									</form>
-									
-									<div class="post-actions">
-									{% if app.user == post.idUser %}
-										<a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn">Edit</a>
-										{{ include('post/_delete_form.html.twig', {'post': post}) }}
-									{% endif %}
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				{% else %}
-					<p>No posts found.</p>
-				{% endfor %}
-			</div> {# close row #}
-		</div> {# close container #}
-</main>
-{% endblock %}

@@ -20,6 +20,7 @@ use App\Repository\LikeRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 #[Route('/user')]
 final class UserController extends AbstractController
@@ -117,13 +118,13 @@ final class UserController extends AbstractController
 
     #[Route('/{slug}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response
-    {   
+    {
         $user = $userRepository->findOneBy(['slug' => $slug]);
-        // $user = $userRepository->find($id);
-
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
+        
+
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -167,13 +168,14 @@ final class UserController extends AbstractController
 
 
 
+
     #[Route('/{slug}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, string $slug, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $userRepository->findOneBy(['slug' => $slug]);
-        if ($this->isCsrfTokenValid('delete' . $user->getSlug(), $request->getPayload()->getString('_token'))) {
+        if (!$this->isCsrfTokenValid('delete' . $user->getSlug(), $request->getPayload()->getString('_token'))) {
 
-            
+
             if ($user->getProfilePic()) {
                 $profilePicturePath = $this->getParameter('kernel.project_dir') . '/public' . $user->getProfilePic();
                 if (file_exists($profilePicturePath)) {
@@ -196,20 +198,20 @@ final class UserController extends AbstractController
 
 
 
-    #[Route('/profile/{slug}', name: 'app_profile', methods: ['GET'])]
+    #[Route('/profile/{slug}', name: 'app_user_profile', methods: ['GET'])]
     public function profile(string $slug, UserRepository $userRepository, ImageRepository $imageRepository, ManagerRegistry $doctrine): Response
     {
         $user = $userRepository->findOneBy(['slug' => $slug]);
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
-    
+
         // Récupération des images via la relation OneToMany
         $images = $user->getImages();
-    
+
         // Récupération des posts via la relation OneToMany
         $posts = $user->getPosts();
-    
+
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'posts' => $posts,

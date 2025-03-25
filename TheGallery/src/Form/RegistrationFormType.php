@@ -24,7 +24,8 @@ class RegistrationFormType extends AbstractType
                 'required' => false
             ])
             ->add('location', null, [
-                'required' => false])
+                'required' => false
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -57,6 +58,10 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            // assurez-vous que cela correspond à ce qui est attendu
+            'csrf_token_id' => 'registration_form',
         ]);
     }
 }
