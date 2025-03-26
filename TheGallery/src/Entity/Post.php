@@ -20,7 +20,7 @@ class Post
     
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\OneToOne(inversedBy: 'post', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'post', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Image $id_img = null;
 

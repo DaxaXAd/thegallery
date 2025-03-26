@@ -1,48 +1,52 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<header>
+<header>
+        <div class="header_image">
+            <nav class="top-bar navbar navbar-expand-lg">
+                <div class="top-bar_item container-fluid">
+                    <div class="logo-gallery navbar-brand">
+                        <a href="{{ path('app_post_index') }}" aria-label="home">
+                            <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                                <path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                                <path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                                <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                            </svg>
+                        </a>
+                    </div>
 
-		<div class="header_image">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavMenu" aria-controls="topNavMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-			<nav class="top-bar">
-
-				<div class="top-bar_item">
-					<div class="logo-gallery">
-						<a href="{{ path('app_post_index') }}" aria-label="home">
-							<svg width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-								<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-								<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-								<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-							</svg>
-						</a>
-
-					</div>
-					<div class="top-bar_menu">
-						<a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
-						<a href="{{ path('app_post_index') }}" class="login-btn button" aria-label="home">Home</a>
-						<a href="{{ path('app_logout') }}" class="logout-btn button" aria-label="logout">Logout</a>
-					</div>
-				</div>
-
-			</nav>
-			<div class="login-container">
-				<div>
-					<svg class="login-logo" width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-						<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-						<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-						<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-					</svg>
-				</div>
-				<h1 class="login-h1">Gallery</h1>
-
-			</div>
-		</div>
-
-
-	</header>
+                    <div class="navbar-collapse collapse top-bar_menu" id="topNavMenu">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if app.user %}
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_image_new') }}">Créer</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_image_index') }}">Gallerie</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_profile', {'slug': app.user.slug}) }}">Compte</a></li>
+                        {% endif %}
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link logout-btn" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        </ul>       
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="post-container">
+                <div>
+                    <svg class="post-logo" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                        <path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                        <path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                        <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                    </svg>
+                </div>
+                <h1 class="post-h1">Gallerie</h1>
+            </div>
+        </div>
+</header>
 	<main>
 		<div class="container">
 			<div class="row">

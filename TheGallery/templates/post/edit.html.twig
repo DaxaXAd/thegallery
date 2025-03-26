@@ -1,10 +1,56 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Edit Post{% endblock %}
 
 {% block body %}
+<header>
+        <div class="header_image">
+            <nav class="top-bar navbar navbar-expand-lg">
+                <div class="top-bar_item container-fluid">
+                    <div class="logo-gallery navbar-brand">
+                        <a href="{{ path('app_post_index') }}" aria-label="home">
+                            <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                                <path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                                <path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                                <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavMenu" aria-controls="topNavMenu" aria-expanded="false" aria-label="Bouton navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="navbar-collapse collapse top-bar_menu" id="topNavMenu">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if app.user %}
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_post_new') }}">Créer</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_image_index') }}">Gallerie</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_profile', {'slug': app.user.slug}) }}">Compte</a></li>
+                        {% endif %}
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link logout-btn" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        </ul>       
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="post-container">
+                <div>
+                    <svg class="post-logo" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                        <path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                        <path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                        <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+                    </svg>
+                </div>
+                <h1 class="post-h1">Edition Post</h1>
+            </div>
+        </div>
+</header>
 <main>
-    <h1>Edit Post</h1>
+    
 
     {{ include('post/_form.html.twig', {'button_label': 'Update'}) }}
 
@@ -12,4 +58,117 @@
 
     {{ include('post/_delete_form.html.twig') }}
 </main>
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block body %}
+<header>
+    <div class="header_image">
+        <nav class="top-bar">
+            <div class="top-bar_item">
+                <div class="logo-gallery">
+                    <a href="{{ path('app_post_index') }}" aria-label="home">
+                        {# SVG du logo ici #}
+                    </a>
+                </div>
+                <div class="top-bar_menu">
+                    {% if app.user %}
+                        <a href="{{ path('app_user_profile', {'slug': app.user.slug}) }}" class="button-global">Compte</a>
+                        <a href="{{ path('app_post_new') }}" class="button-global">Créer</a>
+                        <a href="{{ path('app_image_index') }}" class="button-global">Gallerie</a>
+                    {% endif %}
+                    <a href="{{ path('app_contact_new') }}" class="button-global">Contact</a>
+                    <a href="{{ path('app_logout') }}" class="logout-btn">Déconnexion</a>
+                </div>
+            </div>
+        </nav>
+        <div class="post-container">
+            <div>
+                <svg class="post-logo" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {# Ton SVG ici si tu veux #}
+                </svg>
+            </div>
+            <h1 class="post-h1">Édition</h1>
+        </div>
+    </div>
+</header>
+
+<main class="container mt-5">
+    {% if app.user %}
+        <div class="form_container">
+            <h1>Modifier le Post</h1>
+
+            <div class="instructions">
+                <p><strong>Étape 1 :</strong> Modifiez ou ajoutez une nouvelle image.</p>
+                <p><strong>Étape 2 :</strong> Changez le titre ou les tags si nécessaire.</p>
+            </div>
+
+            {{ form_start(form, { 'attr': {'class': 'post-form'} }) }}
+
+                {{ form_row(form.addImage) }}
+
+                <div class="mb-3">
+                    <label class="form-label">Image actuelle</label>
+                    <div id="selectedImagePreview" class="selected-image-preview">
+                        <img id="previewImg" alt="Selected image preview" class="preview-img">
+                    </div>
+                    <button type="button" class="btn-submit" data-bs-toggle="modal" data-bs-target="#imageModal">
+                        Choisir une image
+                    </button>
+                </div>
+
+                <div class="mb-3">
+                    {{ form_row(form.title, {'attr': {'class': 'form-control', 'id': 'post_title'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_row(form.tags, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <input type="hidden" id="selectedImageId" name="selectedImageId" value="">
+
+                <button type="submit" class="btn-submit">Mettre à jour</button>
+            {{ form_end(form) }}
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_post_index') }}" class="backlist-btn" aria-label="cancel">Retour à la liste</a>
+        </div>
+
+        {{ include('post/_delete_form.html.twig') }}
+    {% else %}
+        <h1>Accès refusé</h1>
+        <p>Vous devez être connecté pour modifier un post.</p>
+    {% endif %}
+</main>
+
+{# Modale image (copiée depuis new.html.twig) #}
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Sélectionner une image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <div class="image-grid">
+            {% for image in images %}
+                <img src="{{ asset(image.path) }}"
+                     data-id="{{ image.id }}"
+                     alt="{{ image.title }}"
+                     class="selectable-image">
+            {% else %}
+                <p>Aucune image disponible.</p>
+            {% endfor %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-submit" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

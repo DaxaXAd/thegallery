@@ -14,9 +14,13 @@ class TagFixtures extends Fixture
         $tagNames = ['Fantaisie', 'ScienceFiction', 'Portrait', 'Abstrait', 'Médieval', 'Illustration', 'Dessin', 'ConceptArt', 'Aquarelle', 'Graphisme', 'Sketch', 'Horreur', 'Design', 'BD', 'Graphite', 'Calligraphie', 'Peinture', 'Photographie', 'PixelArt', 'FanArt', '3D', 'ComicBookArt', 'Manga', 'WebDesign', 'Nature'];
 
         foreach ($tagNames as $name) {
+            $existing = $manager->getRepository(Tag::class)->findOneBy(['nameTag' => $name]);
+
+            if (!$existing){
             $tag = new Tag();
             $tag->setNameTag($name);
             $manager->persist($tag);
+            }
         }
 
         // Envoie toutes les données dans la base

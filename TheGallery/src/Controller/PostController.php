@@ -155,32 +155,43 @@ final class PostController extends AbstractController
 
 
     #[Route('/{id}/edit', name: 'app_post_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Post $post, EntityManagerInterface $entityManager, ImageRepository $imageRepository): Response
     {
+        
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $selectedImageId = $request->request->get('selectedImageId');
+            if ($selectedImageId) {
+                $image = $imageRepository->find($selectedImageId);
+                if ($image) {
+                    $post->setIdImg($image);
+                }
+            }
+            $post->setCreatedAt(new \DateTimeImmutable());
             $entityManager->flush();
 
             return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
         }
+        $images = $imageRepository->findBy(['id_user' => $this->getUser()]);
 
         return $this->render('post/edit.html.twig', [
             'post' => $post,
             'form' => $form,
+            'images' => $images,
         ]);
     }
 
 
 
 
-    #[Route('/{id}', name: 'app_post_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_post_delete', methods: ['POST'])]
     public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($post);
-            $entityManager->remove($post->getidImg());
+            // $entityManager->remove($post->getidImg());
             $entityManager->flush();
         }
 

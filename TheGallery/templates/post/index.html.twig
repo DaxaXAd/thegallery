@@ -61,7 +61,7 @@
 									<div class="author">
 										<h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a></h2>
 										<h3> by <a href="{{ path('app_user_profile', {'slug': post.idUser.slug}) }}">{{ post.idUser.username }}</a></h3>
-										<img class="underline" alt="" src=""/>
+										<img class="underline" aria-label="décoration" src=""/>
 									</div>
 									
 									{% if post.idImg %}
@@ -82,7 +82,7 @@
 									</div>
 									<form action="{{ path('app_like', { 'id': post.id }) }}" method="POST" class="like-form" style="display: inline-block;">
 									<!-- Le bouton est l'icône, stylisée comme tu veux -->
-										<button type="submit" class="like-button pixelarticons-heart like stop-scroll" post-like="{{ post.id }} alt="Aimer le post">
+										<button type="submit" class="like-button pixelarticons-heart like stop-scroll" post-like="{{ post.id }}" aria-label="Aimer le post">
 											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="heart-svg">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
 											</svg>
@@ -92,7 +92,7 @@
 									
 									<div class="post-actions">
 									{% if app.user == post.idUser %}
-										<a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn">Edit</a>
+										<a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn" aria-label="editer les posts">Editer</a>
 										{{ include('post/_delete_form.html.twig', {'post': post}) }}
 									{% endif %}
 									</div>

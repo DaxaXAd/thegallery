@@ -123,7 +123,7 @@ final class UserController extends AbstractController
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
-        
+
 
 
         $form = $this->createForm(UserType::class, $user);
@@ -199,7 +199,7 @@ final class UserController extends AbstractController
 
 
     #[Route('/profile/{slug}', name: 'app_user_profile', methods: ['GET'])]
-    public function profile(string $slug, UserRepository $userRepository, ImageRepository $imageRepository, ManagerRegistry $doctrine): Response
+    public function profile(string $slug, UserRepository $userRepository, ImageRepository $imageRepository, LikeRepository $likeRepository): Response
     {
         $user = $userRepository->findOneBy(['slug' => $slug]);
         if (!$user) {
@@ -212,10 +212,18 @@ final class UserController extends AbstractController
         // Récupération des posts via la relation OneToMany
         $posts = $user->getPosts();
 
+        $likeCounts = [];
+        foreach ($images as $image) {
+            if ($image->getPost()) {
+                $likeCounts[$image->getPost()->getId()] = $likeRepository->count(['post' => $image->getPost()]);
+            }
+        }
+
         return $this->render('user/profile.html.twig', [
             'user' => $user,
             'posts' => $posts,
             'images' => $images,
+            'likeCounts' => $likeCounts,
         ]);
     }
 }
