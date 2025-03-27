@@ -28,6 +28,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => 'En cochant cette case, vous acceptez que vos données entrées soit utilisés pour la connexion et la sécurité du compte. Vous pouvez à tout moment supprimer votre compte ou demander à le supprimer.',
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',

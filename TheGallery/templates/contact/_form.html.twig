@@ -22,5 +22,8 @@
         <button type="submit" class="btn-submit">
             {{ button_label|default('Envoyer') }}
         </button>
+        <div>
+            <a href="{{ path('app_post_index') }}" class="btn-submit btn-backlist">Accueil</a>
+        </div>
     {{ form_end(form) }}
 

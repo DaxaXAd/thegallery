@@ -34,7 +34,7 @@
                 </div>
             </nav>
             
-            <div class="post-container">
+            <div class="text-header">
                 <div>
                     <svg class="post-logo" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
@@ -89,11 +89,7 @@
 										<form action="{{ path('app_like', { 'id': image.post.id }) }}" method="POST" class="like-form" style="display: inline-block;">
 											<button type="submit" class="like-button pixelarticons-heart like stop-scroll" aria-label="like this image">
 												<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="heart-svg">
-													<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5
-													                                                         -1.935 0-3.597 1.126-4.312 2.733
-													                                                         -.715-1.607-2.377-2.733-4.313-2.733
-													                                                         C5.1 3.75 3 5.765 3 8.25
-													                                                         c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+													<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733 C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
 												</svg>
 											</button>
 											<!-- likeCount peut être un simple entier si tu n'as pas un tableau par ID -->
@@ -127,7 +123,7 @@
 		<!-- /container -->
 
 		<!-- Bouton pour ajouter une nouvelle image -->
-		<div class="text-center mt-4">
+		<div class="text-center mt-4 mb-4">
 			<a href="{{ path('app_image_new') }}" class="create-new-link btn-submit">
 				Create new
 			</a>

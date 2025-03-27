@@ -36,11 +36,11 @@
     {{ form_widget(form.password, {'attr': {'class': 'input-edit', 'aria-label': 'mot de passe'}}) }}
 </div>
 
-<button type="submit" class="button edit-btn">
+<button type="submit" class="button edit-btn" aria-label="Enregistrer modification">
     Enregistrer
 </button>
 
-    <a href="{{ path('app_user_show' , {'slug': user.slug}) }}" class="backlist-btn">back to list</a>
+    <a href="{{ path('app_user_profile' , {'slug': user.slug}) }}" class="backlist-btn" aria-label="retour au compte">Profile</a>
 
 
  

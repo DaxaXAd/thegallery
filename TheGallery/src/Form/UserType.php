@@ -61,7 +61,7 @@ class UserType extends AbstractType
             'data_class' => User::class,
             // 'csrf_protection' => true,
             'csrf_field_name' => '_token',
-            // ✅ Tu peux spécifier un token ID personnalisé, mais ce n’est pas obligatoire :
+            // Tu peux spécifier un token ID personnalisé, mais ce n’est pas obligatoire :
             'csrf_token_id'   => 'edit_user', // utilisé uniquement côté serveur pour vérifier que c’est bien ce formulaire
         ]);
     }
