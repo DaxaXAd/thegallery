@@ -20,12 +20,11 @@
                     <div class="navbar-collapse collapse top-bar_menu" id="topNavMenu">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         {% if app.user %}
-                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_post_new') }}">Créer</a></li>
-                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_image_index') }}">Gallerie</a></li>
-                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_profile', {'slug': app.user.slug}) }}">Compte</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_post_new') }}" aria-label="créer un post">Créer</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_profile', {'slug': app.user.slug}) }}" aria-label="accès compte">Compte</a></li>
                         {% endif %}
-                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link logout-btn" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}" aria-label="contact admin">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link  button-global " href="{{ path('app_logout') }}" aria-label="Deconnexion">Déconnexion</a></li>
                         </ul>       
                     </div>
                 </div>
@@ -40,7 +39,7 @@
                         <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
                     </svg>
                 </div>
-                <h1 class="post-h1">New Post</h1>
+                <h1 class="post-h1">{{ image.title }}</h1>
             </div>
         </div>    
 </header>

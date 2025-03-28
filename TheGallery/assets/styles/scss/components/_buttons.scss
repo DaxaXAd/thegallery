@@ -1,4 +1,4 @@
-.button-global, .sign-in, .register-btn, .login-btn, .signup-btn, .edit-btn, .btn-danger, .save-btn, .backlist-btn, .logout-btn {
+.button-global, .sign-in, .register-btn, .login-btn, .signup-btn, .edit-btn, .btn-danger, .save-btn, .backlist-btn, .  {
     display: flex;
     padding: 4px 12px;
     justify-content: center;
@@ -38,12 +38,12 @@
     color: $primary-dark;
 }
 
-.backlist-btn, .logout-btn {
+.backlist-btn, .  {
     background: #ff0000;
     color: $primary-dark;
 }
 
-.logout-btn:hover {
+. :hover {
     transform: scale(1.05);
 }
 

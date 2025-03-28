@@ -3,6 +3,7 @@
 {% block title %}Nouveau Contact{% endblock %}
 
 {% block body %}
+<header>
 <nav class="top-bar navbar navbar-expand-lg">
                 <div class="top-bar_item container-fluid">
                     <div class="logo-gallery navbar-brand">
@@ -25,7 +26,7 @@
                         {% if app.user %}
                             <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_post_index') }}">Accueil</a></li>
                             
-                            <li class="nav-item"><a class="nav-link logout-btn" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                            <li class="nav-item"><a class="nav-link  button-global " href="{{ path('app_logout') }}">Déconnexion</a></li>
                         {% endif %}
                             
                         {% if not app.user %}
@@ -36,6 +37,7 @@
                     </div>
                 </div>
             </nav>
+</header>
 <main>
     <div class="form-wrapper">
 

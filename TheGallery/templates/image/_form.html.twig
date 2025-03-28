@@ -1,5 +1,6 @@
 
-{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+{{ form_start(form, {'attr': {'class': 'form-container' ,'enctype': 'multipart/form-data'}}) }}
     {{ form_widget(form) }}
     <button type="submit" class="btn btn-submit" aria-label="Valider l'image">Add Image</button>
 {{ form_end(form) }}
+{{ include('image/_delete_form.html.twig') }}

@@ -1,9 +1,10 @@
-{{ form_start(form, { 'attr': {'class': 'form_container', 'enctype': 'multipart/form-data' }}) }}
+<div class="form-edit">
+{{ form_start(form, { 'attr': {'enctype': 'multipart/form-data' }}) }}
 
-<div class="form_group">
+<div class="form_group text-center">
         <div class="pp-edit">
             <img id="profilePicturePreview" class="img-edit" src="{{ asset(user.profilePic) }}" alt="Photo de profil">
-            {{ form_widget(form.profile_pic, {'attr': {'id': 'profilePictureFile', 'class': 'hidden-input'}}) }}
+            {{ form_widget(form.profile_pic, {'attr': {'id': 'profilePictureFile', 'class': 'form-control hidden-input'}}) }}
             <label for="profilePictureFile" class="camera-btn">
                 <svg class="camera-icon" id="_1-DSLR_Camera" data-name="1-DSLR Camera" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32">
                     <title>1-DSLR Camera</title>
@@ -16,34 +17,36 @@
         </div>
 </div>
 
-<div class="form_input">
+<div class="form-group">
     {{ form_label(form.username) }}
-    {{ form_widget(form.username, {'attr': {'class': 'input-edit', 'placeholder': ' ', 'aria-label': 'nom utilisateur'}}) }}
+    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': ' ', 'aria-label': 'nom utilisateur'}}) }}
 </div>
 
-<div class="form_input">
+<div class="form-group">
     {{ form_label(form.email) }}
-    {{ form_widget(form.email, {'attr': {'class': 'input-edit', 'placeholder': ' ', 'aria-label': 'adresse email'}}) }}
+    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': ' ', 'aria-label': 'adresse email'}}) }}
 </div>
 
-<div class="form_input">
+<div class="form-group">
     {{ form_label(form.bio) }}
-    {{ form_widget(form.bio, {'attr': {'class': 'input-edit', 'placeholder': ' ', 'aria-label': 'biographie'}}) }}
+    {{ form_widget(form.bio, {'attr': {'class': 'form-control', 'placeholder': ' ', 'aria-label': 'biographie'}}) }}
 </div>
 
-<div class="form_input">
+<div class="form-group">
     {{ form_label(form.password) }}
-    {{ form_widget(form.password, {'attr': {'class': 'input-edit', 'aria-label': 'mot de passe'}}) }}
+    {{ form_widget(form.password, {'attr': {'class': 'form-control', 'aria-label': 'mot de passe'}}) }}
 </div>
 
-<button type="submit" class="button edit-btn" aria-label="Enregistrer modification">
-    Enregistrer
-</button>
+<div class="form-group">
+    <button type="submit" class="button-global btn" aria-label="Enregistrer modification">
+        Enregistrer
+    </button>
 
-    <a href="{{ path('app_user_profile' , {'slug': user.slug}) }}" class="backlist-btn" aria-label="retour au compte">Profile</a>
-
+    <a href="{{ path('app_user_profile' , {'slug': user.slug}) }}" class="button-global" aria-label="retour au compte">Profile</a>
+</div>
 
  
 
 {{ form_end(form) }}
    {{ include('user/_delete_form.html.twig') }}
+   </div>

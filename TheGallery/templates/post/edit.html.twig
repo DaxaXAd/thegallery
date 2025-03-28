@@ -30,7 +30,7 @@
                             <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_profile', {'slug': app.user.slug}) }}">Compte</a></li>
                         {% endif %}
                             <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link logout-btn" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                            <li class="nav-item"><a class="nav-link  button-global " href="{{ path('app_logout') }}">Déconnexion</a></li>
                         </ul>       
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         <a href="{{ path('app_image_index') }}" class="button-global">Gallerie</a>
                     {% endif %}
                     <a href="{{ path('app_contact_new') }}" class="button-global">Contact</a>
-                    <a href="{{ path('app_logout') }}" class="logout-btn">Déconnexion</a>
+                    <a href="{{ path('app_logout') }}" class=" ">Déconnexion</a>
                 </div>
             </div>
         </nav>
