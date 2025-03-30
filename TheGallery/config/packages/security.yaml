@@ -24,7 +24,8 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 target: home
-
+                enable_csrf: true
+                
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -37,6 +38,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/contact/show, roles: ROLE_ADMIN }
         - { path: ^/contact/index, roles: ROLE_ADMIN }
+        - { path: ^/user/new, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/image, roles: ROLE_USER }
         - { path: ^/post, roles: ROLE_USER }

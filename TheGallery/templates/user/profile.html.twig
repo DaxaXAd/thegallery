@@ -27,11 +27,16 @@
                     <div class="navbar-collapse collapse top-bar_menu" id="topNavMenu">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         {% if app.user and app.user.id == user.id %}
-                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_post_new') }}">Créer</a></li>
-                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_edit', {'slug': app.user.slug}) }}">Paramètres</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_post_new') }}" aria-label="Créer un post">Créer</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_edit', {'slug': app.user.slug}) }}" aria-label="modifier compte">Paramètres</a></li>
                         {% endif %}
-                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link  button-global " href="{{ path('app_logout') }}">Déconnexion</a></li>
+                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}" aria-label="Contact admin">Contact</a></li>
+                            <li class="nav-item">
+                                <form action="{{ path('app_logout') }}" method="post" class="logout-form" aria-label="Deconnexion">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                                    <button type="submit" class="nav-link button-global" aria-label="Se déconnecter">Déconnexion</button>
+                                </form>
+                            </li>
                         </ul>       
                     </div>
                 </div>

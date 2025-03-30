@@ -768,11 +768,11 @@ gap: 20px;
 }
 
 .form-control {
-  width: 60%;
+  
   padding: 8px 12px;
-  border: 1px solid #444;
+  border: 1px solid #000000;
   border-radius: 4px;
-  background-color: #222;       /* Champ input sombre */
+  background-color: #ffffff;       /* Champ input sombre */
   color: #fff;                  /* Couleur de texte blanche */
   font-size: 14px;
 }

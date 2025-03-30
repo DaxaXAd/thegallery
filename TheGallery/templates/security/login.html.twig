@@ -78,10 +78,11 @@
 
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-			<button class="login-btn button-global" type="submit" aria-label="Se connecter">
-				Connexion
-			</button>
+			<div class="form-group">
+				<button class=" login-btn" type="submit" aria-label="Se connecter">
+					Connexion
+				</button>
+			</div>
 		</form>
 	{% else %}
 		<a href="{{ path('app_post_index') }}">Retour à l'accueil</a>
