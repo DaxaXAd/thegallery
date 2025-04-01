@@ -1071,3 +1071,168 @@ main {
   -webkit-text-stroke-width: 2px;
 }
 }
+
+
+/* ===== footer ===== */
+
+
+
+.footer {
+  background-color: var(--variable-collection-text-autumn);
+  color: var(--variable-collection-primary-white);
+  font-family: 'Lexend', sans-serif;
+  padding: 2rem 1rem;
+}
+
+.footer_copyright {
+  /* Ajuste si besoin */
+  font-family: "Lexend", Helvetica, sans-serif;
+  font-size: 14px;
+  color: #000;
+}
+
+.footer-content {
+  width: 100%;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-left,
+.footer-right_container,
+.footer-right_list,
+.footer-right_bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+  padding: 5px 10px;
+  border: 2px solid var(--variable-collection-primary-automn-variant);
+  background-color: var(--variable-collection-primary-dark);
+}
+
+
+.footer-right_list {
+  border: 2px solid var(--variable-collection-primary-automn-variant);
+  background-color: var(--variable-collection-primary-dark);
+}
+
+.footer-right_icon {
+  padding: 2px;
+  width: fit-content;
+  border-radius: 10px;
+  border: 2px solid var(--variable-collection-primary-dark);
+  background-color: var(--variable-collection-primary-automn-variant);
+}
+
+
+.footer-left p,
+.footer-right ul li {
+  margin: 0.3rem 0;
+}
+
+.footer-left p a {
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.footer-right ul {
+  padding-left: 0;
+  list-style: none;
+  
+}
+
+.footer-right_list ul li a {
+  text-decoration: none;
+  color: var(--variable-collection-primary-white);
+  transition: transform 0.2s;
+}
+
+.footer-right_list ul li a:hover {
+  transform: scale(1.1);
+}
+
+/* .footer a svg {
+  fill: #a5380a;
+  transition: transform 0.2s;
+}
+.footer a svg:hover {
+  transform: scale(1.1);
+} */
+
+.artstation-icon {
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  fill: #ffffff;
+}
+
+.artstation-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(0.8); /* effet visuel léger */
+}
+
+
+/* 📱 Responsive pour petits écrans */
+@media (max-width: 596px) {
+  .footer-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .footer-left,
+  .footer-right {
+      flex: none;
+      width: 100%;
+  }
+
+  .footer-right ul li {
+      margin: 0.5rem 0;
+  }
+}
+
+
+
+/* ====== cookies banner ======== */
+/* Style pour la bannière des cookies */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  z-index: 9999;
+  display: none; /* Cachée par défaut */
+  justify-content: center;
+  align-items: center;
+}
+
+.cookie-banner p {
+  margin: 0;
+}
+
+.cookie-banner a {
+  color: #ffb84d; /* Couleur automnale */
+  text-decoration: underline;
+}
+
+.cookie-banner button {
+  background-color: #A5380A; /* Couleur chaude automnale */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.cookie-banner button:hover {
+  background-color: #8c2e01; /* Couleur hover */
+}

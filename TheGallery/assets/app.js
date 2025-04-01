@@ -17,7 +17,7 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 //     fileInput.addEventListener('change', function (event) {
 //         const file = event.target.files[0];
-//         if (file) {
+//         if (file) { 
 //             const reader = new FileReader();
 //             reader.onload = function (e) {
 //                 previewImage.src = e.target.result;
@@ -27,49 +27,20 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 //     });
 // });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookies = document.getElementById('accept-cookies');
 
-//   document.addEventListener('DOMContentLoaded', function () {
-//     // API to not scroll automatically when reloading page
-//     if ('scrollRestoration' in history) {
-//         history.scrollRestoration = 'manual';
-//     }
+    if(!localStorage.getItem('cookiesAccepted')) {
+        cookieBanner.style.display = 'flex';// affiche la bannière
+    }
 
+    acceptCookies.addEventListener('click', function () {
+        localStorage.setItem('cookiesAccepted', 'true'); // sauvegarde les cookies dans le localStorage
+        cookieBanner.style.display = 'none'; // cache la bannière
+    });
+});
 
-//     const savedPos = sessionStorage.getItem('positionClick');
-//     if (savedPos !== null) {
-//         window.scrollTo(0, parseInt(savedPos, 10));
-//         sessionStorage.removeItem('positionClick'); // Optionnel : supprime après restauration
-//     }
-
-//     const likeButtons = document.querySelectorAll('.like-button');
-
-//     likeButtons.forEach(button => {
-//         button.addEventListener('click', function (event) {
-//              // Enregistre la position verticale du clic dans un tableau dans le sessionStorage
-//             // let positionClick = sessionStorage.getItem('positionClick');
-//             // if (positionClick) {
-//             //     positionClick = JSON.parse(positionClick);
-//             // } else {
-//             //     positionClick = [];
-//             // } 
-//             // // Ajoute la position verticale du clic
-//             // positionClick.push(event.pageY);
-//             sessionStorage.setItem('positionClick', window.scrollY);
-
-//             // Ajoute une classe CSS pour l’animation
-//             this.classList.add('animate-like');
-
-//             // Retire la classe après 0.5s (durée de l’animation)
-//             setTimeout(() => {
-//                 this.classList.remove('animate-like');
-//             }, 500);
-
-//             // Laisse le formulaire se soumettre normalement
-//             // => la page va se recharger, et le nouveau compteur
-//             //    sera affiché via Twig
-//         });
-//     });
-// });
 
 document.addEventListener('DOMContentLoaded', function () {
     // Désactive la restauration automatique du scroll (optionnel)
@@ -144,46 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-/* select/déselect pre-image */
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     const selectableImages = document.querySelectorAll('.selectable-image');
-//     const selectedImageIdInput = document.getElementById('selectedImageId');
-//     const previewContainer = document.getElementById('selectedImagePreview');
-//     const previewImg = document.getElementById('previewImg');
-
-//     selectableImages.forEach(img => {
-//         img.addEventListener('click', function () {
-            // Si on clique sur une image déjà sélectionnée,
-            // on la désélectionne (toggle)
-            // if (this.classList.contains('selected')) {
-            //     this.classList.remove('selected');
-            //     selectedImageIdInput.value = '';
-            //     previewImg.src = '';
-            //     previewContainer.style.display = 'none';
-            // } else {
-                // Sinon, on enlève la sélection sur les autres images
-                // selectableImages.forEach((i) => i.classList.remove('selected'));
-
-                // Puis on sélectionne celle-ci
-                // this.classList.add('selected');
-                // const imgId = this.getAttribute('data-id');
-                // const imgSrc = this.getAttribute('src');
-                // selectedImageIdInput.value = imgId;
-                // previewImg.src = imgSrc;
-                // previewContainer.style.display = 'block';
-                
-
-                //test
-                // const imgId = this.getAttribute('data-id');
-                // selectedImageIdInput.value = imgId;
-                // previewImg.src = this.src;
-                // previewContainer.style.display = 'block';
-                // end test
-//             }
-//         });
-//     });
-// });
 
 
 document.addEventListener('DOMContentLoaded', function () {
