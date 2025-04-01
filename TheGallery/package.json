@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "klaro": "^0.7.21",
     "tarteaucitronjs": "^1.19.0"
   }
 }

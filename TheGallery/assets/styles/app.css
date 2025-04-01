@@ -1,4 +1,10 @@
-
+#klaro {
+  position: fixed;
+  bottom: 20px;  /* Décale à 20px du bas de la page */
+  left: 50%;
+  transform: translateX(-50%);  /* Centre horizontalement */
+  z-index: 9999;  /* Assure-toi que le popup est au-dessus des autres éléments */
+}
 
   /* ---------------------
    VARIABLES GLOBALES
@@ -8,6 +14,7 @@
   --variable-collection-primary-purple: rgba(113, 16, 216, 1);
   --variable-collection-pers-green:     rgba(8, 165, 36, 1);
   --variable-collection-primary-automn: rgba(165, 56, 10, 1); /* Automne */
+  --variable-collection-primary-automn-variant: rgb(185, 61, 9); /* Automne */
   --variable-collection-white:          rgba(255, 255, 255, 1);
   --variable-collection-text-autumn:    rgba(202, 113, 12, 1);
   --variable-collection-autumn-back:    rgba(154, 100, 0, 0.58);
@@ -96,8 +103,9 @@ max-width: fit-content;
 .sign-in,
 .register-btn,
 .login-btn,
-.save-btn {
-  background: var(--variable-collection-primary-automn);
+.save-btn,
+.logout-btn {
+  background: var(--variable-collection-primary-automn-variant);
   color: var(--variable-collection-primary-dark);
 }
 
@@ -140,11 +148,6 @@ max-width: fit-content;
   background: #a12a02;
   color: #fff;
 }
-
-
-
-/* Bouton "logout" */
-
 
 
 
@@ -191,7 +194,7 @@ max-width: fit-content;
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.45), 
       rgba(0, 0, 0, 0.45)
-      ),url("images/header_automn.webm");
+      ),url("images/header_automn.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -205,6 +208,7 @@ max-width: fit-content;
   left: 0;
   display: inline-flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
   gap: 10px;
   background: rgba(0, 0, 0, 0.92);
@@ -214,9 +218,10 @@ max-width: fit-content;
 
 .top-bar .top-bar_item {
   display: flex;
+  flex-direction: row;
   width: 100%;
   height: 60px;
-  padding: 0 128px;
+  padding: 0 20px;
   justify-content: space-between;
   align-items: center;
 }
@@ -315,7 +320,7 @@ max-width: fit-content;
   max-width: 200px; /* ou la taille que tu souhaites */
   height: auto;
   object-fit: contain; /* optionnel, pour garder le ratio */
-  display: block; /* pour éviter d’éventuels espaces en inline */
+  /* display: block; */ /* pour éviter d’éventuels espaces en inline */
 }
 
 /* Tag example */
@@ -744,6 +749,10 @@ flex-direction: column;
 gap: 20px;
 }
 
+.login-form {
+  background-color: #1e1e1e;
+}
+
 @media (min-width: 768px) {
   .register-form {
       padding: 20px;
@@ -770,10 +779,10 @@ gap: 20px;
 .form-control {
   
   padding: 8px 12px;
-  border: 1px solid #000000;
+  border: 1px solid #ae4800;
   border-radius: 4px;
   background-color: #ffffff;       /* Champ input sombre */
-  color: #fff;                  /* Couleur de texte blanche */
+  color: #000000;                  /* Couleur de texte blanche */
   font-size: 14px;
 }
 

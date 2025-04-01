@@ -152,7 +152,7 @@ final class ImageController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'app_image_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_image_delete', methods: ['POST'])]
     public function delete(Request $request, Image $image, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->getPayload()->getString('_token'))) {

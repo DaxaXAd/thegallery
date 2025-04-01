@@ -27,12 +27,7 @@
                             <a href="{{ path('app_post_new') }}" class="button-global" aria-label="create a post">new post</a>
                         {% endif %}
 							<a href="{{ path('app_contact_new')}}" class="button-global" aria-label="contact">Contact</a>
-							<li class="nav-item">
-                                <form action="{{ path('app_logout') }}" method="post" class="logout-form">
-                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
-                                    <button type="submit" class="nav-link button-global" aria-label="Se déconnecter">Déconnexion</button>
-                                </form>
-                            </li>
+							<li class="nav-item"><a class="nav-link  button-global " href="{{ path('app_logout') }}">Déconnexion</a></li>
 						</div>
 					</div>
 

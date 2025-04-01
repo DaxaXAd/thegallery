@@ -19,5 +19,6 @@ Encore
     })
     .enableSassLoader()
     .enablePostCssLoader();
+    
 
 module.exports = Encore.getWebpackConfig();

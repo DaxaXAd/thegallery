@@ -30,12 +30,7 @@
                             <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_profile', {'slug': app.user.slug}) }}" aria-label="accès compte">Compte</a></li>
                         {% endif %}
                             <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}" aria-label="contact admin">Contact</a></li>
-                            <li class="nav-item">
-                                <form action="{{ path('app_logout') }}" method="post" class="logout-form">
-                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
-                                    <button type="submit" class="nav-link button-global" aria-label="Se déconnecter">Déconnexion</button>
-                                </form>
-                            </li>
+                            <li class="nav-item"><a class="nav-link  button-global " href="{{ path('app_logout') }}">Déconnexion</a></li>
                         </ul>       
                     </div>
                 </div>
