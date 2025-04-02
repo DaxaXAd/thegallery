@@ -160,7 +160,7 @@ final class ImageController extends AbstractController
             // $imagePath = $this->getParameter('images_directory') . '/' . ltrim($image->getPath(), '/');
             $imagePath = $this->getParameter('kernel.project_dir') . '/public/' . ltrim($image->getPath(), '/');
             
-            dump("Chemin du fichier: ", $imagePath);
+            
 
 
             if (file_exists($imagePath)) {

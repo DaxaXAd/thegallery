@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log("Réponse JSON reçue :", data);
 
                     // 6. Mettre à jour le compteur de likes
-                    //    On suppose que le <span class="like-count"> se trouve
+                    //    le <span class="like-count"> se trouve
                     //    dans le même conteneur parent que le formulaire
                     const likeCountElement = form.parentElement.querySelector('.like-count');
                     if (likeCountElement && data.likes !== undefined) {
