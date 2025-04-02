@@ -12,6 +12,7 @@ use App\Form\CommentType;
 use App\Repository\PostRepository;
 use App\Repository\ImageRepository;
 use App\Repository\LikeRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,10 +24,11 @@ use App\Repository\UserRepository;
 final class PostController extends AbstractController
 {
     #[Route(name: 'app_post_index', methods: ['GET'])]
-    public function index(PostRepository $postRepository, LikeRepository $likeRepository): Response
+    public function index(PostRepository $postRepository, LikeRepository $likeRepository, TagRepository $tagRepository): Response
     {
 
         $posts = $postRepository->findBy([], ['created_at' => 'DESC']);
+        $tags = $tagRepository->findAll(); // ajout
         $likeCount = [];
         foreach ($posts as $post) {
             $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
@@ -39,6 +41,7 @@ final class PostController extends AbstractController
 
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
+            'tags' => $tags, // ajout tags
             'likeCount' => $likeCount,
         ]);
     }

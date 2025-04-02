@@ -26,6 +26,9 @@
 
                     <div class="navbar-collapse collapse top-bar_menu" id="topNavMenu">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+						{% if 'ROLE_ADMIN' in app.user.roles %}
+							<li class="nav-item"><a href="{{ path('admin') }}" class="btn btn-danger" aria-label="accès administrateur">Admin</a></li>
+						{% endif %}
                         {% if app.user and app.user.id == user.id %}
                             <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_post_new') }}" aria-label="Créer un post">Créer</a></li>
                             <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_user_edit', {'slug': app.user.slug}) }}" aria-label="modifier compte">Paramètres</a></li>

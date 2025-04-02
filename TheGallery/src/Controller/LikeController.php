@@ -51,7 +51,7 @@ final class LikeController extends AbstractController
         }
 
         $likeCount = $likeRepository->count(['post' => $post]);
-        return new JsonResponse([
+        return new JsonResponse([ // 
             'action'  => $action,
             'likes'   => $likeCount,
         ]);

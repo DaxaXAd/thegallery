@@ -1,110 +1,128 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TheGallery : Accueil{% endblock %}
+{% block title %}TheGallery : Accueil
+{% endblock %}
 
 
 {% block body %}
-<div id="klaro"></div>
-<header>
-        <div class="header_image">
-            <nav class="top-bar navbar navbar-expand-lg">
-                <div class="top-bar_item container-fluid">
-                    <div class="logo-gallery navbar-brand">
-                        <a href="{{ path('app_post_index') }}" aria-label="home">
-                            <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-                                <path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-                                <path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-                                <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-                            </svg>
-                        </a>
-                    </div>
+	
+	<header>
+		<div class="header_image">
+			<nav class="top-bar navbar navbar-expand-lg">
+				<div class="top-bar_item container-fluid">
+					<div class="logo-gallery navbar-brand">
+						<a href="{{ path('app_post_index') }}" aria-label="home">
+							<svg width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+								<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+								<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+								<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+							</svg>
+						</a>
+					</div>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavMenu" aria-controls="topNavMenu" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavMenu" aria-controls="topNavMenu" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-                    <div class="navbar-collapse collapse top-bar_menu" id="topNavMenu">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link button-global" href="{{ path('app_contact_new') }}">Contact</a></li>
-                            <li class="nav-item"><a href="{{ path('app_register') }}" class="nav-link register-btn button-global" aria-label="inscription">Inscription</a></li>
-                            <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link login-btn button-global" aria-label="connexion">connexion</a></li>
-                        </ul>       
-                    </div>
-                </div>
-            </nav>
-            
-            <div class="text-header">
-                <div>
-                    <svg class="post-logo" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-                        <path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-                        <path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-                        <path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
-                    </svg>
-                </div>
-                <h1 class="post-h1">TheGallery</h1>
-            </div>
-        </div>
-</header>
-<main>
-	<div class="box-logo">
+					<div class="navbar-collapse collapse top-bar_menu" id="topNavMenu">
+						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link button-global" href="{{ path('app_contact_new') }}">Contact</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_register') }}" class="nav-link register-btn button-global" aria-label="inscription">Inscription</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_login') }}" class="nav-link login-btn button-global" aria-label="connexion">connexion</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<div class="text-header">
+				<div>
+					<svg class="post-logo" width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+						<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+						<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+						<path d="M23 23H34C40.0751 23 45 27.9249 45 34V44.615C45 44.8276 44.8276 45 44.615 45H34C27.9249 45 23 40.0751 23 34V23Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
+					</svg>
+				</div>
+				<h1 class="post-h1">TheGallery</h1>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div class="box-home mt-5">
+			<div class="home-presentation">
+				<h2>Bienvenue</h2>
+				<h3>Créer vos post et présenter vos création</h3>
+                <p>
+                    Bienvenue sur notre plateforme dédiée à la créativité visuelle ! Ici, nous vous invitons à partager vos images les plus inspirantes, captivantes et uniques. 
+                    Que vous soyez un photographe amateur ou professionnel, un artiste passionné ou simplement quelqu'un qui aime capturer les moments de la vie quotidienne, notre communauté est l'endroit idéal pour exprimer votre vision du monde. 
+                    En publiant vos images dans des posts, vous pouvez non seulement montrer votre talent, mais aussi découvrir et interagir avec d'autres créateurs du monde entier. 
+                    <stong>Rejoignez-nous et laissez votre empreinte visuelle sur notre espace collaboratif et dynamique !</strong>
+                </p>
+			</div>
+			<div class="container-home mt-5">
+				<div class="container-card gapper">
+					<div id="card" class="card-author">
+						<div class="author">
+							<h2>Titre du post</h2>
+							<h3>
+								par
+								<strong>Auteur</strong>
+							</h3>
+							<img class="underline" aria-label="décoration" src=""/>
+						</div>
 
 
-		<section>
-            
-		                <h2>Bienvenue</h2>
-		                <p>Créer vos post et présenter vos création</p>
-                    <div class="container-home">
-		                	<div class="container-card gapper">
-								<div class="card-author">
-									<div class="author">
-										<h2>Titre du post</h2>
-										<h3> par <strong>Auteur</strong></h3>
-										<img class="underline" aria-label="décoration" src=""/>
-									</div>
-									
-									
-										<div class="preview-img">
-											<p>L'image dans le post est lien interactif</p>
-												<img src="{{ asset('images/header_automn.jpg') }}" alt="image demonstratif" >
-											</a>
-										</div>
-								
-									<div class="tag-input-select">
-										<div class="overlap-group">
-											
-											<span class="tag-label badge bg-info text-dark">tag</span>
-											
-										</div>
-									</div>
-									<form action="#" method="" class="like-form" style="display: inline-block;">
-									<!-- Le bouton est l'icône, stylisée comme tu veux -->
-										<button type="" class="like-button pixelarticons-heart like stop-scroll"  aria-label="Aimer le post">
-											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="heart-svg">
-											<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-											</svg>
-										</button>
-										<span class="like-count">0</span>
-									</form>
-									
-									<div class="post-actions">
-								
-										<a href="#" class="edit-btn" aria-label="editer les posts">Editer</a>
-										<a href="#" class="edit-btn" aria-label="supprimer les posts">Supprimer</a>
-							
-									</div>
-								</div>
-							</div>
-                            {# paragraph #}
-                            <div>
-                                <p>Voici un exemple de ce à quoi ressemblera un <em>post</em>.</p>
-                            </div>
-            </div>
-		</section>
+						<div class="preview-img">
+							<p>L'image dans le post est lien interactif</p>
+							<img src="{{ asset('images/header_automn.jpg') }}" alt="image demonstratif">
+						</a>
+					</div>
 
-</main>
+					<div class="tag-input-select">
+						<div class="overlap-group">
 
+							<span class="tag-label badge bg-info text-dark">tag</span>
+
+						</div>
+					</div>
+					<form
+						action="#" method="" class="like-form" style="display: inline-block;">
+						<!-- Le bouton est l'icône, stylisée comme tu veux -->
+						<button type="" class="like-button pixelarticons-heart like stop-scroll" aria-label="Aimer le post">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="heart-svg">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+							</svg>
+						</button>
+						<span class="like-count">0</span>
+					</form>
+
+					<div class="post-actions">
+
+						<a href="#" class="edit-btn" aria-label="editer les posts">Editer</a>
+						<a href="#" class="edit-btn" aria-label="supprimer les posts">Supprimer</a>
+
+					</div>
+				</div>
+			</div>
+			<div class="home-card">
+					<p>Voici, <span class="home-card_show"><a href="#card">ci-dessous</a></span>, un exemple de ce à quoi ressemblera un
+						<em>post</em>.
+					Ces Postes seront vos <strong>cards</strong> <em>ou cartes en français</em> qui seront vos moyens d'afficher vos travaux,
+					pour le partager avec toute la communauté et échanger des conseils avec les uns et les autres.
+					</p>
+				</div>
+			{# paragraph #}
+			
+		</div>
+
+	</main>
 
 
 {% endblock %}

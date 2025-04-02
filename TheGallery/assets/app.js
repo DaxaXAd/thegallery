@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Ajouter la classe "selected" à l'image cliquée pour un feedback visuel
                 this.classList.add('selected');
 
-                // Récupérer l'ID de l'image depuis l'attribut data-id
+                // Récupérer l'ID de l'image depuis l'attribut data-id ou "data-"attribute, html personnalisé
                 const imgId = this.getAttribute('data-id');
                 // Mettre à jour le champ caché avec l'ID de l'image sélectionnée
                 selectedImageIdInput.value = imgId;
@@ -157,6 +157,81 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Afficher le conteneur de prévisualisation
                 previewContainer.style.display = 'block';
             }
+        });
+    });
+});
+
+
+
+/* script filtre tag */
+
+document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('[data-filter]');
+    const items = document.querySelectorAll('.image-item');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(filterButton => filterButton.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+            items.forEach(item => {
+                const tag = item.getAttribute('data-tag');
+                item.style.display = (filter === 'all' || tag === filter) ? 'block' : 'none';
+            });
+        });
+    });
+});
+
+
+/* gérer dropdown bootstrap 5 des tags */
+
+document.addEventListener('DOMContentLoaded', function () {
+    //  Filtrage des POSTS
+    const postDropdownItems = document.querySelectorAll('#postTagFilterMenu .dropdown-item');
+    const postItems = document.querySelectorAll('.post-item');
+
+    postDropdownItems.forEach(filterButton => {
+        filterButton.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Met à jour le bouton actif
+            postDropdownItems.forEach(b => b.classList.remove('active')); // b is temporary variable name
+            filterButton.classList.add('active');
+
+            const filter = filterButton.getAttribute('data-filter');
+
+            postItems.forEach(item => {
+                const tag = item.getAttribute('data-tag');
+                item.style.display = (filter === 'all' || tag === filter) ? 'block' : 'none';
+            });
+
+            // Met à jour le texte du bouton
+            const dropdownToggle = document.getElementById('filterDropdown');
+            dropdownToggle.textContent = filterButton.textContent.trim();
+        });
+    });
+
+    //  Filtrage des IMAGES
+    const imageDropdownItems = document.querySelectorAll('#imageTagFilterMenu .dropdown-item');
+    const imageItems = document.querySelectorAll('.image-item');
+
+    imageDropdownItems.forEach(filterButton => {
+        filterButton.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            imageDropdownItems.forEach(b => b.classList.remove('active'));
+            filterButton.classList.add('active');
+
+            const filter = filterButton.getAttribute('data-filter');
+
+            imageItems.forEach(item => {
+                const tag = item.getAttribute('data-tag');
+                item.style.display = (filter === 'all' || tag === filter) ? 'block' : 'none';
+            });
+
+            const dropdownToggle = document.getElementById('filterImageDropdown');
+            dropdownToggle.textContent = filterButton.textContent.trim();
         });
     });
 });

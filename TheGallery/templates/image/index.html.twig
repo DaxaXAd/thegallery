@@ -49,9 +49,18 @@
 </header>
 	<main>
 		<div class="container">
+			<div class="dropdown mb-4">
+						<button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterImageDropdown" data-bs-toggle="dropdown" aria-expanded="false">Filtrer par tag</button>
+							<ul class="dropdown-menu" id="imageTagFilterMenu" aria-labelledby="filterImageDropdown">
+								<li><a class="dropdown-item active" href="#" data-filter="all">Tous</a></li>
+								{% for tag in tags %}
+								<li><a class="dropdown-item" href="#" data-filter="{{ tag.nameTag|lower }}">🍂 {{ tag.nameTag }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
 			<div class="row">
 				{% for image in images %}
-					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+					<div class="col-lg-4 col-md-6 col-sm-12 mb-4 image-item" data-tag="{{ image.idTag ? image.idTag.nameTag|lower : 'none' }}">
 						<div class="posts-lists">
 							<div class="container-card gapper">
 								<div

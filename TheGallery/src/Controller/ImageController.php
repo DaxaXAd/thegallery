@@ -6,6 +6,7 @@ use App\Entity\Image;
 use App\Form\ImageType;
 use App\Entity\User;
 use App\Entity\Post;
+use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Repository\ImageRepository;
 use App\Repository\LikeRepository;
@@ -24,10 +25,10 @@ final class ImageController extends AbstractController
 
     // version using filename
     #[Route('/' ,name: 'app_image_index', methods: ['GET'])]
-    public function index(ImageRepository $imageRepository, LikeRepository $likeRepository): Response
+    public function index(ImageRepository $imageRepository, LikeRepository $likeRepository, TagRepository $tagRepository): Response
     {
         // $imagesDirectory = $this->getParameter('images_directory'); 
-
+        $tags = $tagRepository->findAll();
         $images = $imageRepository->findBy([], ['created_at' => 'DESC']);
 
         $likeCount = 0;
@@ -43,6 +44,7 @@ final class ImageController extends AbstractController
         return $this->render('image/index.html.twig', [
             'images' => $images,
             'likeCount' => $likeCount,
+            'tags' => $tags,
         ]);
     }
 

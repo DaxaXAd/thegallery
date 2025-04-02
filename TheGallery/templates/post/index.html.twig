@@ -52,9 +52,18 @@
 </header>
 <main>
 		<div class="container">
-			<div class="row">
+			<div class="dropdown mb-4">
+						<button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">Filtrer par tag</button>
+							<ul class="dropdown-menu" id="postTagFilterMenu" aria-labelledby="filterDropdown">
+								<li><a class="dropdown-item active" href="#" data-filter="all">Tous</a></li>
+								{% for tag in tags %}
+								<li><a class="dropdown-item" href="#" data-filter="{{ tag.nameTag|lower }}">🍂 {{ tag.nameTag }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+			<div class="row">				
 				{% for post in posts %}
-					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+					<div class="col-lg-4 col-md-6 col-sm-12 mb-4 post-item" data-tag="{% if post.tags is not empty %}{{ post.tags[0].nameTag|lower }}{% else %}none{% endif %}">
 						<div class="posts-lists">
 							<div class="container-card gapper">
 								<div class="card-author">
