@@ -22,7 +22,27 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
+            ->add('username', null, [
+                'label' => 'Nom d\'utilisateur',
+                'attr' => [
+                    'placeholder' => 'Entrez votre nom d\'utilisateur',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ce champ ne peut pas être vide',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'max' => 20,
+                        'minMessage' => 'Your username should be at least {{ limit }} characters long',
+                        'maxMessage' => 'Your username cannot be longer than {{ limit }} characters',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9_]+$/',
+                        'message' => 'Username can only contain letters, numbers, and underscores.',
+                    ])
+                ],
+            ])
             ->add('email', EmailType::class, [
                 'required' => false,
                 'constraints' => [
@@ -32,9 +52,24 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('bio', TextareaType::class, [
+                'label' => 'Biographie (optionnel)',
+                'attr' => [
+                    'placeholder' => 'Entrez une courte biographie (max 255 caractères)',
+                    'maxlength' => 255,
+                ],
+                'constraints' => [
+                    new Length([
+                        'max' => 255,
+                        'maxMessage' => 'Your biography should not exceed {{ limit }} characters',
+                    ]),
+                ],
                 'required' => false
             ])
             ->add('location', null, [
+                'label' => 'Localisation (optionnel)',
+                'attr' => [
+                    'placeholder' => 'Entrez votre localisation (ex: Paris, France)',
+                ],
                 'required' => false
             ])
             ->add('agreeTerms', CheckboxType::class, [
@@ -50,6 +85,7 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
+                'label' => 'Mot de passe',
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([

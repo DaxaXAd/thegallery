@@ -1330,3 +1330,17 @@ main {
   padding: 0.5rem 1rem;
   font-weight: 500;
 }
+
+/* ===== pagination ===== */
+.page-item .page-link {
+  border-radius: 0.75rem;
+  margin: 0 4px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.page-item.disabled .page-link {
+  background-color: #f8f9fa;
+  color: #ccc;
+  border-color: #ddd;
+}
