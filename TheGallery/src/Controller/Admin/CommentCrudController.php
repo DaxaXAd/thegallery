@@ -25,7 +25,7 @@ class CommentCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             // Relation vers l’utilisateur
-            AssociationField::new('id_user', 'Utilisateur'),
+            AssociationField::new('user', 'Utilisateur'),
             TextEditorField::new('content', 'Contenu'),
             DateTimeField::new('createdAt'),
         ];

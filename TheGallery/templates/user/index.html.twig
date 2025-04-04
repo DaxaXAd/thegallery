@@ -45,9 +45,9 @@
                     <h2><a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a></h2>
                     <img class="underline" src=""/>
                 </div>
-                {% if post.idImg %}
+                {% if post.img %}
                     <div class="preview-img">
-                        <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
+                        <img src="{{ asset(post.img.path) }}" alt="{{ post.title }}">
                     </div>
                 {% endif %}
             </div>

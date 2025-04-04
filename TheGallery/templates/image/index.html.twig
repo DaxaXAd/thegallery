@@ -117,13 +117,13 @@
 												</svg>
 											</button>
 											<!-- likeCount peut être un simple entier si tu n'as pas un tableau par ID -->
-											<span class="like-count">{{ likeCount }}</span>
+											<span class="like-count">{{ likeCounts[image.id]|default(0) }}</span>
 										</form>
 									{% endif %}
 
 									<!-- Actions (Edit, Delete) si l'utilisateur connecté est le propriétaire de l'image -->
 									<div class="post-actions">
-										{% if app.user == image.idUser %}
+										{% if app.user == image.user %}
 											<a href="{{ path('app_image_edit', {'id': image.id}) }}" class="edit-btn">
 												Edit
 											</a>
@@ -167,7 +167,7 @@
 		<!-- Bouton pour ajouter une nouvelle image -->
 		<div class="text-center mt-4 mb-4">
 			<a href="{{ path('app_image_new') }}" class="create-new-link btn-submit">
-				Create new
+				Ajouter
 			</a>
 		</div>
 	</main>

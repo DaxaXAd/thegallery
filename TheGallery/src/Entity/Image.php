@@ -22,12 +22,12 @@ class Image
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Tag $id_tag = null;
 
-    #[ORM\OneToOne(mappedBy: 'id_img', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'img', cascade: ['persist', 'remove'])]
     private ?Post $post = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
-    #[ORM\JoinColumn(name: "id_user_id", nullable: false)]
-    private ?User $id_user = null;
+    #[ORM\JoinColumn(name: "user", nullable: false)]
+    private ?User $user = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
@@ -82,8 +82,8 @@ class Image
     public function setPost(Post $post): static
     {
         // set the owning side of the relation if necessary
-        if ($post->getIdImg() !== $this) {
-            $post->setIdImg($this);
+        if ($post->getimg() !== $this) {
+            $post->setimg($this);
         }
 
         $this->post = $post;
@@ -91,14 +91,14 @@ class Image
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getuser(): ?User
     {
-        return $this->id_user;
+        return $this->user;
     }
 
-    public function setIdUser(?User $id_user): static
+    public function setuser(?User $user): static
     {
-        $this->id_user = $id_user;
+        $this->$user = $user;
 
         return $this;
     }

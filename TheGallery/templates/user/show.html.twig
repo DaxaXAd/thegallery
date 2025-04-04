@@ -66,10 +66,10 @@
                             {{ post.title }}
                         </a>
                     </h3>
-                    {% if post.idImg %}
+                    {% if post.img %}
                         <div class="post-card-image">
                             <img 
-                                src="{{ asset(post.idImg.path) }}" 
+                                src="{{ asset(post.img.path) }}" 
                                 alt="{{ post.title }}"
                             >
                         </div>

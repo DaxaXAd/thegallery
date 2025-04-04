@@ -56,7 +56,7 @@
                 <img src="{{ asset(image.path) }}" alt="{{ image.title }}">
             </div>
 
-            {% if app.user and (app.user == image.idUser or is_granted('ROLE_ADMIN')) %}
+            {% if app.user and (app.user == image.user or is_granted('ROLE_ADMIN')) %}
                 <div class="post-actions">
                     <a href="{{ path('app_image_index') }}" class="button-global backlist-btn" aria-label="revenir en arrière">Retour</a>
                     <a href="{{ path('app_image_edit', {'id': image.id}) }}" class="button-global edit-btn" aria-label="Editer">Editer</a>

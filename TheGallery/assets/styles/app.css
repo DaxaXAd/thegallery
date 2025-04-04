@@ -2,8 +2,8 @@
    VARIABLES GLOBALES
 ---------------------- */
 :root {
+  /* --- color --- */
   --variable-collection-primary-dark:   rgba(0, 0, 0, 1);    /* Noir */
-  --variable-collection-primary-purple: rgba(113, 16, 216, 1);
   --variable-collection-pers-green:     rgba(8, 165, 36, 1);
   --variable-collection-primary-automn: rgba(165, 56, 10, 1); /* Automne */
   --variable-collection-primary-automn-variant: rgb(185, 61, 9); /* Automne */
@@ -11,7 +11,12 @@
   --variable-collection-text-autumn:    rgba(202, 113, 12, 1);
   --variable-collection-autumn-back:    rgba(154, 100, 0, 0.58);
   --variable-collection-grey-back:      rgba(43, 43, 43, 1);  /* Gris très foncé */
+
+  /* --- typo --- */
+  --font-typo-global: "Lexend-Bold", Helvetica, sans-serif; 
 }
+
+
 
 /* RESET SIMPLE */
 html, body {
@@ -28,12 +33,7 @@ html {
   flex-direction: column; /* Le header, main, footer s’empilent */
 }
 
-/* 
- ATTENTION : Si tu mets main en flex + center, 
- toutes tes pages seront centrées verticalement.
- Souvent, on préfère un style plus neutre sur main 
- et on utilise des classes .centered-page au besoin.
-*/
+
 
 body {
   background-color: var(--variable-collection-grey-back);
@@ -76,7 +76,8 @@ main {
   justify-content: center;
   align-items: center;
   border-radius: 8px;         /* moins arrondi */
-  font-family: "Lexend-Bold", Helvetica, sans-serif;
+  /* font-family: var(--font-typo-global); */
+  font-family: var(--font-global);
   font-size: 16px;
   font-weight: 700;
   text-decoration: none;
@@ -266,7 +267,7 @@ max-width: fit-content;
   align-items: baseline;
   position: relative;
   width: fit-content;
-  font-family: "Lexend-Bold", Helvetica, sans-serif;
+  font-family: var(--font-typo-global);
   font-weight: 700;
   color: #ffffff;
   font-size: 32px;
@@ -326,9 +327,9 @@ max-width: fit-content;
   position: absolute;
   top: 4px;
   left: 33px;
-  font-family: "Lexend-Bold", Helvetica, sans-serif;
+  font-family: var(--font-typo-global);
   font-weight: 700;
-  color: #000000;
+  color: var(--variable-collection-primary-dark);
   font-size: 12px;
 }
 
@@ -395,7 +396,7 @@ max-width: fit-content;
   color: var(--variable-collection-white);
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: var(--variable-collection-primary-automn);
-  font-family: Lexend, Helvetica, sans-serif;
+  font-family: "Lexend", Helvetica, sans-serif;
   font-size: 100px;
   font-weight: 700;
   text-transform: uppercase;

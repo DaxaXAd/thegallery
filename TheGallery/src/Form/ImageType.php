@@ -38,7 +38,7 @@ class ImageType extends AbstractType
             //     'class' => Post::class,
             //     'choice_label' => 'title',
             // ])
-            // ->add('id_user', EntityType::class, [
+            // ->add('user', EntityType::class, [
             //     'class' => User::class,
             //     'choice_label' => 'username',
             // ])

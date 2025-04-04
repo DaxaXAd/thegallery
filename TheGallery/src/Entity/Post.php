@@ -22,7 +22,7 @@ class Post
 
     #[ORM\OneToOne(inversedBy: 'post', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Image $id_img = null;
+    private ?Image $img = null;
 
     /**
      * @var Collection<int, Comment>
@@ -32,7 +32,7 @@ class Post
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $id_user = null;
+    private ?User $user = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $title = null;
@@ -79,14 +79,14 @@ class Post
         return $this;
     }
 
-    public function getIdImg(): ?Image
+    public function getimg(): ?Image
     {
-        return $this->id_img;
+        return $this->img;
     }
 
-    public function setIdImg(Image $id_img): static
+    public function setimg(Image $img): static
     {
-        $this->id_img = $id_img;
+        $this->img = $img;
 
         return $this;
     }
@@ -121,14 +121,14 @@ class Post
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getuser(): ?User
     {
-        return $this->id_user;
+        return $this->user;
     }
 
-    public function setIdUser(?User $id_user): static
+    public function setuser(?User $user): static
     {
-        $this->id_user = $id_user;
+        $this->user = $user;
 
         return $this;
     }

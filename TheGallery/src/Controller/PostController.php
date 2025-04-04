@@ -63,7 +63,7 @@ final class PostController extends AbstractController
             if ($imageId) {
                 $image = $imageRepository->find($imageId);
                 if ($image) {
-                    $post->setIdImg($image);
+                    $post->setimg($image);
                 }
             }
 
@@ -75,12 +75,12 @@ final class PostController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $post->setIdUser($user);
+                $post->setuser($user);
                 $selectedImageId = $request->request->get('selectedImageId');
                 if ($selectedImageId) {
                     $image = $imageRepository->find($selectedImageId);
                     if ($image) {
-                        $post->setIdImg($image);
+                        $post->setimg($image);
                     }
                 }
                 
@@ -94,7 +94,7 @@ final class PostController extends AbstractController
                 return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
             }
 
-            $images = $imageRepository->findBy(['id_user' => $user]);
+            $images = $imageRepository->findBy(['user' => $user]);
 
             return $this->render('post/new.html.twig', [
                 'post' => $post,
@@ -122,7 +122,7 @@ final class PostController extends AbstractController
 
         // 2) On pré-remplit le post et l'user
         $comment->setPost($post);
-        $comment->setIdUser($this->getUser()); // si l'utilisateur est connecté
+        $comment->setuser($this->getUser()); // si l'utilisateur est connecté
         $comment->setCreatedAt(new \DateTimeImmutable());
 
         // 3) Créer le formulaire
@@ -169,7 +169,7 @@ final class PostController extends AbstractController
             if ($selectedImageId) {
                 $image = $imageRepository->find($selectedImageId);
                 if ($image) {
-                    $post->setIdImg($image);
+                    $post->setimg($image);
                 }
             }
             $post->setCreatedAt(new \DateTimeImmutable());
@@ -177,7 +177,7 @@ final class PostController extends AbstractController
 
             return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
         }
-        $images = $imageRepository->findBy(['id_user' => $this->getUser()]);
+        $images = $imageRepository->findBy(['user' => $this->getUser()]);
 
         return $this->render('post/edit.html.twig', [
             'post' => $post,
@@ -194,7 +194,7 @@ final class PostController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($post);
-            // $entityManager->remove($post->getidImg());
+            // $entityManager->remove($post->getimg());
             $entityManager->flush();
         }
 

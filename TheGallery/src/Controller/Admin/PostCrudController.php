@@ -41,10 +41,10 @@ class PostCrudController extends AbstractCrudController
             DateTimeField::new('created_at', 'Date de création')->hideOnForm(),// Par exemple, si tu la gères en code
 
              // Relation vers l’utilisateur
-            AssociationField::new('id_user', 'Utilisateur'),
+            AssociationField::new('user', 'Utilisateur'),
 
              // Relation vers l'image
-            AssociationField::new('id_img', 'Image')
+            AssociationField::new('img', 'Image')
                  ->hideOnIndex(), // Optionnel
         ];
     }

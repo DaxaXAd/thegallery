@@ -34,12 +34,12 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 3,
                         'max' => 20,
-                        'minMessage' => 'Your username should be at least {{ limit }} characters long',
-                        'maxMessage' => 'Your username cannot be longer than {{ limit }} characters',
+                        'minMessage' => "Votre nom d'utilisateur doit avoir minimum {{ limit }} caractères",
+                        'maxMessage' => "Votre nom d'utilisateur doit avoir maximum {{ limit }} caractères",
                     ]),
                     new Regex([
                         'pattern' => '/^[a-zA-Z0-9_]+$/',
-                        'message' => 'Username can only contain letters, numbers, and underscores.',
+                        'message' => "nom d'utilisateur ne peut contenir que lettres, nombres et underscore.",
                     ])
                 ],
             ])
@@ -47,7 +47,7 @@ class RegistrationFormType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Email([
-                        'message' => 'Please enter a valid email address.',
+                        'message' => 'Entrer une adresse email valide.',
                     ]),
                 ],
             ])
@@ -60,7 +60,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Length([
                         'max' => 255,
-                        'maxMessage' => 'Your biography should not exceed {{ limit }} characters',
+                        'maxMessage' => "Votre biographie ne peut pas dépasser {{ limit }} caractères",
                     ]),
                 ],
                 'required' => false
@@ -77,7 +77,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'En cochant cette case, vous acceptez que vos données entrées soit utilisés pour la connexion et la sécurité du compte. Vous pouvez à tout moment supprimer votre compte ou demander à le supprimer.',
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter les termes et conditions.',
                     ]),
                 ],
             ])

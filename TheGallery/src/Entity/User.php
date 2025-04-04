@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo; // to use sluggable from package gedmo/doctrine-extensions
@@ -26,6 +28,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message: "Email est requis.")]
+    #[Assert\Email(message: "Format email invalide.")]
     private ?string $email = null;
 
     /**
@@ -38,9 +42,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message: "mot de passe est requis.")]
     private ?string $password = null;
 
     #[ORM\Column(length: 40, unique: true)]
+    #[Assert\NotBlank(message: "nom utilisateur est requis.")]
     private ?string $username = null;
 
     #[Gedmo\Slug(fields: ['username'])]
@@ -62,19 +68,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Post>
      */
-    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'id_user', orphanRemoval: true, cascade: ['remove'])]
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'user', orphanRemoval: true, cascade: ['remove'])]
     private Collection $posts;
 
     /**
      * @var Collection<int, Comment>
      */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'id_user', orphanRemoval: true, cascade: ['remove'])]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user', orphanRemoval: true, cascade: ['remove'])]
     private Collection $comments;
 
     /**
      * @var Collection<int, Image>
      */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'id_user', orphanRemoval: true, cascade: ['remove'])]
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'user', orphanRemoval: true, cascade: ['remove'])]
     private Collection $images;
 
     /**
@@ -86,7 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Contact>
      */
-    #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'user', orphanRemoval: true, cascade: ['remove'])]
+    #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'user', orphanRemoval: true, cascade: ['remove'])] 
     private Collection $contacts;
 
    
@@ -103,6 +109,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     }
 
+    /**
+     * Summary of getId
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -265,7 +275,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->posts->contains($post)) {
             $this->posts->add($post);
-            $post->setIdUser($this);
+            $post->setuser($this);
         }
 
         return $this;
@@ -275,8 +285,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->posts->removeElement($post)) {
             // set the owning side to null (unless already changed)
-            if ($post->getIdUser() === $this) {
-                $post->setIdUser(null);
+            if ($post->getuser() === $this) {
+                $post->setuser(null);
             }
         }
 
@@ -295,7 +305,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
-            $comment->setIdUser($this);
+            $comment->setuser($this);
         }
 
         return $this;
@@ -305,8 +315,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getIdUser() === $this) {
-                $comment->setIdUser(null);
+            if ($comment->getuser() === $this) {
+                $comment->setuser(null);
             }
         }
 
@@ -325,7 +335,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->images->contains($image)) {
             $this->images->add($image);
-            $image->setIdUser($this);
+            $image->setuser($this);
         }
 
         return $this;
@@ -335,8 +345,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->images->removeElement($image)) {
             // set the owning side to null (unless already changed)
-            if ($image->getIdUser() === $this) {
-                $image->setIdUser(null);
+            if ($image->getuser() === $this) {
+                $image->setuser(null);
             }
         }
 
@@ -403,5 +413,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-   
+
 }

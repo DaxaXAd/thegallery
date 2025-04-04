@@ -33,7 +33,9 @@ final class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_contact_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre message a été envoyé avec succès !');
+
+            return $this->redirectToRoute('app_contact_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('contact/new.html.twig', [

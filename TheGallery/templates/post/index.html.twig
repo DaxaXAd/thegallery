@@ -88,15 +88,15 @@
 										</h2>
 										<h3>
 											by
-											<a href="{{ path('app_user_profile', {'slug': post.idUser.slug}) }}">{{ post.idUser.username }}</a>
+											<a href="{{ path('app_user_profile', {'slug': post.user.slug}) }}">{{ post.user.username }}</a>
 										</h3>
 										<img class="underline" aria-label="décoration" src=""/>
 									</div>
 
-									{% if post.idImg %}
+									{% if post.img %}
 										<div class="preview-img">
 											<a href="{{ path('app_post_show', {'id': post.id}) }}">
-												<img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }} by {{ post.idUser.username }}">
+												<img src="{{ asset(post.img.path) }}" alt="{{ post.title }} by {{ post.user.username }}">
 											</a>
 										</div>
 									{% endif %}
@@ -121,7 +121,7 @@
 									</form>
 
 									<div class="post-actions">
-										{% if app.user == post.idUser %}
+										{% if app.user == post.user %}
 											<a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn" aria-label="editer les posts">Editer</a>
 											{{ include('post/_delete_form.html.twig', {'post': post}) }}
 										{% endif %}

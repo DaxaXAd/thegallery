@@ -54,13 +54,13 @@
     <div class="full-post">
         <div class="text-header">
             {# <h2>{{ post.title }}</h2> #}
-            <h2>by {{ post.idUser.username }}</h2>
+            <h2>by {{ post.user.username }}</h2>
             <div class="post-image">
-                {% if post.idImg %}
-                    <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">
+                {% if post.img %}
+                    <img src="{{ asset(post.img.path) }}" alt="{{ post.title }}">
                 {% endif %}
             </div>
-            {% if app.user == post.idUser %}
+            {% if app.user == post.user %}
             <div class="post-actions">
                 <a href="{{ path('app_post_index') }}" class="backlist-btn" aria-label="retourner à l'accueil">Accueil</a>
                 <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn" aria-label="éditer le post">Editer</a>
@@ -75,7 +75,7 @@
                 {% for comment in comments %}
                     <div class="single-comment">
                         <div class="comment-header">
-                            <strong>{{ comment.idUser.username }}</strong>
+                            <strong>{{ comment.user.username }}</strong>
                             <span class="comment-date">{{ comment.createdAt|date('d/m/Y H:i') }}</span>
                         </div>
                         <p class="comment-content">{{ comment.content }}</p>
@@ -166,14 +166,14 @@
     <div class="full-post">
         <div class="text-header">
             <h1>{{ post.title }}</h1>
-            <h2>by {{ post.idUser.username }}</h2>
+            <h2>by {{ post.user.username }}</h2>
             <div class="post-image">
-                {% if post.idImg %}            
-                        <img src="{{ asset(post.idImg.path) }}" alt="{{ post.title }}">                
+                {% if post.img %}            
+                        <img src="{{ asset(post.img.path) }}" alt="{{ post.title }}">                
                 {% endif %}
             </div>
         
-        {% if app.user == post.idUser %}
+        {% if app.user == post.user %}
             <div class="post-actions">
                 <a href="{{ path('app_post_index') }}" class="backlist-btn">Go Back</a>
                 <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn">Edit</a>

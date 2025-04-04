@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Entity\Image;
+use App\Entity\Tag;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -52,7 +53,7 @@ final class ImageControllerTest extends WebTestCase
             'image[path]' => 'Testing',
             'image[id_tag]' => 'Testing',
             'image[post]' => 'Testing',
-            'image[id_user]' => 'Testing',
+            'image[user]' => 'Testing',
         ]);
 
         self::assertResponseRedirects($this->path);
@@ -66,9 +67,9 @@ final class ImageControllerTest extends WebTestCase
         $fixture = new Image();
         $fixture->setTitle('My Title');
         $fixture->setPath('My Title');
-        $fixture->setId_tag('My Title');
+        $fixture->setIdTag('My Title');
         $fixture->setPost('My Title');
-        $fixture->setId_user('My Title');
+        $fixture->setuser('My Title');
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -89,7 +90,7 @@ final class ImageControllerTest extends WebTestCase
         $fixture->setPath('Value');
         $fixture->setId_tag('Value');
         $fixture->setPost('Value');
-        $fixture->setId_user('Value');
+        $fixture->setuser('Value');
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -101,7 +102,7 @@ final class ImageControllerTest extends WebTestCase
             'image[path]' => 'Something New',
             'image[id_tag]' => 'Something New',
             'image[post]' => 'Something New',
-            'image[id_user]' => 'Something New',
+            'image[user]' => 'Something New',
         ]);
 
         self::assertResponseRedirects('/image/');
@@ -112,7 +113,7 @@ final class ImageControllerTest extends WebTestCase
         self::assertSame('Something New', $fixture[0]->getPath());
         self::assertSame('Something New', $fixture[0]->getId_tag());
         self::assertSame('Something New', $fixture[0]->getPost());
-        self::assertSame('Something New', $fixture[0]->getId_user());
+        self::assertSame('Something New', $fixture[0]->getuser());
     }
 
     public function testRemove(): void
@@ -123,7 +124,7 @@ final class ImageControllerTest extends WebTestCase
         $fixture->setPath('Value');
         $fixture->setId_tag('Value');
         $fixture->setPost('Value');
-        $fixture->setId_user('Value');
+        $fixture->setuser('Value');
 
         $this->manager->persist($fixture);
         $this->manager->flush();

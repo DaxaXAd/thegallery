@@ -6,6 +6,7 @@ use App\Entity\Image;
 use App\Form\ImageType;
 use App\Entity\User;
 use App\Entity\Post;
+use App\Entity\Like;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Repository\ImageRepository;
@@ -24,17 +25,20 @@ final class ImageController extends AbstractController
 {
 
     // version using filename
-    #[Route('/' ,name: 'app_image_index', methods: ['GET'])]
+    #[Route('/', name: 'app_image_index', methods: ['GET'])]
     public function index(ImageRepository $imageRepository, LikeRepository $likeRepository, TagRepository $tagRepository): Response
     {
         // $imagesDirectory = $this->getParameter('images_directory'); 
         $tags = $tagRepository->findAll();
         $images = $imageRepository->findBy([], ['created_at' => 'DESC']);
 
-        $likeCount = 0;
+        $likeCounts = [];
+        foreach ($images as $image) {
+            $likeCounts[$image->getId()] = $likeRepository->count(['image' => $image]);
+        }
 
         foreach ($images as $image) {
-            $post = $image->getPost(); 
+            $post = $image->getPost();
             if ($post) {
                 // On utilise la même méthode que pour compter les likes d’un post
                 $likeCount = $likeRepository->totalLike($post->getId());
@@ -43,7 +47,7 @@ final class ImageController extends AbstractController
 
         return $this->render('image/index.html.twig', [
             'images' => $images,
-            'likeCount' => $likeCount,
+            'likeCounts' => $likeCounts,
             'tags' => $tags,
         ]);
     }
@@ -57,7 +61,7 @@ final class ImageController extends AbstractController
     {
         // $user = $this->getUser();
         $image = new Image();
-        
+
 
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
@@ -69,7 +73,7 @@ final class ImageController extends AbstractController
             $file = $form->get('path')->getData();
 
             if ($file instanceof UploadedFile) {
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME); 
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
@@ -90,12 +94,12 @@ final class ImageController extends AbstractController
                 // Enregistrer le chemin partiel dans la base de données
                 $image->setPath('uploads/images/' . $newFilename);
                 $image->setTitle($form->get('title')->getData());
-                $image->setCreatedAt(new \DateTimeImmutable()); 
+                $image->setCreatedAt(new \DateTimeImmutable());
 
 
                 $user = $this->getUser();
                 if ($user) {
-                    $image->setIdUser($user);
+                    $image->setuser($user);
                 }
 
                 $entityManager->persist($image);
@@ -110,7 +114,7 @@ final class ImageController extends AbstractController
         }
 
         return $this->render('image/new.html.twig', [
-            
+
             'form' => $form->createView(),
         ]);
     }
@@ -121,7 +125,7 @@ final class ImageController extends AbstractController
     #[Route('/{id}', name: 'app_image_show', methods: ['GET'])]
     public function show(Image $image, LikeRepository $likeRepository): Response
     {
-        
+
         $post = $image->getPost();
         $likeCount = 0;
         if ($post) {
@@ -157,12 +161,12 @@ final class ImageController extends AbstractController
     #[Route('/{id}/delete', name: 'app_image_delete', methods: ['POST'])]
     public function delete(Request $request, Image $image, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $image->getId(), $request->getPayload()->getString('_token'))) {
 
             // $imagePath = $this->getParameter('images_directory') . '/' . ltrim($image->getPath(), '/');
             $imagePath = $this->getParameter('kernel.project_dir') . '/public/' . ltrim($image->getPath(), '/');
-            
-            
+
+
 
 
             if (file_exists($imagePath)) {

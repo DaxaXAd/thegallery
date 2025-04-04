@@ -22,6 +22,9 @@ class Like
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Post $post = null;
 
+    #[ORM\ManyToOne(targetEntity: Image::class)]
+    private ?Image $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -48,6 +51,17 @@ class Like
     {
         $this->post = $post;
 
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        $this->image = $image;
         return $this;
     }
 }
