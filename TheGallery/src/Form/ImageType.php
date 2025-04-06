@@ -10,8 +10,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType; 
-use Symfony\Component\Validator\Constraints\File; 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ImageType extends AbstractType
@@ -23,10 +23,21 @@ class ImageType extends AbstractType
                 'label' => 'title',
                 'required' => true,
             ])
-            ->add('path', FileType::class, [                 
-                'label' => 'image',                 
-                'mapped' => false,                 
+            ->add('path', FileType::class, [
+                'label' => 'image',
+                'mapped' => false,
                 'required' => true,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '8M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Formats autorisés : JPEG, PNG, WEBP.',
+                    ])
+                ]
             ])
             ->add('id_tag', EntityType::class, [
                 'class' => Tag::class,
@@ -34,14 +45,6 @@ class ImageType extends AbstractType
                 'label' => 'Tag',
                 'placeholder' => 'Sélectionnez un tag',
             ]);
-            // ->add('post', EntityType::class, [
-            //     'class' => Post::class,
-            //     'choice_label' => 'title',
-            // ])
-            // ->add('user', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'username',
-            // ])
         ;
     }
 

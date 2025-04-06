@@ -32,7 +32,8 @@ final class ImageController extends AbstractController
         $tags = $tagRepository->findAll();
         $images = $imageRepository->findBy([], ['created_at' => 'DESC']);
 
-        $likeCounts = [];
+        $likeCounts = []; // Tableau pour stocker le nombre de likes pour chaque image
+        // On parcourt les images et on compte le nombre de likes pour chaque image
         foreach ($images as $image) {
             $likeCounts[$image->getId()] = $likeRepository->count(['image' => $image]);
         }
@@ -44,6 +45,7 @@ final class ImageController extends AbstractController
                 $likeCount = $likeRepository->totalLike($post->getId());
             }
         }
+
 
         return $this->render('image/index.html.twig', [
             'images' => $images,
@@ -141,6 +143,13 @@ final class ImageController extends AbstractController
     #[Route('/{id}/edit', name: 'app_image_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Image $image, EntityManagerInterface $entityManager): Response
     {
+        // Vérification : seul le propriétaire de l'image peut éditer
+        $user = $this->getUser();
+
+        if (!$user || $image->getUser() !== $user) {
+            throw $this->createAccessDeniedException("Vous n'avez pas le droit de modifier cette image.");
+        }
+        
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 

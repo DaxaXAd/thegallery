@@ -21,15 +21,6 @@ class PostType extends AbstractType
     {
         $builder
         
-        // ->add('content', TextareaType::class, [
-        //     'label' => 'Content',
-        // ]);
-        // ->add('photo', FileType::class, [
-        //     'label' => 'Photo',
-        //     'mapped' => false,
-        //     'required' => false,
-        // ])
-        
         ->add('addImage', ButtonType::class, [
             'label' => 'Add Image',
             'attr' => [

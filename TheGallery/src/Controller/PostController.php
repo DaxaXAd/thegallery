@@ -34,11 +34,6 @@ final class PostController extends AbstractController
             $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
         }
 
-        // $commentCounts = [];
-        // foreach ($posts as $post) {
-        //     $commentCounts[$post->getId()] = $commentRepository->countComment($post->getId());
-        // }
-
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
             'tags' => $tags, // ajout tags

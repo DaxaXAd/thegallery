@@ -43,10 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Désactive la restauration automatique du scroll (optionnel)
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
 
     // Sélectionne tous les formulaires de like par leur classe
     const likeForms = document.querySelectorAll('.like-form');
@@ -57,8 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // 1. Empêche le rechargement de la page
             event.preventDefault();
 
-            // 2. (Optionnel) Enregistre la position du scroll pour la restaurer après coup
-            sessionStorage.setItem('positionClick', window.scrollY);
+            
 
             // 3. Récupère l'URL d'action (où on envoie la requête AJAX)
             const actionUrl = form.getAttribute('action');
@@ -104,13 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     });
-
-    // 9. (Optionnel) Restaure la position du scroll si on l'a enregistrée précédemment
-    const savedPos = sessionStorage.getItem('positionClick');
-    if (savedPos !== null) {
-        window.scrollTo(0, parseInt(savedPos, 10));
-        sessionStorage.removeItem('positionClick');
-    }
 });
 
 

@@ -98,7 +98,7 @@ class Image
 
     public function setuser(?User $user): static
     {
-        $this->$user = $user;
+        $this->user = $user;
 
         return $this;
     }
