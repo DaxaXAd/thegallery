@@ -84,3 +84,5 @@ class PasswordHasherTest extends TestCase
         $this->assertTrue($hasher->verify($hashedPassword, strtoupper($plainPassword)));
     }
 }
+
+// 

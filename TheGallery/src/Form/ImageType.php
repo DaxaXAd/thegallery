@@ -25,7 +25,10 @@ class ImageType extends AbstractType
             ])
             ->add('path', FileType::class, [
                 'label' => 'image',
-                'mapped' => false,
+                'mapped' => false, // This field is not mapped to the entity property
+                'attr' => [
+                    'accept' => 'image/jpeg, image/png, image/webp',
+                ],
                 'required' => true,
                 'constraints' => [
                     new File([

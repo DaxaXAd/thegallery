@@ -47,6 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 40, unique: true)]
     #[Assert\NotBlank(message: "nom utilisateur est requis.")]
+    #[Assert\Length(min: 3, minMessage: "Le nom d'utilisateur doit contenir au moins {{ limit }} caractères.")]
     private ?string $username = null;
 
     #[Gedmo\Slug(fields: ['username'])]
@@ -203,6 +204,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function isUsernameValid(): bool // Check if username is valid
+    {
+        return $this->username !== null && strlen($this->username) >= 3; // Check if username is at least 3 characters long
+    }
 
     public function getSlug(): ?string
     {
@@ -333,8 +338,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addImage(Image $image): static
     {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
+        if (!$this->images->contains($image)) { 
+            $this->images->add($image); 
             $image->setuser($this);
         }
 

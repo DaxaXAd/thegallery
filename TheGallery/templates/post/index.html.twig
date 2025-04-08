@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Posts List
+{% block title %}Posts Listes
 {% endblock %}
 
 {% block body %}
@@ -9,8 +9,10 @@
 			<nav class="top-bar navbar navbar-expand-lg">
 				<div class="top-bar_item container-fluid">
 					<div class="logo-gallery navbar-brand">
-						<a href="{{ path('app_post_index') }}" aria-label="home">
+						<!-- Logo with link to the homepage -->
+						<a href="{{ path('app_post_index') }}" aria-label="home"> 
 							<svg width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<!-- SVG paths for the logo -->
 								<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
 								<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
 								<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
@@ -19,6 +21,7 @@
 						</a>
 					</div>
 
+					<!-- Navbar toggler for mobile view -->
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavMenu" aria-controls="topNavMenu" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
@@ -26,21 +29,23 @@
 					<div class="navbar-collapse collapse top-bar_menu" id="topNavMenu">
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 							{% if app.user %}
+								<!-- Links visible only for logged-in users -->
 								<li class="nav-item">
-									<a class="nav-link button-global" href="{{ path('app_post_new') }}">Créer</a>
+									<a class="nav-link button-global" href="{{ path('app_post_new') }}" aria-label="créer un post avec image">Créer</a> 
 								</li>
 								<li class="nav-item">
-									<a class="nav-link button-global" href="{{ path('app_image_index') }}">Gallerie</a>
+									<a class="nav-link button-global" href="{{ path('app_image_index') }}" aria-label="accès à la gallerie d'image">Gallerie</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link button-global" href="{{ path('app_user_profile', {'slug': app.user.slug}) }}">Compte</a>
+									<a class="nav-link button-global" href="{{ path('app_user_profile', {'slug': app.user.slug}) }}" aria-label="accès au compte utilisateur">Compte</a>
 								</li>
 							{% endif %}
+							<!-- Links visible for all users -->
 							<li class="nav-item">
-								<a class="nav-link button-global" href="{{ path('app_contact_new') }}">Contact</a>
+								<a class="nav-link button-global" href="{{ path('app_contact_new') }}" aria-label="accès formulaire de contact">Contact</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link  button-global " href="{{ path('app_logout') }}">Déconnexion</a>
+								<a class="nav-link  button-global " href="{{ path('app_logout') }}" aria-label="se déconnecter">Déconnexion</a>
 							</li>
 						</ul>
 					</div>
@@ -49,7 +54,9 @@
 
 			<div class="text-header">
 				<div>
+					<!-- Secondary logo for the header -->
 					<svg class="post-logo" width="46" height="46" viewbox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<!-- SVG paths for the logo -->
 						<path d="M23 6.5C23 3.46243 25.4624 1 28.5 1H39.5C42.5376 1 45 3.46243 45 6.5V17.5C45 20.5376 42.5376 23 39.5 23H34C27.9249 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
 						<path d="M23 6.5C23 3.46243 20.5376 1 17.5 1H6.5C3.46243 1 1 3.46243 1 6.5V17.5C1 20.5376 3.46243 23 6.5 23H12C18.0751 23 23 18.0751 23 12V6.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
 						<path d="M23 39.5C23 42.5376 20.5376 45 17.5 45H6.5C3.46243 45 1 42.5376 1 39.5V28.5C1 25.4624 3.46243 23 6.5 23H12C18.0751 23 23 27.9249 23 34V39.5Z" fill="#A5380A" stroke="#08A524" stroke-width="1.61"/>
@@ -62,6 +69,7 @@
 	</header>
 	<main>
 		<div class="container">
+			<!-- Dropdown filter for tags -->
 			<div class="dropdown mb-4">
 				<button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">Filtrer par tag</button>
 				<ul class="dropdown-menu" id="postTagFilterMenu" aria-labelledby="filterDropdown">
@@ -78,11 +86,13 @@
 			</div>
 			<div class="row">
 				{% for post in posts %}
+					<!-- Each post card -->
 					<div class="col-lg-4 col-md-6 col-sm-12 mb-4 post-item" data-tag="{% if post.tags is not empty %}{{ post.tags[0].nameTag|lower }}{% else %}none{% endif %}">
 						<div class="posts-lists">
 							<div class="container-card gapper">
 								<div class="card-author">
 									<div class="author">
+										<!-- Post title and author -->
 										<h2>
 											<a href="{{ path('app_post_show', {'id': post.id}) }}">{{ post.title }}</a>
 										</h2>
@@ -94,6 +104,7 @@
 									</div>
 
 									{% if post.img %}
+										<!-- Post image preview -->
 										<div class="preview-img">
 											<a href="{{ path('app_post_show', {'id': post.id}) }}">
 												<img src="{{ asset(post.img.path) }}" alt="{{ post.title }} by {{ post.user.username }}">
@@ -102,6 +113,7 @@
 									{% endif %}
 									<div class="tag-input-select">
 										<div class="overlap-group">
+											<!-- Display tags for the post -->
 											{% if post.tags is not empty %}
 												{% for tag in post.tags %}
 													<span class="tag-label badge bg-info text-dark">{{ tag.nameTag }}</span>
@@ -109,9 +121,9 @@
 											{% endif %}
 										</div>
 									</div>
+									<!-- Like button -->
 									<form
 										action="{{ path('app_like', { 'id': post.id }) }}" method="POST" class="like-form" style="display: inline-block;">
-										<!-- Le bouton est l'icône, stylisée comme tu veux -->
 										<button type="submit" class="like-button pixelarticons-heart like stop-scroll" post-like="{{ post.id }}" aria-label="Aimer le post">
 											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="heart-svg">
 												<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
@@ -121,6 +133,7 @@
 									</form>
 
 									<div class="post-actions">
+										<!-- Edit and delete options for the post owner -->
 										{% if app.user == post.user %}
 											<a href="{{ path('app_post_edit', {'id': post.id}) }}" class="edit-btn" aria-label="editer les posts">Editer</a>
 											{{ include('post/_delete_form.html.twig', {'post': post}) }}
@@ -131,10 +144,11 @@
 						</div>
 					</div>
 				{% else %}
+					<!-- Message if no posts are found -->
 					<p>No posts found.</p>
 				{% endfor %}
 			</div>
-			{# close row #}
+			<!-- Pagination for navigating between pages -->
 			<nav aria-label="Navigation entre les pages">
 				<ul class="pagination justify-content-center mt-4">
 					<li class="page-item disabled">
@@ -155,6 +169,5 @@
 				</ul>
 			</nav>
 		</div>
-		{# close container #}
 	</main>
 {% endblock %}

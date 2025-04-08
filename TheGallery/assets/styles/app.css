@@ -6,6 +6,7 @@
   --variable-collection-primary-dark:   rgba(0, 0, 0, 1);    /* Noir */
   --variable-collection-pers-green:     rgba(8, 165, 36, 1);
   --variable-collection-primary-automn: rgba(165, 56, 10, 1); /* Automne */
+  --variable-collection-primary-automn-bis: rgb(212, 91, 39); /* Automne */
   --variable-collection-primary-automn-variant: rgb(185, 61, 9); /* Automne */
   --variable-collection-white:          rgba(255, 255, 255, 1);
   --variable-collection-text-autumn:    rgba(202, 113, 12, 1);
@@ -98,7 +99,7 @@ max-width: fit-content;
 .login-btn,
 .save-btn,
 .logout-btn {
-  background: var(--variable-collection-primary-automn-variant);
+  background: var(--variable-collection-primary-automn-bis);
   color: var(--variable-collection-primary-dark);
 }
 
@@ -187,7 +188,7 @@ max-width: fit-content;
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.45), 
       rgba(0, 0, 0, 0.45)
-      ),url("images/header_automn.jpg");
+      ),url("images/header_automn.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -877,7 +878,7 @@ text-align: left;
 
 /* Style des liens */
 .navbar-nav .nav-link.button-global {
-  background-color: var(--variable-collection-primary-automn);
+  background-color: var(--variable-collection-primary-automn-bis);
   color: var(--variable-collection-primary-dark);
   font-weight: 700;
   font-family: "Lexend", sans-serif;

@@ -72,29 +72,30 @@ final class ImageController extends AbstractController
         $titlePost = $request->query->get('title');
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('path')->getData();
+            $file = $form->get('path')->getData(); // Récupérer le fichier uploadé
 
-            if ($file instanceof UploadedFile) {
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+            if ($file instanceof UploadedFile) { // Vérifier si le fichier est valide
+                // Générer un nom de fichier unique
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME); // Obtenir le nom de fichier original
+                $safeFilename = $slugger->slug($originalFilename); // Utiliser le slugger pour générer un nom de fichier sûr
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension(); // Générer un nom de fichier unique avec l'extension d'origine
 
                 // Déplacer le fichier vers le répertoire des images
                 try {
                     $file->move(
-                        $this->getParameter('images_directory'),
-                        $newFilename
+                        $this->getParameter('images_directory'), // Chemin vers le répertoire de destination
+                        $newFilename // Nom de fichier unique
                     );
                 } catch (FileException $e) {
                     // Gérer l'exception, par exemple en enregistrant l'erreur ou en informant l'utilisateur
-                    $this->addFlash('error', 'An error occurred while uploading the file.');
-                    return $this->render('image/new.html.twig', [
-                        'form' => $form->createView(),
+                    $this->addFlash('error', 'An error occurred while uploading the file.'); 
+                    return $this->render('image/new.html.twig', [ // Afficher le formulaire à nouveau en cas d'erreur
+                        'form' => $form->createView(), // Passer le formulaire à la vue
                     ]);
                 }
 
                 // Enregistrer le chemin partiel dans la base de données
-                $image->setPath('uploads/images/' . $newFilename);
+                $image->setPath('uploads/images/' . $newFilename); // Chemin relatif à partir de la racine du projet 
                 $image->setTitle($form->get('title')->getData());
                 $image->setCreatedAt(new \DateTimeImmutable());
 
@@ -104,8 +105,8 @@ final class ImageController extends AbstractController
                     $image->setuser($user);
                 }
 
-                $entityManager->persist($image);
-                $entityManager->flush();
+                $entityManager->persist($image); // Persister l'image dans la base de données
+                $entityManager->flush(); // Enregistrer les modifications
 
                 // return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
                 // Rediriger vers la création de post avec l'ID de l'image
@@ -117,7 +118,7 @@ final class ImageController extends AbstractController
 
         return $this->render('image/new.html.twig', [
 
-            'form' => $form->createView(),
+            'form' => $form->createView(), // Passer le formulaire à la vue
         ]);
     }
 
