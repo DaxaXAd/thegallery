@@ -19,14 +19,15 @@ class LikeRepository extends ServiceEntityRepository
     /**
      * Retourne le nombre total de likes pour un post donné.
      */
-    public function totalLike($postId): int
+    public function totalLike($postId): int // On définit le type de retour de la méthode comme un entier
     {    
-        $qb = $this->createQueryBuilder('l')
-            ->select('count(l.id)')
-            ->where('l.post = :postId')
-            ->setParameter('postId', $postId);
-        return $qb->getQuery()->getSingleScalarResult();
-
+        $qb = $this->createQueryBuilder('l') // On crée un QueryBuilder pour l'entité Like
+            ->select('count(l.id)') // On compte le nombre de likes
+            ->where('l.post = :postId') // On filtre par post
+            ->setParameter('postId', $postId); // On définit le paramètre par postId
+        // On exécute la requête et on récupère le résultat
+        // getSingleScalarResult() renvoie un seul résultat, ici le nombre total de likes
+        return $qb->getQuery()->getSingleScalarResult(); // renvoie le résultat avec getSingleScalarResult 
     }    
     //    /**
     //     * @return Like[] Returns an array of Like objects

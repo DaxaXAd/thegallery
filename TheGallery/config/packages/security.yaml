@@ -1,58 +1,63 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    # Password Hashing Configuration
+    # Uses Symfony's recommended automatic hashing algorithm
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+    # User Provider Configuration
+    # Defines how users are loaded from the database
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\User
-                property: email
+                class: App\Entity\User    # Uses the User entity
+                property: email           # Identifies users by their email
+
+    # Firewall Configuration
     firewalls:
+        # Development tools firewall
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+            security: false               # Disables security for these routes
+
+        # Main application firewall
         main:
-            lazy: true
-            provider: app_user_provider
+            lazy: true                    # Loads user only when necessary
+            provider: app_user_provider   # Uses the provider defined above
+            
+            # Login form configuration
             form_login:
-                login_path: app_login
-                check_path: app_login
-                enable_csrf: true
+                login_path: app_login     # Route to login form
+                check_path: app_login     # Route for credentials checking
+                enable_csrf: true         # Enables CSRF protection
+
+            # Logout configuration
             logout:
-                path: app_logout
-                # where to redirect after logout
-                target: home
-                
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
+                path: app_logout          # Route for logging out
+                target: home              # Redirect after logout
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # Access Control Configuration
+    # Rules are checked in order, first match is used
     access_control:
+        # Admin-only routes
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/contact/show, roles: ROLE_ADMIN }
         - { path: ^/contact/index, roles: ROLE_ADMIN }
         - { path: ^/user/new, roles: ROLE_ADMIN }
+        
+        # Authenticated user routes
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/image, roles: ROLE_USER }
         - { path: ^/post, roles: ROLE_USER }
         - { path: ^/user, roles: ROLE_USER }
         - { path: ^/comment, roles: ROLE_USER }
 
+# Test Environment Configuration
 when@test:
     security:
         password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
+            # Reduces hashing complexity to speed up tests
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+                cost: 4                   # Minimum value for bcrypt
+                time_cost: 3              # Minimum value for argon
+                memory_cost: 10           # Minimum value for argon

@@ -2,26 +2,34 @@
 
 namespace App\Controller;
 
-
+// Entity imports
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Image;
+
+// Form imports
 use App\Form\UserType;
+
+// Repository imports
 use App\Repository\UserRepository;
 use App\Repository\PostsRepository;
 use App\Repository\ImageRepository;
+use App\Repository\LikeRepository;
+
+// Symfony component imports
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Controller\SecurityController;
-use App\Repository\LikeRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
+/**
+ * Controller managing all user-related operations
+ */
 #[Route('/user')]
 final class UserController extends AbstractController
 {
@@ -32,23 +40,26 @@ final class UserController extends AbstractController
         $this->doctrine = $doctrine;
     }
 
+    /**
+     * Displays user index page with their posts and likes
+     */
     #[Route('/user/{slug}', name: 'app_user_index', methods: ['GET'])]
     public function index(int $id, UserRepository $userRepository, LikeRepository $likeRepository, string $slug): Response
     {
+        // Find user by slug or throw 404
         $user = $userRepository->findOneBy(['slug' => $slug]);
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
 
+        // Get all posts for this user
         $posts = $user->getPosts();
 
+        // Calculate like count for each post
         $likeCount = [];
         foreach ($posts as $post) {
-            // Appel à ta méthode custom (ou la méthode native count(['post' => $post]))
             $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
         }
-
-        $likeCount = $likeRepository->totalLike($user->getPosts());
 
         return $this->render('user/index.html.twig', [
             'user' => $user,
@@ -57,9 +68,9 @@ final class UserController extends AbstractController
         ]);
     }
 
-
-
-
+    /**
+     * Creates a new user
+     */
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -68,9 +79,10 @@ final class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            // Set default user role
             $user->setRoles(['ROLE_USER']);
 
+            // Set default profile picture if none provided
             if (!$user->getProfilePic()) {
                 $user->setProfilePic('images/profil/profil.png');
             }
@@ -87,23 +99,23 @@ final class UserController extends AbstractController
         ]);
     }
 
-
-
-
+    /**
+     * Shows detailed user information
+     */
     #[Route('/{slug}', name: 'app_user_show', methods: ['GET'])]
     public function show(UserRepository $userRepository, LikeRepository $likeRepository, string $slug): Response
     {
+        // Find user by slug or throw 404
         $user = $userRepository->findOneBy(['slug' => $slug]);
-        // $user = $userRepository->find($id);
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
 
         $posts = $user->getPosts();
 
+        // Calculate likes for each post
         $likeCount = [];
         foreach ($posts as $post) {
-            // Appel à ta méthode custom (ou la méthode native count(['post' => $post]))
             $likeCount[$post->getId()] = $likeRepository->totalLike($post->getId());
         }
 
@@ -114,36 +126,35 @@ final class UserController extends AbstractController
         ]);
     }
 
-
-
+    /**
+     * Edits user information including password and profile picture
+     */
     #[Route('/{slug}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response
     {
+        // Find user by slug or throw 404
         $user = $userRepository->findOneBy(['slug' => $slug]);
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
 
-
-
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // Hashing and manage password
+            // Handle password update if provided
             $newPassword = $form->get('password')->getData();
             if (!empty($newPassword)) {
                 $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
                 $user->setPassword($hashedPassword);
             }
 
-            // manage and add profile_pic
+            // Handle profile picture upload
             $profilePicture = $form->get('profile_pic')->getData();
             if ($profilePicture) {
-
                 $pictureFilename = uniqid() . '.' . $profilePicture->guessExtension();
                 try {
+                    // Move uploaded file to profile pictures directory
                     $profilePicture->move(
                         $this->getParameter('profile_pictures_directory'),
                         $pictureFilename
@@ -166,16 +177,15 @@ final class UserController extends AbstractController
         ]);
     }
 
-
-
-
+    /**
+     * Deletes a user account and their profile picture
+     */
     #[Route('/{slug}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, string $slug, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $userRepository->findOneBy(['slug' => $slug]);
         if ($this->isCsrfTokenValid('delete' . $user->getSlug(), $request->getPayload()->getString('_token'))) {
-
-
+            // Delete profile picture file if it exists
             if ($user->getProfilePic()) {
                 $profilePicturePath = $this->getParameter('kernel.project_dir') . '/public' . $user->getProfilePic();
                 if (file_exists($profilePicturePath)) {
@@ -183,9 +193,11 @@ final class UserController extends AbstractController
                 }
             }
 
+            // Remove user and logout
             $entityManager->remove($user);
             $entityManager->flush();
 
+            // Invalidate session and clear security token
             $request->getSession()->invalidate();
             $this->container->get('security.token_storage')->setToken(null);
 
@@ -195,23 +207,23 @@ final class UserController extends AbstractController
         return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
     }
 
-
-
-
+    /**
+     * Shows user profile with their images and posts
+     */
     #[Route('/profile/{slug}', name: 'app_user_profile', methods: ['GET'])]
     public function profile(string $slug, UserRepository $userRepository, ImageRepository $imageRepository, LikeRepository $likeRepository): Response
     {
+        // Find user by slug or throw 404
         $user = $userRepository->findOneBy(['slug' => $slug]);
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
 
-        // Récupération des images via la relation OneToMany
+        // Get user's images and posts
         $images = $user->getImages();
-
-        // Récupération des posts via la relation OneToMany
         $posts = $user->getPosts();
 
+        // Calculate likes for each image's post
         $likeCounts = [];
         foreach ($images as $image) {
             if ($image->getPost()) {
