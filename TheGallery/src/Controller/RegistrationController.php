@@ -26,11 +26,12 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
+            dump($form->getData());
             $plainPassword = $form->get('plainPassword')->getData();
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+
             if (!$user->getProfilePic()) {
                 $user->setProfilePic('images/profil/profil.png');
             }
@@ -39,7 +40,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-
+            dump($user);
             // do anything else you need here, like send an email
 
             return $security->login($user, 'form_login', 'main');
