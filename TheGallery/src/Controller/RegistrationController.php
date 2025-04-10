@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+
 
 class RegistrationController extends AbstractController
 {
@@ -24,38 +26,38 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-        
-   
-        
+
         if ($form->isSubmitted()) {
-            // dump('Form valid:', $form->isValid());
-            // dump($form->getErrors(true, true)); // Montre les erreurs précises
-
-
-            if($form->isValid()) {
-                // dump($form->getData());
+            if ($form->isValid()) {
                 $plainPassword = $form->get('plainPassword')->getData();
-                // dump($plainPassword);
-                // encode the plain password
                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-                // dump($user->getPassword());
+
                 if (!$user->getProfilePic()) {
                     $user->setProfilePic('images/profil/profil.png');
                 }
-    
+
                 $user->setRoles(['ROLE_USER']);
-    
-                $entityManager->persist($user);
-                $entityManager->flush();
-                // do anything else you need here, like send an email
-    
+                $user->setUpdatedAt(new \DateTimeImmutable());
+
+                // Création du slug à partir du username
+                $slugger = new AsciiSlugger();
+                $slug = $slugger->slug($user->getUsername());
+                $user->setSlug($slug);
+
+                try {
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+                } catch (\Exception $e) {
+                    $this->addFlash("danger", "Erreur à l'enregistrement : " . $e->getMessage());
+                    return $this->redirectToRoute('app_register');
+                }
+
+                $this->addFlash('success', 'Inscription réussie ! Bienvenue sur TheGallery 🦊');
                 return $security->login($user, 'form_login', 'main');
-                // $security->login($user);
-    
-                // return $this->redirectToRoute('app_posts_index', ['id' => $user->getId()]);
-                 // ou autre route logique
             }
-            return $this->redirectToRoute('app_post_index');
+
+            $this->addFlash('danger', 'Le formulaire est invalide.');
+            return $this->redirectToRoute('app_register');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -63,3 +65,55 @@ class RegistrationController extends AbstractController
         ]);
     }
 }
+
+// class RegistrationController extends AbstractController
+// {
+//     #[Route('/register', name: 'app_register')]
+//     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+//     {
+//         if ($this->getUser()) {
+//             return $this->redirectToRoute('app_posts_index');
+//         }
+
+//         $user = new User();
+//         $form = $this->createForm(RegistrationFormType::class, $user);
+//         $form->handleRequest($request);
+        
+   
+        
+//         if ($form->isSubmitted()) {
+//             // dump('Form valid:', $form->isValid());
+//             // dump($form->getErrors(true, true)); // Montre les erreurs précises
+
+
+//             if($form->isValid()) {
+//                 // dump($form->getData());
+//                 $plainPassword = $form->get('plainPassword')->getData();
+//                 // dump($plainPassword);
+//                 // encode the plain password
+//                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+//                 // dump($user->getPassword());
+//                 if (!$user->getProfilePic()) {
+//                     $user->setProfilePic('images/profil/profil.png');
+//                 }
+    
+//                 $user->setRoles(['ROLE_USER']);
+    
+//                 $entityManager->persist($user);
+//                 $entityManager->flush();
+//                 // do anything else you need here, like send an email
+    
+//                 return $security->login($user, 'form_login', 'main');
+//                 // $security->login($user);
+    
+//                 // return $this->redirectToRoute('app_posts_index', ['id' => $user->getId()]);
+//                  // ou autre route logique
+//             }
+//             return $this->redirectToRoute('app_post_index');
+//         }
+
+//         return $this->render('registration/register.html.twig', [
+//             'registrationForm' => $form->createView(),
+//         ]);
+//     }
+// }
