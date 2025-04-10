@@ -7,6 +7,7 @@ cmds = [
   "npm install",
   "npm install postcss-loader@^8.1.0 --save-dev",
   "npm install sass-loader@^16.0.1 sass --save-dev"
+  "npm install webpack-notifier@^1.15.0 --save-dev"
 ]
 
 [phases.build]
