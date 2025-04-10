@@ -24,31 +24,38 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-        dump('Form valid:', $form->isValid());
-        dump('Form submitted:', $form->isSubmitted());
         
-        if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
-            $plainPassword = $form->get('plainPassword')->getData();
+   
+        
+        if ($form->isSubmitted()) {
+            dump('Form valid:', $form->isValid());
 
-            // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-            if (!$user->getProfilePic()) {
-                $user->setProfilePic('images/profil/profil.png');
+
+            if($form->isValid()) {
+                dump($form->getData());
+                $plainPassword = $form->get('plainPassword')->getData();
+    
+                // encode the plain password
+                $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+    
+                if (!$user->getProfilePic()) {
+                    $user->setProfilePic('images/profil/profil.png');
+                }
+    
+                $user->setRoles(['ROLE_USER']);
+    
+                $entityManager->persist($user);
+                $entityManager->flush();
+                dd($user);
+                // do anything else you need here, like send an email
+    
+                return $security->login($user, 'form_login', 'main');
+                // $security->login($user);
+    
+                // return $this->redirectToRoute('app_posts_index', ['id' => $user->getId()]);
             }
-
-            $user->setRoles(['ROLE_USER']);
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-            dump($user); die;
-            // do anything else you need here, like send an email
-
-            return $security->login($user, 'form_login', 'main');
-            // $security->login($user);
-
-            // return $this->redirectToRoute('app_posts_index', ['id' => $user->getId()]);
+          
         }
 
         return $this->render('registration/register.html.twig', [
