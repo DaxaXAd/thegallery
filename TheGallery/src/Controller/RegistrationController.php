@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
                 // return $this->redirectToRoute('app_posts_index', ['id' => $user->getId()]);
                  // ou autre route logique
             }
-            return $this->redirectToRoute('app_posts_index');
+            return $this->redirectToRoute('app_post_index');
         }
 
         return $this->render('registration/register.html.twig', [
