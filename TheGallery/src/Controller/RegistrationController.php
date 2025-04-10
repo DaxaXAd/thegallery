@@ -28,17 +28,17 @@ class RegistrationController extends AbstractController
    
         
         if ($form->isSubmitted()) {
-            dump('Form valid:', $form->isValid());
-            dump($form->getErrors(true, true)); // Montre les erreurs précises
+            // dump('Form valid:', $form->isValid());
+            // dump($form->getErrors(true, true)); // Montre les erreurs précises
 
 
             if($form->isValid()) {
-                dump($form->getData());
+                // dump($form->getData());
                 $plainPassword = $form->get('plainPassword')->getData();
-                dump($plainPassword);
+                // dump($plainPassword);
                 // encode the plain password
                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-                dump($user->getPassword());
+                // dump($user->getPassword());
                 if (!$user->getProfilePic()) {
                     $user->setProfilePic('images/profil/profil.png');
                 }
@@ -53,9 +53,9 @@ class RegistrationController extends AbstractController
                 // $security->login($user);
     
                 // return $this->redirectToRoute('app_posts_index', ['id' => $user->getId()]);
-                return $this->redirectToRoute('app_posts_index'); // ou autre route logique
+                 // ou autre route logique
             }
-          
+            return $this->redirectToRoute('app_posts_index');
         }
 
         return $this->render('registration/register.html.twig', [
