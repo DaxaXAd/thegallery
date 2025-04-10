@@ -25,6 +25,8 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+        dump('Form submitted:', $form->isSubmitted());
+        dump('Form valid:', $form->isValid());
         if ($form->isSubmitted() && $form->isValid()) {
             dump($form->getData());
             $plainPassword = $form->get('plainPassword')->getData();
@@ -40,7 +42,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            dump($user);
+            dump($user); die;
             // do anything else you need here, like send an email
 
             return $security->login($user, 'form_login', 'main');
