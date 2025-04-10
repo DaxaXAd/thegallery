@@ -44,7 +44,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('email', EmailType::class, [
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new Email([
                         'message' => 'Entrer une adresse email valide.',
