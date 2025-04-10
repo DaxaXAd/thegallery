@@ -29,7 +29,7 @@ class RegistrationController extends AbstractController
         
         if ($form->isSubmitted()) {
             dump('Form valid:', $form->isValid());
-
+            dump($form->getErrors(true, true)); // Montre les erreurs précises
 
 
             if($form->isValid()) {
