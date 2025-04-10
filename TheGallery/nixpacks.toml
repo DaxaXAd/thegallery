@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["nodejs_20", "php", "phpPackages.composer, "phpExtensions.pdo_mysql"]
+nixPkgs = ["nodejs_20", "php", "phpPackages.composer", "phpExtensions.pdo_mysql"]
  
 [phases.install]
 cmds = [
