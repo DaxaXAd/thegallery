@@ -28,9 +28,10 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            dump($form->getErrors(true, true)); 
+            // dump($form->getErrors(true, true)); 
             if ($form->isValid()) {
-                dump($form->getErrors(true, true)); 
+                // dump($form->getErrors(true, true)); 
+
                 $plainPassword = $form->get('plainPassword')->getData();
                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
@@ -46,13 +47,12 @@ class RegistrationController extends AbstractController
                 $slug = $slugger->slug($user->getUsername());
                 $user->setSlug($slug);
 
-                try {
+                $user->setRoles(['ROLE_USER']);
+                $user->setUpdatedAt(new \DateTimeImmutable());
+
                     $entityManager->persist($user);
                     $entityManager->flush();
-                } catch (\Exception $e) {
-                    $this->addFlash("danger", "Erreur à l'enregistrement : " . $e->getMessage());
-                    return $this->redirectToRoute('app_register');
-                }
+                
 
                 $this->addFlash('success', 'Inscription réussie ! Bienvenue sur TheGallery 🦊');
                 return $this->redirectToRoute('app_posts_index');
