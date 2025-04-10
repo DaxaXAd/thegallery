@@ -53,7 +53,7 @@ class RegistrationController extends AbstractController
                 }
 
                 $this->addFlash('success', 'Inscription réussie ! Bienvenue sur TheGallery 🦊');
-                return $security->login($user, 'form_login', 'main');
+                return $this->redirectToRoute('app_posts_index');
             }
 
             $this->addFlash('danger', 'Le formulaire est invalide.');
