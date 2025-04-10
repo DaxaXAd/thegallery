@@ -52,8 +52,47 @@
 
     
 </div>
+<form method="post" class="register-form">
+    <div class="form-group">
+        <label for="registration_form_username">Nom d'utilisateur</label>
+        <input type="text" id="registration_form_username" name="registration_form[username]" class="form-control" required>
+    </div>
 
-		{{ form_start(registrationForm, { 'attr': { 'class': 'register-form' } }) }}
+    <div class="form-group">
+        <label for="registration_form_email">Email</label>
+        <input type="email" id="registration_form_email" name="registration_form[email]" class="form-control" required autocomplete="email">
+    </div>
+
+    <div class="form-group">
+        <label for="registration_form_plainPassword">Mot de passe</label>
+        <input type="password" id="registration_form_plainPassword" name="registration_form[plainPassword]" class="form-control" required autocomplete="new-password">
+    </div>
+
+    <div class="form-group">
+        <label for="registration_form_bio">Biographie (optionnel)</label>
+        <textarea id="registration_form_bio" name="registration_form[bio]" class="form-control" maxlength="255"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="registration_form_location">Localisation (optionnel)</label>
+        <input type="text" id="registration_form_location" name="registration_form[location]" class="form-control">
+    </div>
+
+    <div class="form-group form-check">
+        <input type="checkbox" id="registration_form_agreeTerms" name="registration_form[agreeTerms]" class="form-check-input" required>
+        <label for="registration_form_agreeTerms">En cochant cette case, vous acceptez que vos données entrées soient utilisées pour la connexion et la sécurité du compte.</label>
+    </div>
+
+    <input type="hidden" name="registration_form[_token]" value="{{ csrf_token('registration_form') }}">
+
+    <div class="form-group">
+        <button type="submit" class="btn-submit">
+            {{ button_label|default("S'inscrire") }}
+        </button>
+    </div>
+</form>
+
+		{# {{ form_start(registrationForm, { 'attr': { 'class': 'register-form' } }) }}
 
         <div class="form-group">
             {{ form_label(registrationForm.username) }}
@@ -98,7 +137,7 @@
             </button>
         </div>
 
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }} #}
 	
 	</main>
 
