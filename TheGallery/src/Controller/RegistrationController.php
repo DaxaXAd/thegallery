@@ -66,8 +66,26 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
-}
 
+
+#[Route('/test-user', name: 'test_user')]
+public function test(EntityManagerInterface $em): Response
+{
+    $user = new User();
+    $user->setEmail('fox@test.com');
+    $user->setPassword('testpass');
+    $user->setRoles(['ROLE_USER']);
+    $user->setUsername('FoxTest');
+    $user->setSlug('foxtest');
+    $user->setProfilePic('images/profil/profil.png');
+    $user->setUpdatedAt(new \DateTimeImmutable());
+
+    $em->persist($user);
+    $em->flush();
+
+    return new Response("User ajouté !");
+}
+}
 // class RegistrationController extends AbstractController
 // {
 //     #[Route('/register', name: 'app_register')]
