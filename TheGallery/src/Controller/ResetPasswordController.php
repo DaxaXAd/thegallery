@@ -133,7 +133,6 @@ class ResetPasswordController extends AbstractController
 
         try {
             $mailer->send($email);
-            dd('Mail envoyé avec succès 🎉');
         } catch (\Exception $e) {
             return new Response('Erreur lors de l\'envoi : ' . $e->getMessage());
         }

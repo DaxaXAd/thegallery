@@ -9,6 +9,7 @@ use App\Entity\Comment;
 use App\Form\PostType;
 use App\Form\ImageType;
 use App\Form\CommentType;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Repository\PostRepository;
 use App\Repository\ImageRepository;
 use App\Repository\LikeRepository;
@@ -21,9 +22,11 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\UserRepository;
 
 #[Route('/post')]
+#[IsGranted('ROLE_USER')]
 final class PostController extends AbstractController
 {
     #[Route(name: 'app_post_index', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function index(PostRepository $postRepository, LikeRepository $likeRepository, TagRepository $tagRepository): Response
     {
 
@@ -46,6 +49,7 @@ final class PostController extends AbstractController
 
 
     #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $entityManager, ImageRepository $imageRepository, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
@@ -107,6 +111,7 @@ final class PostController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_post_show', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function show(Request $request, Post $post, LikeRepository $likeRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
@@ -153,6 +158,7 @@ final class PostController extends AbstractController
 
 
     #[Route('/{id}/edit', name: 'app_post_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Post $post, EntityManagerInterface $entityManager, ImageRepository $imageRepository): Response
     {
         
@@ -185,6 +191,7 @@ final class PostController extends AbstractController
 
 
     #[Route('/{id}/delete', name: 'app_post_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->getPayload()->getString('_token'))) {

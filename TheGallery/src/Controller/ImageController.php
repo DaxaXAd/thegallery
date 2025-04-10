@@ -11,6 +11,7 @@ use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Repository\ImageRepository;
 use App\Repository\LikeRepository;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,11 +22,13 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[Route('/image')]
+#[IsGranted('ROLE_USER')]
 final class ImageController extends AbstractController
 {
 
     // version using filename
     #[Route('/', name: 'app_image_index', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function index(ImageRepository $imageRepository, LikeRepository $likeRepository, TagRepository $tagRepository): Response
     {
         // $imagesDirectory = $this->getParameter('images_directory'); 
@@ -59,6 +62,7 @@ final class ImageController extends AbstractController
 
 
     #[Route('/new', name: 'app_image_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         // $user = $this->getUser();
@@ -126,6 +130,7 @@ final class ImageController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_image_show', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function show(Image $image, LikeRepository $likeRepository): Response
     {
 
@@ -142,6 +147,7 @@ final class ImageController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_image_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Image $image, EntityManagerInterface $entityManager): Response
     {
         // Vérification : seul le propriétaire de l'image peut éditer
@@ -169,6 +175,7 @@ final class ImageController extends AbstractController
 
 
     #[Route('/{id}/delete', name: 'app_image_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Image $image, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $request->getPayload()->getString('_token'))) {
@@ -176,15 +183,13 @@ final class ImageController extends AbstractController
             // $imagePath = $this->getParameter('images_directory') . '/' . ltrim($image->getPath(), '/');
             $imagePath = $this->getParameter('kernel.project_dir') . '/public/' . ltrim($image->getPath(), '/');
 
-
-
-
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
+            if (file_exists($imagePath)) { // Check if the file exists
+                unlink($imagePath); // Delete the image file
             }
 
-            $entityManager->remove($image);
-            $entityManager->flush();
+            $entityManager->remove($image); // Remove the image from the database
+            // Remove likes associated with the image
+            $entityManager->flush(); // Save the changes to the database
         }
 
         return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);

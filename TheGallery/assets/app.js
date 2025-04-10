@@ -9,7 +9,7 @@ import './bootstrap.js';
  */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+// console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 // document.addEventListener('DOMContentLoaded', function () {
 //     const fileInput = document.getElementById('user_profilePicture');
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // 5. data contient la réponse JSON envoyée par le contrôleur
                     //    Par exemple : { success: true, action: "liked", likes: 5 }
 
-                    console.log("Réponse JSON reçue :", data);
+                    // console.log("Réponse JSON reçue :", data);
 
                     // 6. Mettre à jour le compteur de likes
                     //    le <span class="like-count"> se trouve
@@ -152,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /* script filtre tag */
-
 document.addEventListener('DOMContentLoaded', function () {
     const buttons = document.querySelectorAll('[data-filter]');
     const items = document.querySelectorAll('.image-item');

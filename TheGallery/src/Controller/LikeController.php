@@ -7,6 +7,7 @@ use App\Entity\Post;
 use App\Form\LikeType;
 use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,9 +15,11 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse; // Ajout important for AJAX
 
 #[Route('/like')]
+#[IsGranted('ROLE_USER')]
 final class LikeController extends AbstractController
 {
     #[Route('/{id}',name: 'app_like')]
+    #[IsGranted('ROLE_USER')]
     public function addLike(Post $post, Request $request, EntityManagerInterface $entityManager, LikeRepository $likeRepository): Response
     {
         // Vérifier si l'utilisateur est connecté
@@ -60,6 +63,7 @@ final class LikeController extends AbstractController
     }
 
     #[Route(name:'show_like')]
+    #[IsGranted('ROLE_USER')]
     public function showNumberLike($postId, EntityManagerInterface $entityManager): Response
     {
         $numberLike = $entityManager->getRepository(Like::class)->count(['post' => $postId,]);

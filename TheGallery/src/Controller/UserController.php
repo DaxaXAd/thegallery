@@ -26,24 +26,27 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
  * Controller managing all user-related operations
  */
 #[Route('/user')]
+#[IsGranted('ROLE_USER')]
 final class UserController extends AbstractController
 {
     private $doctrine;
 
-    public function __construct(ManagerRegistry $doctrine)
+    public function __construct(ManagerRegistry $doctrine) // Constructor to inject the Doctrine registry
     {
-        $this->doctrine = $doctrine;
+        $this->doctrine = $doctrine; // Store the Doctrine registry
     }
 
     /**
      * Displays user index page with their posts and likes
      */
     #[Route('/user/{slug}', name: 'app_user_index', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function index(int $id, UserRepository $userRepository, LikeRepository $likeRepository, string $slug): Response
     {
         // Find user by slug or throw 404
@@ -72,6 +75,7 @@ final class UserController extends AbstractController
      * Creates a new user
      */
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -103,6 +107,7 @@ final class UserController extends AbstractController
      * Shows detailed user information
      */
     #[Route('/{slug}', name: 'app_user_show', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function show(UserRepository $userRepository, LikeRepository $likeRepository, string $slug): Response
     {
         // Find user by slug or throw 404
@@ -130,6 +135,7 @@ final class UserController extends AbstractController
      * Edits user information including password and profile picture
      */
     #[Route('/{slug}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response
     {
         // Find user by slug or throw 404
@@ -181,6 +187,7 @@ final class UserController extends AbstractController
      * Deletes a user account and their profile picture
      */
     #[Route('/{slug}', name: 'app_user_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Request $request, string $slug, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $user = $userRepository->findOneBy(['slug' => $slug]);
@@ -211,6 +218,7 @@ final class UserController extends AbstractController
      * Shows user profile with their images and posts
      */
     #[Route('/profile/{slug}', name: 'app_user_profile', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function profile(string $slug, UserRepository $userRepository, ImageRepository $imageRepository, LikeRepository $likeRepository): Response
     {
         // Find user by slug or throw 404

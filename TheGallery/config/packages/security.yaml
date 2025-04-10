@@ -43,6 +43,7 @@ security:
         - { path: ^/contact/show, roles: ROLE_ADMIN }
         - { path: ^/contact/index, roles: ROLE_ADMIN }
         - { path: ^/user/new, roles: ROLE_ADMIN }
+        - { path: ^/test, roles: ROLE_ADMIN }
         
         # Authenticated user routes
         - { path: ^/profile, roles: ROLE_USER }
