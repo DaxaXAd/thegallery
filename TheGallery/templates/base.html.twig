@@ -14,16 +14,14 @@
 		{# <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
 		<script src="{{ asset('app.js') }}" defer></script> #}
 	
-		{% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-{% endblock %}
-            
-		{% block javascripts %}
-			{% block importmap %}
-				{{ importmap('app') }}
-			{% endblock %}
-			
+				{% block stylesheets %}
+		{{ encore_entry_link_tags('app') }}
 		{% endblock %}
+
+		{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+
 		
 	</head>
 	<body>
