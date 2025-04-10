@@ -35,10 +35,10 @@ class RegistrationController extends AbstractController
             if($form->isValid()) {
                 dump($form->getData());
                 $plainPassword = $form->get('plainPassword')->getData();
-    
+                dump($plainPassword);
                 // encode the plain password
                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-    
+                dump($user->getPassword());
                 if (!$user->getProfilePic()) {
                     $user->setProfilePic('images/profil/profil.png');
                 }
@@ -53,6 +53,7 @@ class RegistrationController extends AbstractController
                 // $security->login($user);
     
                 // return $this->redirectToRoute('app_posts_index', ['id' => $user->getId()]);
+                return $this->redirectToRoute('app_posts_index'); // ou autre route logique
             }
           
         }
