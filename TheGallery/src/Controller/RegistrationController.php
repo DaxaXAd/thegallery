@@ -81,8 +81,9 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
         $user->setUsername('FoxTest');
         $user->setSlug('foxtest');
         $user->setProfilePic('images/profil/profil.png');
-        $user->setUpdatedAt(new \DateTimeImmutable());
         dump($user); die;
+        $user->setUpdatedAt(new \DateTimeImmutable());
+        
         $em->persist($user);
         $em->flush();
 
