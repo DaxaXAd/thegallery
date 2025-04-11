@@ -56,7 +56,7 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
             
             // Connecter l'utilisateur directement
             // return $security->login($user, 'form_login', 'main');
-          return $this->redirectToRoute('app_posts_index');
+          return $this->redirectToRoute('app_post_index');
         } else {
             // Afficher les erreurs de validation sans arrêter l'exécution
             $this->addFlash('danger', 'Le formulaire est invalide.');
