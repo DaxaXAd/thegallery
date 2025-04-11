@@ -39,6 +39,7 @@ security:
     # Rules are checked in order, first match is used
     access_control:
         # Admin-only routes
+        - { path: ^/test-user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/contact/show, roles: ROLE_ADMIN }
         - { path: ^/contact/index, roles: ROLE_ADMIN }
