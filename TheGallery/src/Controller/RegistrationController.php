@@ -49,6 +49,7 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
 
             // Sauvegarde en base de données
             $entityManager->persist($user);
+            dump($entityManager); die;
             $entityManager->flush();
 
             // Message flash et redirection
