@@ -31,6 +31,8 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
         if ($form->isValid()) {
             // Traitement du mot de passe
             $plainPassword = $form->get('plainPassword')->getData();
+            dump($plainPassword);
+            die();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             // Image de profil par défaut
@@ -49,7 +51,6 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
 
             // Sauvegarde en base de données
             $entityManager->persist($user);
-            dump($entityManager); die;
             $entityManager->flush();
 
             // Message flash et redirection
