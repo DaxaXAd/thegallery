@@ -81,10 +81,11 @@ public function test(EntityManagerInterface $em): Response
     $user->setUsername('FoxTest');
     $user->setSlug('foxtest');
     $user->setProfilePic('images/profil/profil.png');
-    dump($user); die;
+    
     $user->setUpdatedAt(new \DateTimeImmutable());
     
     $em->persist($user);
+    dump($user); die;
     $em->flush();
 
     return new Response("User ajouté !");
