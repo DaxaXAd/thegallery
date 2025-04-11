@@ -17,63 +17,58 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_posts_index');
-        }
-
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-                
-            if (!$form->isValid()) {
-                dd($form->getErrors(true, true)); 
-            }
-
-            // dump($form->getErrors(true, true)); 
-
-            
-            if ($form->isValid()) {
-                // dd($form->getErrors(true, true)); 
-
-
-                $plainPassword = $form->get('plainPassword')->getData();
-                $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-
-                if (!$user->getProfilePic()) {
-                    $user->setProfilePic('images/profil/profil.png');
-                }
-
-                $user->setRoles(['ROLE_USER']);
-                $user->setUpdatedAt(new \DateTimeImmutable());
-
-                // Création du slug à partir du username
-                $slugger = new AsciiSlugger();
-                $slug = $slugger->slug($user->getUsername());
-                $user->setSlug($slug);
-
-                $user->setRoles(['ROLE_USER']);
-                $user->setUpdatedAt(new \DateTimeImmutable());
-                dd($entityManager);
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-
-                $this->addFlash('success', 'Inscription réussie ! Bienvenue sur TheGallery 🦊');
-                return $this->redirectToRoute('app_posts_index');
-            }
-
-            $this->addFlash('danger', 'Le formulaire est invalide.');
-            return $this->redirectToRoute('app_register');
-        }
-
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+{
+    if ($this->getUser()) {
+        return $this->redirectToRoute('app_posts_index');
     }
+
+    $user = new User();
+    $form = $this->createForm(RegistrationFormType::class, $user);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted()) {
+        if ($form->isValid()) {
+            // Traitement du mot de passe
+            $plainPassword = $form->get('plainPassword')->getData();
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+
+            // Image de profil par défaut
+            if (!$user->getProfilePic()) {
+                $user->setProfilePic('images/profil/profil.png');
+            }
+
+            // Création du slug
+            $slugger = new AsciiSlugger();
+            $slug = $slugger->slug($user->getUsername());
+            $user->setSlug($slug);
+
+            // Paramètres additionnels
+            $user->setRoles(['ROLE_USER']);
+            $user->setUpdatedAt(new \DateTimeImmutable());
+
+            // Sauvegarde en base de données
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // Message flash et redirection
+            $this->addFlash('success', 'Inscription réussie ! Bienvenue sur TheGallery 🦊');
+            
+            // Connecter l'utilisateur directement
+            // return $security->login($user, 'form_login', 'main');
+          return $this->redirectToRoute('app_posts_index');
+        } else {
+            // Afficher les erreurs de validation sans arrêter l'exécution
+            $this->addFlash('danger', 'Le formulaire est invalide.');
+            // Pour le débogage vous pouvez temporairement utiliser:
+            dump($form->getErrors(true, true));
+        }
+    }
+
+    return $this->render('registration/register.html.twig', [
+        'registrationForm' => $form->createView(),
+    ]);
+}
 
 
     #[Route('/test-user', name: 'test_user')]
