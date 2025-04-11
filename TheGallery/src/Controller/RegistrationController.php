@@ -82,7 +82,7 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
         $user->setSlug('foxtest');
         $user->setProfilePic('images/profil/profil.png');
         $user->setUpdatedAt(new \DateTimeImmutable());
-
+        dump($user); die;
         $em->persist($user);
         $em->flush();
 
