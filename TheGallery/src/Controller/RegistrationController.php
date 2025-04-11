@@ -85,8 +85,10 @@ public function test(EntityManagerInterface $em): Response
     $user->setUpdatedAt(new \DateTimeImmutable());
     
     $em->persist($user);
-    dump($user); die;
+    dump($em); die;
     $em->flush();
+    dump($em);
+    dump($user); die;
 
     return new Response("User ajouté !");
 }
