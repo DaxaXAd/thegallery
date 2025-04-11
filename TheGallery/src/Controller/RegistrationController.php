@@ -50,9 +50,9 @@ class RegistrationController extends AbstractController
                 $user->setRoles(['ROLE_USER']);
                 $user->setUpdatedAt(new \DateTimeImmutable());
 
-                    $entityManager->persist($user);
-                    $entityManager->flush();
-                
+                $entityManager->persist($user);
+                $entityManager->flush();
+
 
                 $this->addFlash('success', 'Inscription réussie ! Bienvenue sur TheGallery 🦊');
                 return $this->redirectToRoute('app_posts_index');
@@ -68,23 +68,31 @@ class RegistrationController extends AbstractController
     }
 
 
-#[Route('/test-user', name: 'test_user')]
-public function test(EntityManagerInterface $em): Response
-{
-    $user = new User();
-    $user->setEmail('fox@test.com');
-    $user->setPassword('testpass');
-    $user->setRoles(['ROLE_USER']);
-    $user->setUsername('FoxTest');
-    $user->setSlug('foxtest');
-    $user->setProfilePic('images/profil/profil.png');
-    $user->setUpdatedAt(new \DateTimeImmutable());
+    #[Route('/test-user', name: 'test_user')]
+    public function test(EntityManagerInterface $em): Response
+    {
+        $user = new User();
+        $user->setEmail('fox@test.com');
+        $user->setPassword('testpass');
+        $user->setRoles(['ROLE_USER']);
+        $user->setUsername('FoxTest');
+        $user->setSlug('foxtest');
+        $user->setProfilePic('images/profil/profil.png');
+        $user->setUpdatedAt(new \DateTimeImmutable());
 
-    $em->persist($user);
-    $em->flush();
+        $em->persist($user);
+        $em->flush();
 
-    return new Response("User ajouté !");
-}
+        return new Response("User ajouté !");
+    }
+
+    #[Route('/debug/doctrine', name: 'debug_doctrine')]
+    public function debugDoctrine(EntityManagerInterface $em): Response
+    {
+        $meta = $em->getMetadataFactory()->getAllMetadata();
+        $entityNames = array_map(fn($m) => $m->getName(), $meta);
+        return new Response('<pre>' . print_r($entityNames, true) . '</pre>');
+    }
 }
 // class RegistrationController extends AbstractController
 // {
@@ -98,9 +106,9 @@ public function test(EntityManagerInterface $em): Response
 //         $user = new User();
 //         $form = $this->createForm(RegistrationFormType::class, $user);
 //         $form->handleRequest($request);
-        
-   
-        
+
+
+
 //         if ($form->isSubmitted()) {
 //             // dump('Form valid:', $form->isValid());
 //             // dump($form->getErrors(true, true)); // Montre les erreurs précises
@@ -116,16 +124,16 @@ public function test(EntityManagerInterface $em): Response
 //                 if (!$user->getProfilePic()) {
 //                     $user->setProfilePic('images/profil/profil.png');
 //                 }
-    
+
 //                 $user->setRoles(['ROLE_USER']);
-    
+
 //                 $entityManager->persist($user);
 //                 $entityManager->flush();
 //                 // do anything else you need here, like send an email
-    
+
 //                 return $security->login($user, 'form_login', 'main');
 //                 // $security->login($user);
-    
+
 //                 // return $this->redirectToRoute('app_posts_index', ['id' => $user->getId()]);
 //                  // ou autre route logique
 //             }
