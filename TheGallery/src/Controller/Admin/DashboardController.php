@@ -7,6 +7,8 @@ use App\Entity\Post;
 use App\Entity\Image;
 use App\Entity\Contact;
 use App\Entity\Comment;
+// use EasyCorp\Bundle\EasyAdminBundle\Asset\Assets;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -63,5 +65,12 @@ class DashboardController extends AbstractDashboardController
             ->setController(ContactCrudController::class);
         yield MenuItem::linkToCrud('Comments', 'fa fa-envelope', Comment::class)
             ->setController(CommentCrudController::class);
+    }
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+            // Indique à EA4 de charger ses CSS habituels
+            ->addCssFile('bundles/easyadmin/app.css');
     }
 }
