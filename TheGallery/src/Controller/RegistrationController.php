@@ -28,7 +28,14 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+                
+            if (!$form->isValid()) {
+                dd($form->getErrors(true, true)); 
+            }
+
             // dump($form->getErrors(true, true)); 
+
+            
             if ($form->isValid()) {
                 dd($form->getErrors(true, true)); 
 
