@@ -8,7 +8,7 @@ use App\Entity\Image;
 use App\Entity\Contact;
 use App\Entity\Comment;
 // use EasyCorp\Bundle\EasyAdminBundle\Asset\Assets;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets as Assets;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;

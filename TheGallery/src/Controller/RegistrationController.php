@@ -71,35 +71,35 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
 }
 
 
-#[Route('/test-user', name: 'test_user')]
-public function test(EntityManagerInterface $em): Response
-{
-    $user = new User();
-    $user->setEmail('fox@test.com');
-    $user->setPassword('testpass');
-    $user->setRoles(['ROLE_USER']);
-    $user->setUsername('FoxTest');
-    $user->setSlug('foxtest');
-    $user->setProfilePic('images/profil/profil.png');
+// #[Route('/test-user', name: 'test_user')]
+// public function test(EntityManagerInterface $em): Response
+// {
+//     $user = new User();
+//     $user->setEmail('fox@test.com');
+//     $user->setPassword('testpass');
+//     $user->setRoles(['ROLE_USER']);
+//     $user->setUsername('FoxTest');
+//     $user->setSlug('foxtest');
+//     $user->setProfilePic('images/profil/profil.png');
     
-    $user->setUpdatedAt(new \DateTimeImmutable());
+//     $user->setUpdatedAt(new \DateTimeImmutable());
     
-    $em->persist($user);
-    dump($em); die;
-    $em->flush();
-    dump($em);
-    dump($user); die;
+//     $em->persist($user);
+//     dump($em); die;
+//     $em->flush();
+//     dump($em);
+//     dump($user); die;
 
-    return new Response("User ajouté !");
-}
+//     return new Response("User ajouté !");
+// }
 
-    #[Route('/debug/doctrine', name: 'debug_doctrine')]
-    public function debugDoctrine(EntityManagerInterface $em): Response
-    {
-        $meta = $em->getMetadataFactory()->getAllMetadata();
-        $entityNames = array_map(fn($m) => $m->getName(), $meta);
-        return new Response('<pre>' . print_r($entityNames, true) . '</pre>');
-    }
+//     #[Route('/debug/doctrine', name: 'debug_doctrine')]
+//     public function debugDoctrine(EntityManagerInterface $em): Response
+//     {
+//         $meta = $em->getMetadataFactory()->getAllMetadata();
+//         $entityNames = array_map(fn($m) => $m->getName(), $meta);
+//         return new Response('<pre>' . print_r($entityNames, true) . '</pre>');
+//     }
 }
 // class RegistrationController extends AbstractController
 // {
