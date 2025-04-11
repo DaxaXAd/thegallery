@@ -28,6 +28,8 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
     $form->handleRequest($request);
 
     if ($form->isSubmitted()) {
+        $formData = $form->getData();
+        dd($formData);
         if ($form->isValid()) {
             // Traitement du mot de passe
             $plainPassword = $form->get('plainPassword')->getData();
