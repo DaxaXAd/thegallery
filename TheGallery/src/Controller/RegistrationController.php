@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
 
             
             if ($form->isValid()) {
-                dd($form->getErrors(true, true)); 
+                // dd($form->getErrors(true, true)); 
 
 
                 $plainPassword = $form->get('plainPassword')->getData();
@@ -57,7 +57,7 @@ class RegistrationController extends AbstractController
 
                 $user->setRoles(['ROLE_USER']);
                 $user->setUpdatedAt(new \DateTimeImmutable());
-
+                dd($entityManager);
                 $entityManager->persist($user);
                 $entityManager->flush();
 
