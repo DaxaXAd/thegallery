@@ -13,10 +13,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
-
+#[Route('/register')]
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+    #[Route('/', name: 'app_register')]
 public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
 {
     if ($this->getUser()) {
@@ -71,24 +71,24 @@ public function register(Request $request, UserPasswordHasherInterface $userPass
 }
 
 
-    #[Route('/test-user', name: 'test_user')]
-    public function test(EntityManagerInterface $em): Response
-    {
-        $user = new User();
-        $user->setEmail('fox@test.com');
-        $user->setPassword('testpass');
-        $user->setRoles(['ROLE_USER']);
-        $user->setUsername('FoxTest');
-        $user->setSlug('foxtest');
-        $user->setProfilePic('images/profil/profil.png');
-        dump($user); die;
-        $user->setUpdatedAt(new \DateTimeImmutable());
-        
-        $em->persist($user);
-        $em->flush();
+#[Route('/test-user', name: 'test_user')]
+public function test(EntityManagerInterface $em): Response
+{
+    $user = new User();
+    $user->setEmail('fox@test.com');
+    $user->setPassword('testpass');
+    $user->setRoles(['ROLE_USER']);
+    $user->setUsername('FoxTest');
+    $user->setSlug('foxtest');
+    $user->setProfilePic('images/profil/profil.png');
+    dump($user); die;
+    $user->setUpdatedAt(new \DateTimeImmutable());
+    
+    $em->persist($user);
+    $em->flush();
 
-        return new Response("User ajouté !");
-    }
+    return new Response("User ajouté !");
+}
 
     #[Route('/debug/doctrine', name: 'debug_doctrine')]
     public function debugDoctrine(EntityManagerInterface $em): Response
