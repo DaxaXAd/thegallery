@@ -71,6 +71,6 @@ class DashboardController extends AbstractDashboardController
     {
         return Assets::new()
             // Indique à EA4 de charger ses CSS habituels
-            ->addCssFile('bundles/easyadmin/app.css');
+            ->addCssFile('assets/bundles/easyadmin/app.css');
     }
 }
