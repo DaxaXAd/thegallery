@@ -117,7 +117,7 @@ final class PostController extends AbstractController
         $user = $this->getUser();
         $likeCount = $likeRepository->totalLike($post->getId());
 
-        // 1) Créer un nouvel objet Comment
+        // 1) Instancier un nouvel objet Comment
         $comment = new Comment();
 
         // 2) On pré-remplit le post et l'user

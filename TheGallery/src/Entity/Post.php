@@ -6,7 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo; // to use sluggable from package gedmo/doctrine-extensions
+
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post

@@ -136,29 +136,31 @@ final class UserController extends AbstractController
      */
     #[Route('/{slug}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response
+    // This method is responsible for editing user information
+    public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, string $slug): Response 
     {
-        // Find user by slug or throw 404
+        // Find user by slug 
         $user = $userRepository->findOneBy(['slug' => $slug]);
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
-
+        // Create form for editing user
+        // Set default profile picture if none provided
         $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $form->handleRequest($request); 
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Handle password update if provided
-            $newPassword = $form->get('password')->getData();
+            $newPassword = $form->get('password')->getData(); // Get new password from form
             if (!empty($newPassword)) {
-                $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
-                $user->setPassword($hashedPassword);
+                $hashedPassword = $passwordHasher->hashPassword($user, $newPassword); // Hash new password
+                $user->setPassword($hashedPassword); // Set new hashed password
             }
 
             // Handle profile picture upload
             $profilePicture = $form->get('profile_pic')->getData();
             if ($profilePicture) {
-                $pictureFilename = uniqid() . '.' . $profilePicture->guessExtension();
+                $pictureFilename = uniqid() . '.' . $profilePicture->guessExtension(); // Generate unique filename
                 try {
                     // Move uploaded file to profile pictures directory
                     $profilePicture->move(
@@ -166,19 +168,20 @@ final class UserController extends AbstractController
                         $pictureFilename
                     );
                     $user->setProfilePic('images/profil/' . $pictureFilename);
-                } catch (FileException $e) {
+                } catch (FileException $e) { 
                     throw new \Exception($e->getMessage());
                 }
             }
 
             $entityManager->persist($user);
             $entityManager->flush();
+            // Redirect to user profile page
 
-            return $this->redirectToRoute('app_user_show', ['slug' => $user->getSlug()]);
+            return $this->redirectToRoute('app_user_profile', ['slug' => $user->getSlug()]);
         }
 
         return $this->render('user/edit.html.twig', [
-            'user' => $user,
+            'user' => $user, 
             'form' => $form->createView(),
         ]);
     }
